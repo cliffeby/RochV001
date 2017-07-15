@@ -1,0 +1,67 @@
+<div class="row">
+  <div *ngIf="!hidenewMatch">
+    <h2>New Match</h2>
+    <form #form="ngForm" (ngSubmit)="onSubmitAddMatch(form.value)" class="well">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" required name="name" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Rating</label>
+        <input type="text" class="form-control" required name="rating" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Slope</label>
+        <input type="text" class="form-control" name="slope" ngModel>
+      </div>
+      <button type="submit" class="btn btn-success">Save</button>
+    </form>
+  </div>
+  <match-detail *ngIf="selectedMatch && hidenewMatch"
+                    (updateMatchEvent)="onUpdateMatchEvent($event)"
+                    (deleteMatchEvent)="onDeleteMatchEvent($event)"
+                    [match]="selectedMatch">
+  </match-detail>
+</div>
+<div *ngIf="!selectedMatch && hidenewMatch">
+  <!--<button style="margin-bottom:2px;" type="button" (click)="newMatch()" class="btn btn-success btn-block">+ New Match</button>-->
+  <!--<match-list *ngIf="!selectedMatch && hidenewMatch" [matchs]="matchs" (SelectMatch)="onSelectMatch($event)"></match-list>-->
+  <h2>Course Info</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="error" *ngIf="error">{{error}}</div>
+      <div class="pull-right">
+        <button class="btn btn-primary" type="button" (click)="newMatch()" >
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Members</th>
+          <th>Course</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let match of matches" [class.active]="match === selectedMatch">
+          <td>{{match.name}}</td>
+          <td>{{match.rating}}</td>
+          <td>{{match.slope}}</td>
+          <a class="btn btn-primary col-sm-offset-2 "(click)="onSelectMatch(match)">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn btn-primary col-sm-offset-2" (click)="onCopyAddMatch(match, $event)">
+            <i class="glyphicon glyphicon-copy"></i>
+          </a>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

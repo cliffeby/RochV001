@@ -1,0 +1,38 @@
+<h2>Match Info</h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="error" *ngIf="error">{{error}}</div>
+    <div class="pull-right">
+      <button class="btn btn-primary" (click)="addMatch()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Members</th>
+        <th>Course</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let match of matchs" [class.active]="match === selectedMatch">
+        <td>{{match.name}}</td>
+        <td>{{match.memberIds}}</td>
+        <td>{{match.scorecardId}}</td>
+        <a class="btn btn-primary" (click)="onSelect(match)">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-danger" (click)="deleteMatch(match, $event)">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

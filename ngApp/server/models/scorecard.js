@@ -16,16 +16,16 @@ const ScorecardSchema = new Schema({
     type: Number
   },
   parInputString: String,
-  par: [{
-    type: Number
+  pars: [{
+    type: String
   }],
   hCapInputString: String,
-  hCap: [{
-    type: Number
+  hCaps: [{
+    type: String
   }],
   yardsInputString: String,
   yards: [{
-    type: Number
+    type: String
   }],
   created: {
     type: Date,

@@ -1,0 +1,87 @@
+<div *ngIf="scorecard" class="form-horizontal">
+  <h2>{{scorecard.name}} input</h2>
+  <div class="form-group">
+    <label class="col-sm-2 control-label"> Name: </label>
+    <div class="col-sm-10">
+      <input class="form-control" [(ngModel)]="scorecard.name" placeholder="Name/Course/Tees"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Rating: </label>
+    <div class="col-sm-10">
+      <input class="form-control" [(ngModel)]="scorecard.rating" placeholder="Rating"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Slope: </label>
+    <div class="col-sm-10">
+      <input class="form-control" [(ngModel)]="scorecard.slope" placeholder="Slope"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Par:</label>
+    <div class="col-sm-10">
+            <textarea [(ngModel)]="scorecard.parInputString" class="form-control" cols="30" rows="2"
+                      placeholder="Starting at hole #1, enter hole Par separated by commas"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Handicaps:</label>
+    <div class="col-sm-10">
+            <textarea [(ngModel)]="scorecard.hCapInputString" class="form-control" cols="30" rows="2"
+                      placeholder="Starting at hole #1, enter hole Handicap separated by commas"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Yards:</label>
+    <div class="col-sm-10">
+            <textarea [(ngModel)]="scorecard.yardsInputString" class="form-control" cols="30" rows="2"
+                      placeholder="Starting at hole #1, enter hole Yards separated by commas"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" (click)="updateScorecard()" class="btn btn-primary">Update</button>
+      <button type="button" (click)="deleteScorecard()" class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+  <table class="stripe row-border order-column" cellspacing="0" width="100%">
+    <th style = "text-align: center;">Name</th>
+    <th style = "text-align: center;">1</th>
+    <th style = "text-align: center;">2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+    <th style = "text-align: center;">9</th>
+    <th style = "text-align: center;">Front</th>
+    <th>10</th>
+    <th>11</th>
+    <th>12</th>
+    <th>13</th>
+    <th>14</th>
+    <th>15</th>
+    <th>16</th>
+    <th>17</th>
+    <th>18</th>
+    <th style = "text-align: center;">Back</th>
+    <th style = "text-align: center;">Total</th>
+    <tr md-row md-auto-select >
+      <td align = "center" *ngFor="let yards of scorecard.yards" [class.active]="scorecard === selectedScorecard">
+        <!--<td align = "center" data-ng-repeat="yards in vm.yards track by $index">-->
+        <span >{{yards}}</span>
+      </td>
+    <tr md-row md-auto-select >
+      <td align = "center" *ngFor="let par of scorecard.pars" [class.active]="scorecard === selectedScorecard">
+        <span>{{par}}</span>
+      </td>
+    </tr>
+    <tr md-row md-auto-select >
+      <td align = "center" *ngFor="let hCap of scorecard.hCaps" [class.active]="scorecard === selectedScorecard">
+        <span>{{hCap}}</span>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -10,7 +10,20 @@ import { VideoCenterComponent } from './video-center/video-center.component';
 import { VideoListComponent } from './video-list/video-list.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { SafePipe } from './safe.pipe';
-import { ScorecardsComponent } from './scorecards/scorecards.component';
+import {ScorecardService} from "./services/scorecard.service";
+import {ScorecardsComponent} from "./components/scorecards/scorecards.component";
+import { ScorecardDetailComponent } from './components/scorecard-detail/scorecard-detail.component';
+import { ScorecardListComponent } from './components/scorecard-list/scorecard-list.component';
+import { MatchCenterComponent } from './components/match-center/match-center.component';
+import { MatchDetailComponent } from './components/match-detail/match-detail.component';
+import { MatchListComponent } from './components/match-list/match-list.component';
+import { MemberCenterComponent } from './components/member-center/member-center.component';
+import { MemberDetailComponent } from './components/member-detail/member-detail.component';
+import { MemberListComponent } from './components/member-list/member-list.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +33,15 @@ import { ScorecardsComponent } from './scorecards/scorecards.component';
     VideoListComponent,
     VideoDetailComponent,
     SafePipe,
-    ScorecardsComponent
+    ScorecardsComponent,
+    ScorecardDetailComponent,
+    ScorecardListComponent,
+    MatchCenterComponent,
+    MatchDetailComponent,
+    MatchListComponent,
+    MemberCenterComponent,
+    MemberDetailComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +49,9 @@ import { ScorecardsComponent } from './scorecards/scorecards.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ScorecardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

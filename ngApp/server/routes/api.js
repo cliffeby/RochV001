@@ -5,6 +5,7 @@ const models = require('../models/index');
 const Video = require('../models/video');
 const Match = require('../models/match');
 const Scorecard = require('../models/scorecard');
+const Member = require('../models/member');
 
 const db = "mongodb://devuser:dev1234@ds053788.mlab.com:53788/mean-devr04";
 //const db = "mongodb://uservishwas:dbpwvishwas1@ds147920.mlab.com:47920/scorecardplayer";
@@ -86,7 +87,7 @@ router.delete('/video/:id', function(req, res){
     }
   });
 });
-
+//Match Routes
 router.get('/matches', function(req, res){
   console.log('Get request for all matches');
   Match.find({})
@@ -126,7 +127,6 @@ router.post('/match', function(req, res){
   });
 });
 
-
 router.put('/match/:id', function(req, res){
   console.log('Update a match');
   Match.findByIdAndUpdate(req.params.id,
@@ -147,7 +147,6 @@ router.put('/match/:id', function(req, res){
   );
 });
 
-
 router.delete('/match/:id', function(req, res){
   console.log('Deleting a match');
   Match.findByIdAndRemove(req.params.id, function(err, deletedMatch){
@@ -158,7 +157,7 @@ router.delete('/match/:id', function(req, res){
     }
   });
 });
-
+//Scorecard Routes
 router.get('/scorecards', function(req, res){
   console.log('Get request for all scorecards');
   Scorecard.find({})
@@ -187,6 +186,16 @@ router.post('/scorecard', function(req, res){
   console.log('Post a scorecard');
   var newScorecard = new Scorecard();
   newScorecard.name = req.body.name;
+  newScorecard.rating = req.body.rating;
+  newScorecard.slope = req.body.slope;
+  newScorecard.parInputString = req.body.parInputString;
+  newScorecard.par = req.body.par;
+  newScorecard.hCapInputString = req.body.hCapInputString;
+  newScorecard.hCap = req.body.hCap;
+  newScorecard.yardsInputString = req.body.yardsInputString;
+  newScorecard.yards = req.body.yards;
+  newScorecard.created = req.body.created;
+  newScorecard.user = req.body.user;
   newScorecard.save(function(err, insertedScorecard){
     if (err){
       console.log('Error saving scorecard');
@@ -196,12 +205,14 @@ router.post('/scorecard', function(req, res){
   });
 });
 
-
 router.put('/scorecard/:id', function(req, res){
   console.log('Update a scorecard');
   Scorecard.findByIdAndUpdate(req.params.id,
     {
-      $set: {title: req.body.title, url: req.body.url, description: req.body.description}
+      $set: {
+        name: req.body.name,
+        rating: req.body.rating,
+        slope: req.body.slope}
     },
     {
       new: true
@@ -217,7 +228,6 @@ router.put('/scorecard/:id', function(req, res){
   );
 });
 
-
 router.delete('/scorecard/:id', function(req, res){
   console.log('Deleting a scorecard');
   Scorecard.findByIdAndRemove(req.params.id, function(err, deletedScorecard){
@@ -228,76 +238,73 @@ router.delete('/scorecard/:id', function(req, res){
     }
   });
 });
-
-
-router.get('/scorecards', function(req, res){
-  console.log('Get request for all scorecards');
-  Scorecard.find({})
-    .exec(function(err, scorecards){
+// Members
+router.get('/members', function(req, res){
+  console.log('Get request for all members');
+  Member.find({})
+    .exec(function(err, members){
       if (err){
-        console.log("Error retrieving scorecards");
+        console.log("Error retrieving members");
       }else {
-        res.json(scorecards);
+        res.json(members);
       }
     });
 });
 
-router.get('/scorecards/:id', function(req, res){
-  console.log('Get request for a single scorecard');
-  Scorecard.findById(req.params.id)
-    .exec(function(err, scorecard){
+router.get('/members/:id', function(req, res){
+  console.log('Get request for a single member');
+  Member.findById(req.params.id)
+    .exec(function(err, member){
       if (err){
-        console.log("Error retrieving scorecard");
+        console.log("Error retrieving member");
       }else {
-        res.json(scorecard);
+        res.json(member);
       }
     });
 });
 
-router.post('/scorecard', function(req, res){
-  console.log('Post a scorecard');
-  var newScorecard = new Scorecard();
-  newScorecard.title = req.body.title;
-  newScorecard.url = req.body.url;
-  newScorecard.description = req.body.description;
-  newScorecard.save(function(err, insertedScorecard){
+router.post('/member', function(req, res){
+  console.log('Post a member');
+  var newMember = new Member();
+  newMember.firstName = req.body.firstName;
+  newMember.lastName = req.body.lastName;
+  newMember.currentHCap  = req.body.currentHCap;
+  newMember.save(function(err, insertedMember){
     if (err){
-      console.log('Error saving scorecard');
+      console.log('Error saving member');
     }else{
-      res.json(insertedScorecard);
+      res.json(insertedMember);
     }
   });
 });
 
-
-router.put('/scorecard/:id', function(req, res){
-  console.log('Update a scorecard');
-  Scorecard.findByIdAndUpdate(req.params.id,
+router.put('/member/:id', function(req, res){
+  console.log('Update a member');
+  Member.findByIdAndUpdate(req.params.id,
     {
       $set: {title: req.body.title, url: req.body.url, description: req.body.description}
     },
     {
       new: true
     },
-    function(err, updatedScorecard){
+    function(err, updatedMember){
       if(err){
-        res.send("Error updating scorecard");
+        res.send("Error updating member");
       }else{
-        res.json(updatedScorecard);
+        res.json(updatedMember);
       }
     }
 
   );
 });
 
-
-router.delete('/scorecard/:id', function(req, res){
-  console.log('Deleting a scorecard');
-  Scorecard.findByIdAndRemove(req.params.id, function(err, deletedScorecard){
+router.delete('/member/:id', function(req, res){
+  console.log('Deleting a member');
+  Member.findByIdAndRemove(req.params.id, function(err, deletedMember){
     if(err){
-      res.send("Error deleting scorecard");
+      res.send("Error deleting member");
     }else{
-      res.json(deletedScorecard);
+      res.json(deletedMember);
     }
   });
 });
