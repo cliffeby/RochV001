@@ -23,42 +23,7 @@
                 [member]="selectedMember">
   </member-detail>
 </div>
-<div *ngIf="!selectedMember && hidenewMember">
+<!--<div *ngIf="!selectedMember && hidenewMember">-->
   <!--<button style="margin-bottom:2px;" type="button" (click)="newMember()" class="btn btn-success btn-block">+ New Member</button>-->
-  <!--<member-list *ngIf="!selectedMember && hidenewMember" [members]="members" (SelectMember)="onSelectMember($event)"></member-list>-->
-  <h2>Member Info</h2>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="error" *ngIf="error">{{error}}</div>
-      <div class="pull-right">
-        <button class="btn btn-primary" type="button" (click)="newMember()" >
-          <i class="glyphicon glyphicon-plus"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Current HCap</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let member of members" [class.active]="member === selectedMember">
-          <td>{{member.firstName}}</td>
-          <td>{{member.lastName}}</td>
-          <td>{{member.currentHCap}}</td>
-          <a class="btn btn-primary col-sm-offset-2 "(click)="onSelectMember(member)">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+  <member-list *ngIf="!selectedMember && hidenewMember" [members]="members" (SelectMember)="onSelectMember($event)"></member-list>
+<!--</div>-->

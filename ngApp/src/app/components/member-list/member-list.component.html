@@ -21,15 +21,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let member of members" [class.active]="member === selectedMember">
+      <tr *ngFor="let member of members" >
         <td>{{member.firstName}}</td>
         <td>{{member.lastName}}</td>
         <td>{{member.currentHCap}}</td>
         <a class="btn btn-primary" (click)="onSelect(member)">
           <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-danger" (click)="deleteMember(member, $event)">
-          <i class="glyphicon glyphicon-trash"></i>
         </a>
       </tr>
       </tbody>

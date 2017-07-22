@@ -25,43 +25,6 @@
   </div>
   <div *ngIf="!selectedScorecard && hidenewScorecard">
     <!--<button style="margin-bottom:2px;" type="button" (click)="newScorecard()" class="btn btn-success btn-block">+ New Scorecard</button>-->
-    <!--<scorecard-list *ngIf="!selectedScorecard && hidenewScorecard" [scorecards]="scorecards" (SelectScorecard)="onSelectScorecard($event)"></scorecard-list>-->
-    <h2>Course Info</h2>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="error" *ngIf="error">{{error}}</div>
-        <div class="pull-right">
-          <button class="btn btn-primary" type="button" (click)="newScorecard()" >
-            <i class="glyphicon glyphicon-plus"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-bordered">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Rating</th>
-            <th>Slope</th>
-            <th>Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let scorecard of scorecards" [class.active]="scorecard === selectedScorecard">
-            <td>{{scorecard.name}}</td>
-            <td>{{scorecard.rating}}</td>
-            <td>{{scorecard.slope}}</td>
-            <a class="btn btn-primary col-sm-offset-2 "(click)="onSelectScorecard(scorecard)">
-              <i class="glyphicon glyphicon-edit"></i>
-            </a>
-            <a class="btn btn-primary col-sm-offset-2" (click)="onCopyAddScorecard(scorecard, $event)">
-              <i class="glyphicon glyphicon-copy"></i>
-            </a>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <scorecard-list *ngIf="!selectedScorecard && hidenewScorecard" [scorecards]="scorecards" (SelectScorecard)="onSelectScorecard($event)"></scorecard-list>
+
   </div>

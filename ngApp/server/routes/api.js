@@ -6,9 +6,11 @@ const Video = require('../models/video');
 const Match = require('../models/match');
 const Scorecard = require('../models/scorecard');
 const Member = require('../models/member');
+const Score = require('../models/score')
 
-const db = "mongodb://devuser:dev1234@ds053788.mlab.com:53788/mean-devr04";
-//const db = "mongodb://uservishwas:dbpwvishwas1@ds147920.mlab.com:47920/scorecardplayer";
+//const db = "mongodb://devuser:dev1234@ds053788.mlab.com:53788/mean-devr04";
+// const db = "mongodb://localhost/mean-devR04:27017";
+const db = "mongodb://127.0.0.1/mean-devR04";
 mongoose.Promise = global.Promise;
 mongoose.connect(db, function(err){
     if(err){
@@ -305,6 +307,77 @@ router.delete('/member/:id', function(req, res){
       res.send("Error deleting member");
     }else{
       res.json(deletedMember);
+    }
+  });
+});
+
+router.get('/scores', function(req, res){
+  console.log('Get request for all scores');
+  Score.find({})
+    .exec(function(err, scores){
+      if (err){
+        console.log("Error retrieving scores");
+      }else {
+        res.json(scores);
+      }
+    });
+});
+
+router.get('/scores/:id', function(req, res){
+  console.log('Get request for a single score');
+  Score.findById(req.params.id)
+    .exec(function(err, score){
+      if (err){
+        console.log("Error retrieving score");
+      }else {
+        res.json(score);
+      }
+    });
+});
+
+router.post('/score', function(req, res){
+  console.log('Post a score');
+  var newScore = new Score();
+  newScore.name = req.body.name;
+  newScore.cap = req.body.cap;
+  newScore.matchId  = req.body.matchId;
+  newScore.memberId  = req.body.memberId;
+  newScore.save(function(err, insertedScore){
+    if (err){
+      console.log('Error saving score');
+    }else{
+      res.json(insertedScore);
+    }
+  });
+});
+
+router.put('/score/:id', function(req, res){
+  console.log('Update a score');
+  Score.findByIdAndUpdate(req.params.id,
+    {
+      $set: {title: req.body.title, url: req.body.url, description: req.body.description}
+    },
+    {
+      new: true
+    },
+    function(err, updatedScore){
+      if(err){
+        res.send("Error updating score");
+      }else{
+        res.json(updatedScore);
+      }
+    }
+
+  );
+});
+
+router.delete('/score/:id', function(req, res){
+  console.log('Deleting a score');
+  Score.findByIdAndRemove(req.params.id, function(err, deletedScore){
+    if(err){
+      res.send("Error deleting score");
+    }else{
+      res.json(deletedScore);
     }
   });
 });

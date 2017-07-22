@@ -1,23 +1,24 @@
 import {Component, OnInit, EventEmitter} from '@angular/core';
+import { MemberService } from '../../services/member.service';
 
 @Component({
-  selector: 'match-detail',
-  templateUrl: './match-detail.component.html',
-  styleUrls: ['./match-detail.component.css'],
+  selector: 'app-match-add-player',
+  templateUrl: './match-add-player.component.html',
+  styleUrls: ['./match-add-player.component.css'],
   inputs: ['match'],
   outputs: ['updateMatchEvent', 'deleteMatchEvent']
 })
-export class MatchDetailComponent implements OnInit {
+export class MatchAddPlayerComponent implements OnInit {
   match: any;
-
   private editTitle: boolean = false;
   private updateMatchEvent = new EventEmitter();
   private deleteMatchEvent = new EventEmitter();
 
-  constructor() {
-  }
+  constructor(private _memberservice: MemberService) { }
 
   ngOnInit() {
+    this._memberservice.getMembers()
+      .subscribe((members)=> console.log(members));
   }
 
   onTitleClick() {

@@ -1,0 +1,70 @@
+<div class="row">
+  <div *ngIf="!hidenewScore">
+    <h2>New Score</h2>
+    <form #form="ngForm" (ngSubmit)="onSubmitAddScore(form.value)" class="well">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" required name="name" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Cap</label>
+        <input type="text" class="form-control" required name="cap" ngModel>
+      </div>
+      <div class="form-group">
+        <label>MatchId</label>
+        <input type="text" class="form-control" name="matchId" ngModel>
+      </div>
+      <div class="form-group">
+        <label>MemberId</label>
+        <input type="text" class="form-control" name="memberId" ngModel>
+      </div>
+      <button type="submit" class="btn btn-success">Save</button>
+    </form>
+  </div>
+  <score-detail *ngIf="selectedScore && hidenewScore"
+                 (updateScoreEvent)="onUpdateScoreEvent($event)"
+                 (deleteScoreEvent)="onDeleteScoreEvent($event)"
+                 [score]="selectedScore">
+  </score-detail>
+</div>
+<div *ngIf="!selectedScore && hidenewScore">
+  <!--<button style="margin-bottom:2px;" type="button" (click)="newScore()" class="btn btn-success btn-block">+ New Score</button>-->
+  <!--<score-list *ngIf="!selectedScore && hidenewScore" [scores]="scores" (SelectScore)="onSelectScore($event)"></score-list>-->
+  <h2>Score Info</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="error" *ngIf="error">{{error}}</div>
+      <div class="pull-right">
+        <button class="btn btn-primary" type="button" (click)="newScore()" >
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Cap</th>
+          <th>MatchId</th>
+          <th>MemberId</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let score of scores" [class.active]="score === selectedScore">
+          <td>{{score.name}}</td>
+          <td>{{score.cap}}</td>
+          <td>{{score.matchId}}</td>
+          <td>{{score.memberId}}</td>
+          <a class="btn btn-primary col-sm-offset-2 "(click)="onSelectScore(score)">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

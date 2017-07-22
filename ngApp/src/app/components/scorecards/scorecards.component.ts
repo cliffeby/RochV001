@@ -1,6 +1,7 @@
 import { ScorecardService } from '../../services/scorecard.service';
 import { Component, OnInit } from '@angular/core';
 import { Scorecard } from "../../models/scorecard";
+
 @Component({
   selector: 'app-scorecards',
   templateUrl: './scorecards.component.html',
@@ -11,6 +12,7 @@ export class ScorecardsComponent implements OnInit {
   selectedScorecard: Scorecard;
   private hidenewScorecard: boolean = true;
   scorecards: Array<Scorecard>;
+
   constructor(private _scorecardService: ScorecardService) { }
 
   ngOnInit() {

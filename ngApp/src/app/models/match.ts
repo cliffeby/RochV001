@@ -1,7 +1,7 @@
 export class Match {
     _id: string;
     name: string;
-    scorecardId: number;
+    scorecardId: string;
     datePlayed: number;
     memberIds: number;
     lineUpIds: string[];

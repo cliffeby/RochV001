@@ -15,8 +15,8 @@ export class MemberListComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect(mtc: Member) {
-    this.SelectMember.emit(mtc);
+  onSelect(mem: Member) {
+    this.SelectMember.emit(mem);
   }
 
 }

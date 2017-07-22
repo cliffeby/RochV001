@@ -1,0 +1,39 @@
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const ScoreSchema = new Schema({
+  name: String,
+  cap: Number,
+  wonTwoBall: Boolean,
+  wonOneBall: Boolean,
+  wonIndo: Boolean,
+  matchId: {
+    type: Schema.ObjectId,
+    ref: 'Match'
+  },
+  memberId: {
+    type: Schema.ObjectId,
+    ref: 'Member'
+  },
+  datePlayed: Date,
+  partnerId: {
+    type: Schema.ObjectId,
+    ref: 'Member'
+  },
+  foursomeIds: [{
+    type: Schema.ObjectId,
+    ref: 'Member'
+  }],
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
+});
+
+module.exports = mongoose.model('Score', ScoreSchema);
+

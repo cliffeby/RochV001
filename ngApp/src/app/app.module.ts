@@ -20,10 +20,13 @@ import { MatchListComponent } from './components/match-list/match-list.component
 import { MemberCenterComponent } from './components/member-center/member-center.component';
 import { MemberDetailComponent } from './components/member-detail/member-detail.component';
 import { MemberListComponent } from './components/member-list/member-list.component';
-
-
-
-
+import { ScoreCenterComponent } from './components/score-center/score-center.component';
+import { ScoreListComponent } from './components/score-list/score-list.component';
+import { ScoreDetailComponent } from './components/score-detail/score-detail.component';
+import {MemberService} from "./services/member.service";
+import {MatchService} from "./services/match.service";
+import {ScoreService} from "./services/score.service";
+import { MatchAddPlayerComponent } from './components/match-add-player/match-add-player.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,11 @@ import { MemberListComponent } from './components/member-list/member-list.compon
     MatchListComponent,
     MemberCenterComponent,
     MemberDetailComponent,
-    MemberListComponent
+    MemberListComponent,
+    ScoreCenterComponent,
+    ScoreListComponent,
+    ScoreDetailComponent,
+    MatchAddPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +57,10 @@ import { MemberListComponent } from './components/member-list/member-list.compon
     AppRoutingModule
   ],
   providers: [
-    ScorecardService
+    ScorecardService,
+    ScoreService,
+    MatchService,
+    MemberService
   ],
   bootstrap: [AppComponent]
 })
