@@ -18,7 +18,8 @@ export class MatchCenterComponent implements OnInit {
   private hidenewMatch: boolean = true;
   matches: Array<Match>;
   members: Array<Member>;
-  score:  Array<Score>;
+  scores:  Array<Score>;
+  scorecard: Scorecard;
   constructor(private _matchservice: MatchService,
               private _scoreservice: ScoreService,
               private _scorecardservice: ScorecardService,
@@ -32,13 +33,46 @@ export class MatchCenterComponent implements OnInit {
   onSelectMatch(match: any) {
     this.selectedMatch = match;
     console.log('selectedMatch',this.selectedMatch);
-    this._memberservice.getMembers()
-      .subscribe(resMemData => this.members = resMemData);
-    console.log('MSCID',match.scorecardId);
+    // this._memberservice.getMembers()
+    //   .subscribe(resMemData => this.members = resMemData);
+    // console.log('MSCID',match.scorecardId);
     this._scorecardservice.getScorecard(match.scorecardId)
-      .subscribe((scorecard)=> console.log('Scorecard',scorecard));
-  }
+      .subscribe(resSCData => {
+          this.scorecard = resSCData;
+          console.log('SCName', this.scorecard.name);
+          match.scName = this.scorecard.name;
+        });
+    this._scoreservice.getScoreByMatch(match._id)
+     .subscribe(resScoreData => {
+       this.scores = resScoreData;
+       this._memberservice.getMembers()
+         .subscribe(resMemData => {
+           this.members = resMemData;
+           // console.log('THISMEMBERS',this.members);
+           // console.log('ID',this.members[0]._id);
+       for (let index = 0; index < this.scores.length; index++) {
+         for (let i = 0; i< this.members.length; i++){
+           if (this.members[i]._id === this.scores[index].memberId){
+             this.members[i].isPlaying = true;
+             console.log('PLAYERTRUE?', this.members[i].lastName);
+           } else {
+             if (!this.members[i].isPlaying) this.members[i].isPlaying = false
+           }
+         }
+         console.log('MEMBERS', this.members);
+         console.log('SCORES From MatchPlayer',this.scores[index]);
+       }
+      console.log('SCORES from Match', this.scores);
+     }) });
 
+    //   for (let j = 0; j < this.members.length; j++){
+    //     if (this.scores[i].memberId === this.members[j]._id) {
+    //     //  this.members[j].isPlaying = true;
+    // for (let i = 0; i < this.scores.length; i++) {
+    //       console.log('name',  this.members[j].lastName);
+    //     }}}
+
+   }
   newMatch() {
     this.hidenewMatch = false;
   }

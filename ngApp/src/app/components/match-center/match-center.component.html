@@ -22,14 +22,13 @@
                     (deleteMatchEvent)="onDeleteMatchEvent($event)"
                     [match]="selectedMatch">
   </match-detail>
-  <member-list *ngIf="selectedMatch && hidenewMatch" [members]="members"></member-list>
+  <member-block *ngIf="selectedMatch && hidenewMatch" [members]="members" [scores]="scores" [match]="selectedMatch">></member-block>
 </div>
 
 <div *ngIf="!selectedMatch && hidenewMatch">
   <!--<button style="margin-bottom:2px;" type="button" (click)="newMatch()" class="btn btn-success btn-block">+ New Match</button>-->
   <!--<match-list *ngIf="!selectedMatch && hidenewMatch" [matchs]="matchs" (SelectMatch)="onSelectMatch($event)"></match-list>-->
 
-  <h2>Course Info</h2>
   <div class="row">
     <div class="col-md-12">
       <div class="error" *ngIf="error">{{error}}</div>
@@ -46,24 +45,24 @@
         <thead>
         <tr>
           <th>Name</th>
-          <th>Members</th>
+          <th>Date</th>
           <th>Course</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let match of matches" [class.active]="match === selectedMatch">
-          <td>{{match.name}}</td>
-          <td>{{match.rating}}</td>
-          <td>{{match.slope}}</td>
-          <a class="btn btn-primary col-sm-offset-2 "(click)="onSelectMatch(match)">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn btn-primary col-sm-offset-2" (click)="onCopyAddMatch(match, $event)">
-            <i class="glyphicon glyphicon-copy"></i>
-          </a>
-        </tr>
-        </tbody>
+      <tr *ngFor="let match of matches" [class.active]="match === selectedMatch">
+        <td>{{match.name}}</td>
+        <td>{{match.rating}}</td>
+        <td>{{match.slope}}</td>
+        <a class="btn btn-primary col-sm-offset-2 " (click)="onSelectMatch(match)">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary col-sm-offset-2" (click)="onCopyAddMatch(match, $event)">
+          <i class="glyphicon glyphicon-copy"></i>
+        </a>
+      </tr>
+      </tbody>
       </table>
     </div>
   </div>

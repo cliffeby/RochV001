@@ -1,5 +1,5 @@
 <div *ngIf="match" class="form-horizontal">
-  <h2>{{match.name}} input</h2>
+  <h2>{{match.name}}</h2>
   <div class="form-group">
     <label class="col-sm-2 control-label"> Name: </label>
     <div class="col-sm-10">
@@ -9,19 +9,38 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Course: </label>
     <div class="col-sm-10">
-      <input class="form-control" [(ngModel)]="match.scorecardId" placeholder="Course"/>
+      <input class="selectpicker form-control show-tick" [(ngModel)]="match.scName" placeholder="Course"/>
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Members: </label>
-    <div class="col-sm-10">
-      <input class="form-control" [(ngModel)]="match.memberIds" placeholder="Members"/>
+  <!--<div>select with name value pair listens to value too:-->
+    <!--<select [(ngModel)]="scorecards">-->
+      <!--&lt;!&ndash;<option *ngFor="scorecard in scorecards" [value]="scorecard._id">{{scorecard.name}}</option>&ndash;&gt;-->
+    <!--</select>  <span> &ndash;&gt; "{{ scorecard._id }}"</span>-->
+  <!--</div>-->
+
+  <div class="row">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Course: </label>
+        <div class="col-sm-10">
+        <select class="selectpicker form-control show-tick">
+          <option>Mustard</option>
+          <option>Ketchup</option>
+          <option>Relish</option>
+        </select>
+          </div>
     </div>
   </div>
-  <app-match-add-player></app-match-add-player>
+  <!--<div class="form-group">-->
+    <!--<label for="status">Status</label>-->
+    <!--<select class="form-control" name="status" [(ngModel)]="category.status">-->
+      <!--<option  [value]="1" [selected]="category.status ==1">Active</option>-->
+      <!--<option  [value]="0" [selected]="category.status ==0">In Active</option>-->
+    <!--</select>-->
+  <!--</div>-->
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="button" (click)="updateMatch()" class="btn btn-primary">Update</button>
       <button type="button" (click)="deleteMatch()" class="btn btn-danger">Delete</button>
     </div>
   </div>
+</div>

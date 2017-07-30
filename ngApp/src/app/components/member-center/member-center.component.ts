@@ -1,21 +1,27 @@
 import { MemberService } from '../../services/member.service';
+import { ScoreService } from '../../services/score.service';
 import { Component, OnInit } from '@angular/core';
 import { Member } from "../../models/member";
+
 @Component({
   selector: 'app-member-center',
   templateUrl: './member-center.component.html',
   styleUrls: ['./member-center.component.css'],
   providers: [MemberService]
 })
+
 export class MemberCenterComponent implements OnInit {
   selectedMember: Member;
   private hidenewMember: boolean = true;
   members: Array<Member>;
+ // scores: Array<Score>;
   constructor(private _memberService: MemberService) { }
 
   ngOnInit() {
     this._memberService.getMembers()
       .subscribe(resMemberData => this.members = resMemberData);
+    // this._scoreService.getScores()
+    //   .subscribe(resScoreData => this.scores = resScoreData);
   }
 
   onSelectMember(member: any) {
@@ -23,7 +29,7 @@ export class MemberCenterComponent implements OnInit {
     console.log(this.selectedMember);
   }
 
-  newMember() {
+  addMember() {
     this.hidenewMember = false;
   }
 

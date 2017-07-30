@@ -25,5 +25,16 @@
 </div>
 <!--<div *ngIf="!selectedMember && hidenewMember">-->
   <!--<button style="margin-bottom:2px;" type="button" (click)="newMember()" class="btn btn-success btn-block">+ New Member</button>-->
-  <member-list *ngIf="!selectedMember && hidenewMember" [members]="members" (SelectMember)="onSelectMember($event)"></member-list>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="error" *ngIf="error">{{error}}</div>
+    <div class="pull-right">
+      <button class="btn btn-primary" (click)="addMember()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<member-list *ngIf="!selectedMember && hidenewMember" [members]="members" (SelectMember)="onSelectMember($event)"></member-list>
 <!--</div>-->

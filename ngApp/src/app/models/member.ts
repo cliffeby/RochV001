@@ -3,6 +3,7 @@ export class Member {
   firstName: string;
   lastName: string;
   currentHCap: number;
+  isPlaying: boolean;
   created: string;
   user: string;
 }

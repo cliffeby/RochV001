@@ -15,7 +15,7 @@ export class ScoreListComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect(scr: Score) {
+  onSelectScore(scr: Score) {
     this.SelectScore.emit(scr);
   }
 

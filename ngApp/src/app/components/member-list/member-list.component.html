@@ -1,17 +1,8 @@
 <h2>Member Info</h2>
+
 <div class="row">
-  <div class="col-md-12">
-    <div class="error" *ngIf="error">{{error}}</div>
-    <div class="pull-right">
-      <button class="btn btn-primary" (click)="addMember()">
-        <i class="glyphicon glyphicon-plus"></i>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-bordered">
+
+    <table class="table table-bordered table-striped">
       <thead>
       <tr>
         <th>First Name</th>
@@ -21,15 +12,17 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let member of members" >
+      <tr *ngFor="let member of members">
         <td>{{member.firstName}}</td>
         <td>{{member.lastName}}</td>
         <td>{{member.currentHCap}}</td>
         <a class="btn btn-primary" (click)="onSelect(member)">
           <i class="glyphicon glyphicon-edit"></i>
         </a>
+
       </tr>
       </tbody>
     </table>
-  </div>
 </div>
+<member-block [members]="members" ></member-block>
+

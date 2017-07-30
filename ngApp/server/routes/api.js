@@ -6,7 +6,7 @@ const Video = require('../models/video');
 const Match = require('../models/match');
 const Scorecard = require('../models/scorecard');
 const Member = require('../models/member');
-const Score = require('../models/score')
+const Score = require('../models/score');
 
 //const db = "mongodb://devuser:dev1234@ds053788.mlab.com:53788/mean-devr04";
 // const db = "mongodb://localhost/mean-devR04:27017";
@@ -296,7 +296,6 @@ router.put('/member/:id', function(req, res){
         res.json(updatedMember);
       }
     }
-
   );
 });
 
@@ -335,8 +334,33 @@ router.get('/scores/:id', function(req, res){
     });
 });
 
+router.get('/scoresByMatch/:id', function(req, res){
+  console.log('Get request for match scores');
+  Score.find({'matchId': req.params.id})
+    .exec(function(err, score){
+      if (err){
+        console.log("Error retrieving match score");
+      }else {
+        res.json(score);
+      }
+    });
+});
+
+router.get('/scoresByMatchPlayer/:matchId/:memberId', function(req, res){
+  console.log('Get request for player-match score', req.params.matchId, req.params.memberId);
+  Score.find({'matchId': req.params.matchId,'memberId': req.params.memberId})
+    .exec(function(err, score){
+      if (err){
+        console.log("Error retrieving match score");
+      }else {
+        res.json(score);
+        console.log('Response',score);
+      }
+    });
+});
+
 router.post('/score', function(req, res){
-  console.log('Post a score');
+  console.log('Post a score', req.body);
   var newScore = new Score();
   newScore.name = req.body.name;
   newScore.cap = req.body.cap;
@@ -345,8 +369,10 @@ router.post('/score', function(req, res){
   newScore.save(function(err, insertedScore){
     if (err){
       console.log('Error saving score');
+      console.log('InsertedScoreFail',insertedScore);
     }else{
       res.json(insertedScore);
+      console.log('InsertedScorePass',insertedScore);
     }
   });
 });

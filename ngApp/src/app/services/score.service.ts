@@ -17,10 +17,16 @@ export class ScoreService {
     return this._http.get(this._server + this._getUrl)
       .map((response: Response) => response.json());
   }
+  getScoreByMatch(matchId: string){
+    return this._http.get(this._server + this._getUrl+ 'ByMatch/' + matchId)
+      .map((response: Response) => response.json());
+  }
 
   addScore(score: Score) {
+
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
+    console.log('MADEIT ADD SCORE', score, headers, options, JSON.stringify(score));
     return this._http.post(this._server + this._postUrl, JSON.stringify(score), options)
       .map((response: Response) => response.json());
   }

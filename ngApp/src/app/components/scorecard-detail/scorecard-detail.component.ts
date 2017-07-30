@@ -16,10 +16,11 @@ export class ScorecardDetailComponent implements OnInit {
   private deleteScorecardEvent = new EventEmitter();
 
   constructor() {
+
   }
 
   ngOnInit() {
-    init2(this.scorecard)
+    init2(this.scorecard);
 
     function init2(scorecard: Scorecard) {
       let front9Par: number = 0, back9Par: number = 0;

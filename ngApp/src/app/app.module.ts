@@ -27,6 +27,7 @@ import {MemberService} from "./services/member.service";
 import {MatchService} from "./services/match.service";
 import {ScoreService} from "./services/score.service";
 import { MatchAddPlayerComponent } from './components/match-add-player/match-add-player.component';
+import { MemberBlockComponent } from './components/member-block/member-block.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MatchAddPlayerComponent } from './components/match-add-player/match-add
     ScoreCenterComponent,
     ScoreListComponent,
     ScoreDetailComponent,
-    MatchAddPlayerComponent
+    MatchAddPlayerComponent,
+    MemberBlockComponent
   ],
   imports: [
     BrowserModule,

@@ -20,13 +20,6 @@ export class MatchDetailComponent implements OnInit {
   ngOnInit() {
   }
 
-  onTitleClick() {
-    this.editTitle = true;
-  }
-
-  ngOnChanges() {
-    this.editTitle = false;
-  }
 
   updateMatch() {
     this.updateMatchEvent.emit(this.match);
