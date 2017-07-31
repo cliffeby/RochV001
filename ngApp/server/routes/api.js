@@ -117,9 +117,13 @@ router.get('/matches/:id', function(req, res){
 router.post('/match', function(req, res){
   console.log('Post a match');
   var newMatch = new Match();
-  // newMatch.title = req.body.title;
-  // newMatch.url = req.body.url;
   newMatch.name = req.body.name;
+  newMatch.memberId = req.body.memberId;
+  newMatch.scorecardId = req.body.scorecardId;
+  newMatch.lineUpId = req.body.lineUpId;
+  newMatch.datePlayed = req.body.datePlayed;
+  newMatch.user = req.body.user;
+
   newMatch.save(function(err, insertedMatch){
     if (err){
       console.log('Error saving match');
@@ -133,7 +137,14 @@ router.put('/match/:id', function(req, res){
   console.log('Update a match');
   Match.findByIdAndUpdate(req.params.id,
     {
-      $set: {title: req.body.title, url: req.body.url, description: req.body.description}
+      $set: { name: req.body.name,
+              scorecardId: req.body.scorecardId,
+              memberId: req.body.memberId,
+              lineUpId: req.body.lineUpId,
+              datePlayed: req.body.datePlayed,
+              created: req.body.created,
+              user: req.body.user
+      }
     },
     {
       new: true
@@ -145,7 +156,6 @@ router.put('/match/:id', function(req, res){
         res.json(updatedMatch);
       }
     }
-
   );
 });
 
@@ -214,7 +224,15 @@ router.put('/scorecard/:id', function(req, res){
       $set: {
         name: req.body.name,
         rating: req.body.rating,
-        slope: req.body.slope}
+        slope: req.body.slope,
+        parInputString: req.body.parInputString,
+        par: req.body.par,
+        hCapInputString: req.body.hCapInputString,
+        hCap: req.body.hCap,
+        yardsInputString: req.body.yardsInputString,
+        yards: req.body.yards,
+        created: req.body.created,
+        user: req.body.user}
     },
     {
       new: true
@@ -271,6 +289,7 @@ router.post('/member', function(req, res){
   newMember.firstName = req.body.firstName;
   newMember.lastName = req.body.lastName;
   newMember.currentHCap  = req.body.currentHCap;
+  newMember.user = req.body.user;
   newMember.save(function(err, insertedMember){
     if (err){
       console.log('Error saving member');
@@ -284,7 +303,11 @@ router.put('/member/:id', function(req, res){
   console.log('Update a member');
   Member.findByIdAndUpdate(req.params.id,
     {
-      $set: {title: req.body.title, url: req.body.url, description: req.body.description}
+      $set: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        currentHCap: req.body.currentHCap,
+        user: req.body.user}
     },
     {
       new: true
@@ -364,8 +387,13 @@ router.post('/score', function(req, res){
   var newScore = new Score();
   newScore.name = req.body.name;
   newScore.cap = req.body.cap;
+  newScore.wonTwoBall = req.body.wonTwoBall;
+  newScore.wonOneBall = req.body.wonOneBall;
+  newScore.wonIndo = req.body.wonIndo;
+  newScore.foursomeIds = req.body.foursomeIds;
   newScore.matchId  = req.body.matchId;
   newScore.memberId  = req.body.memberId;
+  newScore.user = req.body.user;
   newScore.save(function(err, insertedScore){
     if (err){
       console.log('Error saving score');
@@ -381,7 +409,17 @@ router.put('/score/:id', function(req, res){
   console.log('Update a score');
   Score.findByIdAndUpdate(req.params.id,
     {
-      $set: {title: req.body.title, url: req.body.url, description: req.body.description}
+      $set: {
+        name: req.body.name,
+        cap: req.body.cap,
+        wonTwoBall: req.body.wonTwoBall,
+        wonOneBall: req.body.wonOneBall,
+        wonIndo: req.body.wonIndo,
+        foursomeIds: req.body.foursomeIds,
+        matchId: req.body.matchId,
+        memberId: req.body.memberId,
+        user: req.body.user
+          }
     },
     {
       new: true

@@ -2,8 +2,8 @@ export class Match {
     _id: string;
     name: string;
     scorecardId: string;
-    datePlayed: number;
-    memberIds: number;
+    datePlayed: string;
+    memberIds: string;
     lineUpIds: string[];
     created: string;
     user: string;

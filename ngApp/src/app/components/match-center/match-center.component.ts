@@ -36,12 +36,14 @@ export class MatchCenterComponent implements OnInit {
     // this._memberservice.getMembers()
     //   .subscribe(resMemData => this.members = resMemData);
     // console.log('MSCID',match.scorecardId);
+    if (match.scorecardId) {
     this._scorecardservice.getScorecard(match.scorecardId)
       .subscribe(resSCData => {
           this.scorecard = resSCData;
           console.log('SCName', this.scorecard.name);
           match.scName = this.scorecard.name;
         });
+      }
     this._scoreservice.getScoreByMatch(match._id)
      .subscribe(resScoreData => {
        this.scores = resScoreData;
