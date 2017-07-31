@@ -1,4 +1,6 @@
 import {Component, OnInit, EventEmitter} from '@angular/core';
+import { Scorecard } from "../../models/scorecard";
+import { ScorecardService } from "../../services/scorecard.service"
 
 @Component({
   selector: 'match-detail',
@@ -9,15 +11,18 @@ import {Component, OnInit, EventEmitter} from '@angular/core';
 })
 export class MatchDetailComponent implements OnInit {
   match: any;
+  scorecards: Array<Scorecard>;
 
   private editTitle: boolean = false;
   private updateMatchEvent = new EventEmitter();
   private deleteMatchEvent = new EventEmitter();
 
-  constructor() {
+  constructor( private _scorecardservice: ScorecardService) {
   }
 
   ngOnInit() {
+    this._scorecardservice.getScorecards()
+      .subscribe(resSCData => this.scorecards = resSCData);
   }
 
 

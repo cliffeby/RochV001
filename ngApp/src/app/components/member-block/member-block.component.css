@@ -14,6 +14,10 @@
   font-size: 14px;
   color: white;
   text-align: left;
+
+}
+.card-border {
+  border: solid 5px black;
 }
 p {
   margin: 0;

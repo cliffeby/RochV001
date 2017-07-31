@@ -3,40 +3,27 @@
   <div class="form-group">
     <label class="col-sm-2 control-label"> Name: </label>
     <div class="col-sm-10">
-      <input class="form-control" [(ngModel)]="match.name" placeholder="Name/Course/Tees"/>
+      <input class="form-control" [(ngModel)]="match.name" placeholder="Assign a name"/>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Course: </label>
-    <div class="col-sm-10">
-      <input class="selectpicker form-control show-tick" [(ngModel)]="match.scName" placeholder="Course"/>
-    </div>
-  </div>
-  <!--<div>select with name value pair listens to value too:-->
-    <!--<select [(ngModel)]="scorecards">-->
-      <!--&lt;!&ndash;<option *ngFor="scorecard in scorecards" [value]="scorecard._id">{{scorecard.name}}</option>&ndash;&gt;-->
-    <!--</select>  <span> &ndash;&gt; "{{ scorecard._id }}"</span>-->
-  <!--</div>-->
+    <div class="col-sm-10 control-label">
+      <select [(ngModel)]="match.scorecardId" name="scorecardId">
+        <option *ngFor = "let n of scorecards" [value] = n._id>
+          {{ n.name }}
+        </option>
+      </select>
 
-  <div class="row">
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Course: </label>
-        <div class="col-sm-10">
-        <select class="selectpicker form-control show-tick">
-          <option>Mustard</option>
-          <option>Ketchup</option>
-          <option>Relish</option>
-        </select>
-          </div>
     </div>
   </div>
-  <!--<div class="form-group">-->
-    <!--<label for="status">Status</label>-->
-    <!--<select class="form-control" name="status" [(ngModel)]="category.status">-->
-      <!--<option  [value]="1" [selected]="category.status ==1">Active</option>-->
-      <!--<option  [value]="0" [selected]="category.status ==0">In Active</option>-->
-    <!--</select>-->
-  <!--</div>-->
+  <div class="form-group">
+    <label class="col-sm-2 control-label"> Date: </label>
+    <div class="col-sm-10">
+      <input class="form-control" [(ngModel)]="match.datePlayed" placeholder="date"/>
+    </div>
+  </div>
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="button" (click)="updateMatch()" class="btn btn-primary">Update</button>
