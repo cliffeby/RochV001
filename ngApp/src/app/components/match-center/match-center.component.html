@@ -12,7 +12,7 @@
       </div>
       <div class="form-group">
         <label>Date</label>
-        <input type="text" class="form-control" name="created" ngModel>
+        <input type="text" class="form-control" name="datePlayed" ngModel>
       </div>
       <button type="submit" class="btn btn-success">Save</button>
     </form>
@@ -53,8 +53,8 @@
         <tbody>
       <tr *ngFor="let match of matches" [class.active]="match === selectedMatch">
         <td>{{match.name}}</td>
-        <td>{{match.rating}}</td>
-        <td>{{match.slope}}</td>
+        <td>{{match.datePlayed | date:'shortDate'}}</td>
+        <td>{{match.scName}}</td>
         <a class="btn btn-primary col-sm-offset-2 " (click)="onSelectMatch(match)">
           <i class="glyphicon glyphicon-edit"></i>
         </a>

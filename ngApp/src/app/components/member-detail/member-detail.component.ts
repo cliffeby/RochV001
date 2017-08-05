@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
+
 @Component({
   selector: 'member-detail',
   templateUrl: './member-detail.component.html',
@@ -27,6 +28,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   updateMember() {
+
     this.updateMemberEvent.emit(this.member);
   }
 

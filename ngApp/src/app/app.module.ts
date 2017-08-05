@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -28,6 +27,8 @@ import {MatchService} from "./services/match.service";
 import {ScoreService} from "./services/score.service";
 import { MatchAddPlayerComponent } from './components/match-add-player/match-add-player.component';
 import { MemberBlockComponent } from './components/member-block/member-block.component';
+import { MyDatePickerModule } from 'mydatepicker';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MemberBlockComponent } from './components/member-block/member-block.com
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MyDatePickerModule
   ],
   providers: [
     ScorecardService,

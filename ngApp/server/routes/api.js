@@ -134,7 +134,7 @@ router.post('/match', function(req, res){
 });
 
 router.put('/match/:id', function(req, res){
-  console.log('Update a match');
+  console.log('Update a match', req.body.datePlayed);
   Match.findByIdAndUpdate(req.params.id,
     {
       $set: { name: req.body.name,
