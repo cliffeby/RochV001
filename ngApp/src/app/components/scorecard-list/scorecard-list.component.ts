@@ -6,17 +6,22 @@ import { Scorecard } from '../../models/scorecard';
   templateUrl: 'scorecard-list.component.html',
   styleUrls: ['scorecard-list.component.css'],
   inputs: ['scorecards'],
-  outputs: ['SelectScorecard']
+  outputs: ['SelectScorecard', 'CopyScorecardEvent']
 })
 export class ScorecardListComponent implements OnInit {
   public SelectScorecard = new EventEmitter();
+  public CopyScorecardEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSelect(vid: Scorecard) {
-    this.SelectScorecard.emit(vid);
+  onSelect(scard: Scorecard) {
+    this.SelectScorecard.emit(scard);
+  }
+  onCopyAddScorecard(scard: Scorecard){
+    console.log('Emited',scard);
+    this.CopyScorecardEvent.emit(scard);
   }
 
 }

@@ -7,6 +7,8 @@ import {Match} from "../../models/match";
 import {Member} from "../../models/member";
 import {Score} from "../../models/score";
 import {Scorecard} from "../../models/scorecard";
+import {IMyDpOptions} from 'mydatepicker';
+
 @Component({
   selector: 'app-match-center',
   templateUrl: './match-center.component.html',
@@ -15,18 +17,30 @@ import {Scorecard} from "../../models/scorecard";
 })
 export class MatchCenterComponent implements OnInit {
   selectedMatch: Match;
+  match: Match;
   private hidenewMatch: boolean = true;
   matches: Array<Match>;
   members: Array<Member>;
   scores: Array<Score>;
   scorecards: Array<Scorecard>;
   scorecard: Scorecard;
+  private model: any;
+  private today: any;
+  private myDatePickerOptions: IMyDpOptions = {
+    // other options... see https://github.com/kekeh/mydatepicker
+    dateFormat: 'mm.dd.yyyy',
+    firstDayOfWeek: 'su',
+    satHighlight: true
+  };
 
 
   constructor(private _matchservice: MatchService,
               private _scoreservice: ScoreService,
               private _scorecardservice: ScorecardService,
               private _memberservice: MemberService) {
+    let date: Date = new Date();
+    this.today = date.getFullYear()+'-'+(Number(date.getMonth()+1))+'-'+date.getDate();
+    console.log('DAT', date, this.today);
   }
 
 
@@ -53,9 +67,6 @@ export class MatchCenterComponent implements OnInit {
   onSelectMatch(match: any) {
     this.selectedMatch = match;
     console.log('selectedMatch', this.selectedMatch);
-    // this._memberservice.getMembers()
-    //   .subscribe(resMemData => this.members = resMemData);
-    // console.log('MSCID',match.scorecardId);
     if (match.scorecardId) {
       this._scorecardservice.getScorecard(match.scorecardId)
         .subscribe(resSCData => {
@@ -85,21 +96,23 @@ export class MatchCenterComponent implements OnInit {
   }
 
   newMatch() {
+    this.match = new Match();
+    var dateArray = this.today.split('-');
+    this.model = { date: { year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2]) } };
     this.hidenewMatch = false;
   }
 
   onSubmitAddMatch(match: Match) {
+    match.datePlayed = (this.model.date.year+'-'+this.model.date.month+'-'+this.model.date.day);
     this._matchservice.addMatch(match)
       .subscribe(resNewMatch => {
         this.matches.push(resNewMatch);
         this.hidenewMatch = true;
-        this.selectedMatch = resNewMatch;
+        this.selectedMatch = null;
       });
-
   }
 
   onUpdateMatchEvent(match: any) {
-    console.log('UPDATE MATCH FOR DATE', match);
     this._matchservice.updateMatch(match)
       .subscribe(resUpdatedMatch => match = resUpdatedMatch);
     this.selectedMatch = null;

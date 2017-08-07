@@ -1,30 +1,33 @@
 <div class="row">
-    <div *ngIf="!hidenewScorecard">
-      <h2>New Scorecard</h2>
-      <form #form="ngForm" (ngSubmit)="onSubmitAddScorecard(form.value)" class="well">
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control" required name="name" ngModel>
-        </div>
-        <div class="form-group">
-          <label>Rating</label>
-          <input type="text" class="form-control" required name="rating" ngModel>
-        </div>
-        <div class="form-group">
-          <label>Slope</label>
-          <input type="text" class="form-control" name="slope" ngModel>
-        </div>
-        <button type="submit" class="btn btn-success">Save</button>
-      </form>
-    </div>
-    <scorecard-detail *ngIf="selectedScorecard && hidenewScorecard"
-                  (updateScorecardEvent)="onUpdateScorecardEvent($event)"
-                  (deleteScorecardEvent)="onDeleteScorecardEvent($event)"
-                  [scorecard]="selectedScorecard">
-    </scorecard-detail>
+  <div *ngIf="!hidenewScorecard">
+    <h2>New Scorecard</h2>
+    <form #form="ngForm" (ngSubmit)="onSubmitAddScorecard(form.value)" class="well">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" required name="name" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Rating</label>
+        <input type="text" class="form-control" required name="rating" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Slope</label>
+        <input type="text" class="form-control" name="slope" ngModel>
+      </div>
+      <button type="submit" class="btn btn-success">Save</button>
+    </form>
   </div>
-  <div *ngIf="!selectedScorecard && hidenewScorecard">
-    <!--<button style="margin-bottom:2px;" type="button" (click)="newScorecard()" class="btn btn-success btn-block">+ New Scorecard</button>-->
-    <scorecard-list *ngIf="!selectedScorecard && hidenewScorecard" [scorecards]="scorecards" (SelectScorecard)="onSelectScorecard($event)"></scorecard-list>
-
-  </div>
+  <scorecard-detail *ngIf="selectedScorecard && hidenewScorecard"
+                    (updateScorecardEvent)="onUpdateScorecardEvent($event)"
+                    (deleteScorecardEvent)="onDeleteScorecardEvent($event)"
+                    [scorecard]="selectedScorecard">
+  </scorecard-detail>
+</div>
+<div *ngIf="!selectedScorecard && hidenewScorecard">
+  <!--<button style="margin-bottom:2px;" type="button" (click)="newScorecard()" class="btn btn-success btn-block">+ New Scorecard</button>-->
+  <scorecard-list *ngIf="!selectedScorecard && hidenewScorecard"
+                  (SelectScorecard)="onSelectScorecard($event)"
+                  (CopyScorecardEvent)="onCopyAddScorecardEvent($event)"
+                  [scorecards]="scorecards">
+  </scorecard-list>
+</div>

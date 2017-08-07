@@ -22,7 +22,6 @@ export class ScorecardsComponent implements OnInit {
 
   onSelectScorecard(scorecard: any) {
     this.selectedScorecard = scorecard;
-    console.log(this.selectedScorecard);
   }
 
   newScorecard() {
@@ -39,8 +38,9 @@ export class ScorecardsComponent implements OnInit {
       });
 
   }
-  onCopyAddScorecard(scorecard: Scorecard) {
+  onCopyAddScorecardEvent(scorecard: any) {
     let copiedScorecard = scorecard;
+    console.log('COPIED', copiedScorecard);
     copiedScorecard.name = scorecard.name + " COPY";
     this._scorecardService.addScorecard(copiedScorecard)
       .subscribe(resNewScorecard => {

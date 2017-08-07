@@ -16,7 +16,6 @@ export class ScorecardDetailComponent implements OnInit {
   private deleteScorecardEvent = new EventEmitter();
 
   constructor() {
-
   }
 
   ngOnInit() {
