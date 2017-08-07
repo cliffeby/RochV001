@@ -28,6 +28,7 @@
   <scorecard-list *ngIf="!selectedScorecard && hidenewScorecard"
                   (SelectScorecard)="onSelectScorecard($event)"
                   (CopyScorecardEvent)="onCopyAddScorecardEvent($event)"
+                  (AddScorecardEvent) = "onAddScorecardEvent($event)"
                   [scorecards]="scorecards">
   </scorecard-list>
 </div>
