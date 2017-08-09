@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Member } from '../../models/member';
-import { SearchFilterPipe} from '../../search.pipe';
 
 @Component({
   selector: 'member-list',

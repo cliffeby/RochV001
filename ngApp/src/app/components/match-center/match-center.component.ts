@@ -8,7 +8,6 @@ import {Member} from "../../models/member";
 import {Score} from "../../models/score";
 import {Scorecard} from "../../models/scorecard";
 import {IMyDpOptions} from 'mydatepicker';
-import {SearchFilterPipe} from '../../search.pipe';
 
 @Component({
   selector: 'app-match-center',

@@ -93,6 +93,7 @@ router.delete('/video/:id', function(req, res){
 router.get('/matches', function(req, res){
   console.log('Get request for all matches');
   Match.find({})
+    .sort({datePlayed: 'desc'})
     .exec(function(err, matches){
       if (err){
         console.log("Error retrieving matches");
@@ -262,6 +263,7 @@ router.delete('/scorecard/:id', function(req, res){
 router.get('/members', function(req, res){
   console.log('Get request for all members');
   Member.find({})
+    .sort('lastName')
     .exec(function(err, members){
       if (err){
         console.log("Error retrieving members");

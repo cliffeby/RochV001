@@ -70,7 +70,7 @@
         </thead>
         <tbody>
 
-        <tr *ngFor="let match of matches | searchfilter: 'name' : queryString" [class.active]="match === selectedMatch">
+        <tr *ngFor="let match of matches | searchfilter: 'name' : queryString " [class.active]="match === selectedMatch">
           <td>{{match.name}}</td>
           <td>{{match.datePlayed | date:'shortDate'}}</td>
           <td>{{match.scName}}</td>
