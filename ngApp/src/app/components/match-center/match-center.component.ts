@@ -8,6 +8,7 @@ import {Member} from "../../models/member";
 import {Score} from "../../models/score";
 import {Scorecard} from "../../models/scorecard";
 import {IMyDpOptions} from 'mydatepicker';
+import {SearchFilterPipe} from '../../search.pipe';
 
 @Component({
   selector: 'app-match-center',
@@ -19,6 +20,7 @@ export class MatchCenterComponent implements OnInit {
   selectedMatch: Match;
   match: Match;
   private hidenewMatch: boolean = true;
+  private queryString: string;
   matches: Array<Match>;
   members: Array<Member>;
   scores: Array<Score>;
@@ -45,6 +47,7 @@ export class MatchCenterComponent implements OnInit {
 
 
   ngOnInit() {
+    this.queryString = "";
     this._matchservice.getMatches()
       .subscribe(resMatchData => {
           this.matches = resMatchData;

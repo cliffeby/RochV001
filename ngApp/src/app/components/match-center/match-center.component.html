@@ -57,6 +57,8 @@
   </div>
   <div class="row">
     <div class="col-md-12">
+      <input type="text" [(ngModel)]="queryString" id="search" placeholder="Search Match Name">
+      <i class="glyphicon glyphicon-search"></i>
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -67,7 +69,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let match of matches" [class.active]="match === selectedMatch">
+
+        <tr *ngFor="let match of matches | searchfilter: 'name' : queryString" [class.active]="match === selectedMatch">
           <td>{{match.name}}</td>
           <td>{{match.datePlayed | date:'shortDate'}}</td>
           <td>{{match.scName}}</td>

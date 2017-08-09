@@ -28,6 +28,7 @@ import {ScoreService} from "./services/score.service";
 import { MatchAddPlayerComponent } from './components/match-add-player/match-add-player.component';
 import { MemberBlockComponent } from './components/member-block/member-block.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { SearchFilterPipe } from './search.pipe';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     ScoreListComponent,
     ScoreDetailComponent,
     MatchAddPlayerComponent,
-    MemberBlockComponent
+    MemberBlockComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,

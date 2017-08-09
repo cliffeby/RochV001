@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Member } from '../../models/member';
+import { SearchFilterPipe} from '../../search.pipe';
 
 @Component({
   selector: 'member-list',
@@ -10,9 +11,11 @@ import { Member } from '../../models/member';
 })
 export class MemberListComponent implements OnInit {
   public SelectMember = new EventEmitter();
+  private queryString: string;
   constructor() { }
 
   ngOnInit() {
+    this.queryString = "";
   }
 
   onSelect(mem: Member) {

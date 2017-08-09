@@ -1,4 +1,6 @@
 <h2>Member Info</h2>
+<input type="text" [(ngModel)]="queryString" id="search" placeholder="Search Last Name">
+<i class="glyphicon glyphicon-search"></i>
 
 <div class="row">
 
@@ -12,7 +14,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let member of members">
+      <tr *ngFor="let member of members | searchfilter:'lastName': queryString ">
         <td>{{member.firstName}}</td>
         <td>{{member.lastName}}</td>
         <td>{{member.currentHCap}}</td>
@@ -24,5 +26,4 @@
       </tbody>
     </table>
 </div>
-<member-block [members]="members" ></member-block>
 
