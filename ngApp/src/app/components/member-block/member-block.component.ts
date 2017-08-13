@@ -18,11 +18,13 @@ export class MemberBlockComponent implements OnInit {
   match;
   Match;
   private score = new Score();
+  private queryString: string;
 
   constructor(private _scoreservice: ScoreService) {
   }
 
   ngOnInit() {
+    this.queryString = "";
   }
 
   onSelect(mem: Member) {
@@ -32,6 +34,7 @@ export class MemberBlockComponent implements OnInit {
   playerinMatch(member) {
     member.isPlaying = !member.isPlaying;
     if (member.isPlaying) {
+      this.match.players++;
       this.score.matchId = this.match._id;
       this.score.memberId = member._id;
       this.score.cap = member.currentHCap;
@@ -41,6 +44,7 @@ export class MemberBlockComponent implements OnInit {
           this.scores.push(resNewScore);
         });
     } else {
+      this.match.players--;
       let scoreArray = this.scores;
       for (let i = 0; i < this.scores.length; i++) {
         if (this.scores[i].memberId === member._id && this.scores[i].matchId === this.match._id) {

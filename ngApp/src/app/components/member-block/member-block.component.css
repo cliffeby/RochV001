@@ -10,6 +10,7 @@
 .card-block {
   align-content:  space-around;
   background-color: #6272af;
+  border: solid 5px #6272af;
   margin: 5px;
   font-size: 14px;
   color: white;

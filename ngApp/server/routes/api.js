@@ -7,6 +7,7 @@ const Match = require('../models/match');
 const Scorecard = require('../models/scorecard');
 const Member = require('../models/member');
 const Score = require('../models/score');
+const User = require('../models/user');
 
 //const db = "mongodb://devuser:dev1234@ds053788.mlab.com:53788/mean-devr04";
 // const db = "mongodb://localhost/mean-devR04:27017";
@@ -80,12 +81,84 @@ router.put('/video/:id', function(req, res){
 
 
 router.delete('/video/:id', function(req, res){
-  console.log('Deleting a video');
-  Video.findByIdAndRemove(req.params.id, function(err, deletedVideo){
+  console.log('Deleting a vid');
+  user.findByIdAndRemove(req.params.id, function(err, deletevid){
     if(err){
-      res.send("Error deleting video");
+      res.send("Error deleting vid");
     }else{
-      res.json(deletedVideo);
+      res.json(deletedvid);
+    }
+  });
+});
+
+router.get('/users', function(req, res){
+  console.log('Get request for all users');
+  User.find({})
+    .exec(function(err, users){
+      if (err){
+        console.log("Error retrieving users");
+      }else {
+        res.json(users);
+      }
+    });
+});
+
+router.get('/users/:id', function(req, res){
+  console.log('Get request for a single user');
+  User.findById(req.params.id)
+    .exec(function(err, user){
+      if (err){
+        console.log("Error retrieving user");
+      }else {
+        res.json(user);
+      }
+    });
+});
+
+router.post('/user', function(req, res){
+  console.log('Post a user');
+  var newuser = new User();
+  newuser.title = req.body.title;
+  newuser.url = req.body.url;
+  newuser.description = req.body.description;
+  newuser.save(function(err, inserteduser){
+    if (err){
+      console.log('Error saving user');
+    }else{
+      res.json(inserteduser);
+    }
+  });
+});
+
+
+router.put('/user/:id', function(req, res){
+  console.log('Update a user');
+  User.findByIdAndUpdate(req.params.id,
+    {
+      $set: {title: req.body.title, url: req.body.url, description: req.body.description}
+    },
+    {
+      new: true
+    },
+    function(err, updateduser){
+      if(err){
+        res.send("Error updating user");
+      }else{
+        res.json(updateduser);
+      }
+    }
+
+  );
+});
+
+
+router.delete('/user/:id', function(req, res){
+  console.log('Deleting a user');
+  User.findByIdAndRemove(req.params.id, function(err, deleteduser){
+    if(err){
+      res.send("Error deleting user");
+    }else{
+      res.json(deleteduser);
     }
   });
 });

@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2016"
+      "es2016", "dom"
     ],
     "outDir": "../out-tsc/spec",
     "module": "commonjs",
@@ -18,9 +18,11 @@
     ]
   },
   "files": [
-    "test.ts"
+    "test.ts",
+    "server/tests/*.spec.js"
   ],
   "include": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.spec.js"
   ]
 }

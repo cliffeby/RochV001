@@ -1,5 +1,7 @@
+<input type="text" [(ngModel)]="queryString" id="search" placeholder="Search Last Name">
+<i class="glyphicon glyphicon-search"></i>                    Playing: {{match.players}}
 <div class ="container">
-  <div *ngFor="let member of members">
+  <div *ngFor="let member of members | searchfilter: 'lastName' : queryString">
     <div >
     <div class="aligner aligner-item--top card card-block col-xs-2" [ngClass]="{'card-border': member.isPlaying==true}">
       <p>{{member.firstName}} - {{member.currentHCap}}</p>

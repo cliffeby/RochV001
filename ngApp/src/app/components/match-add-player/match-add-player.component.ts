@@ -17,8 +17,6 @@ export class MatchAddPlayerComponent implements OnInit {
   constructor(private _memberservice: MemberService) { }
 
   ngOnInit() {
-    this._memberservice.getMembers()
-      .subscribe((members)=> console.log(members));
   }
 
   onTitleClick() {

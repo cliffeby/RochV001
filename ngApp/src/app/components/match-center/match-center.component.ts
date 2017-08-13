@@ -8,6 +8,7 @@ import {Member} from "../../models/member";
 import {Score} from "../../models/score";
 import {Scorecard} from "../../models/scorecard";
 import {IMyDpOptions} from 'mydatepicker';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'app-match-center',
@@ -27,6 +28,7 @@ export class MatchCenterComponent implements OnInit {
   scorecard: Scorecard;
   private model: any;
   private today: any;
+  private myday: Date;
   private myDatePickerOptions: IMyDpOptions = {
     // other options... see https://github.com/kekeh/mydatepicker
     dateFormat: 'mm.dd.yyyy',
@@ -39,19 +41,20 @@ export class MatchCenterComponent implements OnInit {
               private _scoreservice: ScoreService,
               private _scorecardservice: ScorecardService,
               private _memberservice: MemberService) {
-    let date: Date = new Date();
-    this.today = date.getFullYear()+'-'+(Number(date.getMonth()+1))+'-'+date.getDate();
-    console.log('DAT', date, this.today);
+    let date1: Date = new Date();
+    this.today = date1.getFullYear() + '-' + (Number(date1.getMonth() + 1)) + '-' + date1.getDate();
   }
 
-
   ngOnInit() {
+    this.myday = new Date();
     this.queryString = "";
     this._matchservice.getMatches()
       .subscribe(resMatchData => {
-          this.matches = resMatchData;
+         this.matches = resMatchData;
+        for (let i = 0; i < this.matches.length; i++) {
+          this.matches[i].dateFlag = moment(this.myday).subtract(1,'days').isBefore(this.matches[i].datePlayed);
         }
-      );
+      });
     this._scorecardservice.getScorecards()
       .subscribe(resSCData => {
           this.scorecards = resSCData;
@@ -68,7 +71,6 @@ export class MatchCenterComponent implements OnInit {
 
   onSelectMatch(match: any) {
     this.selectedMatch = match;
-    console.log('selectedMatch', this.selectedMatch);
     if (match.scorecardId) {
       this._scorecardservice.getScorecard(match.scorecardId)
         .subscribe(resSCData => {
@@ -82,12 +84,12 @@ export class MatchCenterComponent implements OnInit {
         this._memberservice.getMembers()
           .subscribe(resMemData => {
             this.members = resMemData;
-            // console.log('THISMEMBERS',this.members);
-            // console.log('ID',this.members[0]._id);
+            match.players = 0;
             for (let index = 0; index < this.scores.length; index++) {
               for (let i = 0; i < this.members.length; i++) {
                 if (this.members[i]._id === this.scores[index].memberId) {
                   this.members[i].isPlaying = true;
+                  match.players++;
                 } else {
                   if (!this.members[i].isPlaying) this.members[i].isPlaying = false
                 }
@@ -100,14 +102,19 @@ export class MatchCenterComponent implements OnInit {
   newMatch() {
     this.match = new Match();
     var dateArray = this.today.split('-');
-    this.model = { date: { year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2]) } };
+    this.model = {date: {year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2])}};
     this.hidenewMatch = false;
   }
 
   onSubmitAddMatch(match: Match) {
-    match.datePlayed = (this.model.date.year+'-'+this.model.date.month+'-'+this.model.date.day);
+    match.datePlayed = (this.model.date.year + '-' + this.model.date.month + '-' + this.model.date.day);
+
     this._matchservice.addMatch(match)
       .subscribe(resNewMatch => {
+        //TODO Populate SCName on match list Not working
+        this._scorecardservice.getScorecard(this.match.scorecardId)
+          .subscribe((resSCData) => this.match.scName = resSCData.name);
+        //TODO push to top of heap
         this.matches.push(resNewMatch);
         this.hidenewMatch = true;
         this.selectedMatch = null;

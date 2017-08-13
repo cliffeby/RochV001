@@ -33,7 +33,6 @@ export class MatchDetailComponent implements OnInit {
     this._scorecardservice.getScorecards()
       .subscribe(resSCData => this.scorecards = resSCData);
     this.model =  this.match.datePlayed;
-    console.log('this.model', this.model);
     if (this.match.datePlayed){
       var dateArray = this.match.datePlayed.split('-');
       this.model = { date: { year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2]) } };
@@ -46,8 +45,7 @@ export class MatchDetailComponent implements OnInit {
     this._scorecardservice.getScorecard(this.match.scorecardId)
       .subscribe((resSCData) => this.match.scName = resSCData.name);
     this.updateMatchEvent.emit(this.match);
-    console.log('Date', this.match.datePlayed);
-  }
+    }
 
   deleteMatch() {
     this.deleteMatchEvent.emit(this.match);
