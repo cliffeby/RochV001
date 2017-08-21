@@ -9,9 +9,9 @@ export class MemberService {
   private _server = 'http://localhost:3000';
 
   private _getUrl = "/api/members";
-  private _postUrl = "/api/member";
-  private _putUrl = "/api/member/";
-  private _deleteUrl = "/api/member/";
+  private _postUrl = "/api/members";
+  private _putUrl = "/api/members/";
+  private _deleteUrl = "/api/members/";
 
   constructor(private _http: Http) { }
 

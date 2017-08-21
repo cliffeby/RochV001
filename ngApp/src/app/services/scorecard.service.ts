@@ -9,9 +9,9 @@ export class ScorecardService {
   private _server = "http://localhost:3000";
 //
   private _getUrl = "/api/scorecards";
-  private _postUrl = "/api/scorecard";
-  private _putUrl = "/api/scorecard/";
-  private _deleteUrl = "/api/scorecard/";
+  private _postUrl = "/api/scorecards";
+  private _putUrl = "/api/scorecards/";
+  private _deleteUrl = "/api/scorecards/";
 
   constructor(private _http: Http) { }
 

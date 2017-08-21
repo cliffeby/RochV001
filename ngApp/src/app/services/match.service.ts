@@ -7,9 +7,9 @@ import 'rxjs/add/operator/map';
 export class MatchService {
   private _server = 'http://localhost:3000';
   private _getUrl = "/api/matches";
-  private _postUrl = "/api/match";
-  private _putUrl = "/api/match/";
-  private _deleteUrl = "/api/match/";
+  private _postUrl = "/api/matches";
+  private _putUrl = "/api/matches/";
+  private _deleteUrl = "/api/matches/";
 
   constructor(private _http: Http) { }
 

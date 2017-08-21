@@ -7,9 +7,9 @@ import 'rxjs/add/operator/map';
 export class ScoreService {
   private _server = 'http://localhost:3000';
   private _getUrl = "/api/scores";
-  private _postUrl = "/api/score";
-  private _putUrl = "/api/score/";
-  private _deleteUrl = "/api/score/";
+  private _postUrl = "/api/scores";
+  private _putUrl = "/api/scores/";
+  private _deleteUrl = "/api/scores/";
 
   constructor(private _http: Http) { }
 
