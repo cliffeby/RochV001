@@ -14,7 +14,8 @@ const MemberSchema = new Schema({
     default: '',
     required: 'Please fill Member last name',
     trim: true
-  },
+  }
+  ,
   currentHCap: Number,
   matchIds: [{
     type: Schema.ObjectId,

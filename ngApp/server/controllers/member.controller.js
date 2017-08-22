@@ -30,16 +30,19 @@ exports.getMember=function(req, res){
 };
 
 exports.postMember=function(req, res){
-  console.log('Post a member');
+  console.log('Post a member1');
+  console.log('User?', req.body);
   var newMember = new Member();
   newMember.firstName = req.body.firstName;
   newMember.lastName = req.body.lastName;
   newMember.currentHCap  = req.body.currentHCap;
-  newMember.user = req.body.user;
+  newMember.user = req.user._id;
+
   newMember.save(function(err, insertedMember){
     if (err){
       console.log('Error saving member');
     }else{
+      console.log('User2',insertedMember);
       res.json(insertedMember);
     }
   });

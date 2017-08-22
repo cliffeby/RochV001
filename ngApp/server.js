@@ -6,6 +6,8 @@ const matchController = require('./server/controllers/match.controller');
 const scoreController = require('./server/controllers/score.controller');
 const scorecardController = require('./server/controllers/scorecard.controller');
 const userController = require('./server/controllers/user');
+const passport = require('passport');
+const authController = require('./server/controllers/auth.controller');
 const path = require('path');
 // const api = require('./server/routes/api');
 const port =3000;
@@ -28,32 +30,32 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
+app.use(passport.initialize());
 var router = express.Router();
 // Create endpoint handlers for /members
 router.route('/members')
-  .post(memberController.postMember)
-  .get(memberController.getMembers);
+  .post(authController.isAuthenticated,memberController.postMember)
+  .get(authController.isAuthenticated,memberController.getMembers);
 
 // Create endpoint handlers for /members/:beer_id
 router.route('/members/:id')
-  .get(memberController.getMember)
-  .put(memberController.putMember)
-  .delete(memberController.deleteMember);
+  .get(authController.isAuthenticated,memberController.getMember)
+  .put(authController.isAuthenticated,memberController.putMember)
+  .delete(authController.isAuthenticated,memberController.deleteMember);
 
 router.route('/users')
   .post(userController.postUsers)
-  .get(userController.getUsers);
+  .get(authController.isAuthenticated,userController.getUsers);
 
 // Create endpoint handlers for /users/:_id
-router.route('/users/:id')
-  .get(userController.getUser)
-  .put(userController.putUser)
-  .delete(userController.deleteUser);
+// router.route('/users/:id')
+//   .get(userController.getUser)
+//   .put(userController.putUser)
+//   .delete(userController.deleteUser);
 
 router.route('/matches')
   .post(matchController.postMatch)
-  .get(matchController.getMatches);
+  .get( matchController.getMatches);
 
 // Create endpoint handlers for /matches/_id
 router.route('/matches/:id')
