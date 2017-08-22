@@ -1,0 +1,38 @@
+<h2>User Info</h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="error" *ngIf="error">{{error}}</div>
+    <div class="pull-right">
+      <button class="btn btn-primary" (click)="addUser()">
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users" [class.active]="user === selectedUser">
+        <td>{{user.username}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.email}}</td>
+        <a class="btn btn-primary" (click)="onSelect(user)">
+          <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary col-sm-offset-2" (click)="onCopyAddUser(user)">
+          <i class="glyphicon glyphicon-copy"></i>
+        </a>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

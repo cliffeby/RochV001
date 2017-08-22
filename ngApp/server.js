@@ -5,7 +5,7 @@ const memberController = require('./server/controllers/member.controller');
 const matchController = require('./server/controllers/match.controller');
 const scoreController = require('./server/controllers/score.controller');
 const scorecardController = require('./server/controllers/scorecard.controller');
-const userController = require('./server/controllers/user');
+const userController = require('./server/controllers/user.controller');
 const passport = require('passport');
 const authController = require('./server/controllers/auth.controller');
 const path = require('path');
@@ -44,9 +44,13 @@ router.route('/members/:id')
   .delete(authController.isAuthenticated,memberController.deleteMember);
 
 router.route('/users')
-  .post(userController.postUsers)
-  .get(authController.isAuthenticated,userController.getUsers);
+  .post(userController.postUser)
+  .get(userController.getUsers);
 
+router.route('/users/:id')
+  .get(userController.getUser)
+  .put(userController.putUser)
+  .delete(authController.isAuthenticated,userController.deleteUser);
 // Create endpoint handlers for /users/:_id
 // router.route('/users/:id')
 //   .get(userController.getUser)

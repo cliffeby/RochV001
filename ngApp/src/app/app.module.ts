@@ -25,10 +25,15 @@ import { ScoreDetailComponent } from './components/score-detail/score-detail.com
 import {MemberService} from "./services/member.service";
 import {MatchService} from "./services/match.service";
 import {ScoreService} from "./services/score.service";
+import {UserService} from "./services/user.service";
 import { MatchAddPlayerComponent } from './components/match-add-player/match-add-player.component';
 import { MemberBlockComponent } from './components/member-block/member-block.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchFilterPipe } from './search.pipe';
+import { SignupComponent } from './components/signup/signup.component';
+import { UserCenterComponent } from './components/user-center/user-center.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 
 
@@ -54,7 +59,11 @@ import { SearchFilterPipe } from './search.pipe';
     ScoreDetailComponent,
     MatchAddPlayerComponent,
     MemberBlockComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    SignupComponent,
+    UserCenterComponent,
+    UserDetailComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +76,8 @@ import { SearchFilterPipe } from './search.pipe';
     ScorecardService,
     ScoreService,
     MatchService,
-    MemberService
+    MemberService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
