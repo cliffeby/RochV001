@@ -1,6 +1,7 @@
 import { ScoreService } from '../../services/score.service';
 import { Component, OnInit } from '@angular/core';
 import { Score } from "../../models/score";
+import {AuthService} from "../../services/auth.service";
 @Component({
   selector: 'app-score-center',
   templateUrl: './score-center.component.html',
@@ -11,7 +12,8 @@ export class ScoreCenterComponent implements OnInit {
   selectedScore: Score;
   private hidenewScore: boolean = true;
   scores: Array<Score>;
-  constructor(private _scoreService: ScoreService) { }
+  constructor(private _scoreService: ScoreService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this._scoreService.getScores()
@@ -55,6 +57,5 @@ export class ScoreCenterComponent implements OnInit {
       });
     this.selectedScore = null;
   };
-
 }
 

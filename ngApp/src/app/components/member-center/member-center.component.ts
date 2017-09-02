@@ -2,6 +2,7 @@ import { MemberService } from '../../services/member.service';
 import { ScoreService } from '../../services/score.service';
 import { Component, OnInit } from '@angular/core';
 import { Member } from "../../models/member";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-member-center',
@@ -15,7 +16,8 @@ export class MemberCenterComponent implements OnInit {
   private hidenewMember: boolean = true;
   members: Array<Member>;
  // scores: Array<Score>;
-  constructor(private _memberService: MemberService) { }
+  constructor(private _memberService: MemberService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this._memberService.getMembers()

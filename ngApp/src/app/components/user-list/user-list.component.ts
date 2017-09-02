@@ -19,10 +19,7 @@ export class UserListComponent implements OnInit {
   onSelect(usr: User) {
     this.SelectUser.emit(usr);
   }
-  onCopyAddUser(usr: User){
-    this.CopyUserEvent.emit(usr);
-  }
-  addUser() {
+  onAddUser() {
     this.AddUserEvent.emit();
   }
 }

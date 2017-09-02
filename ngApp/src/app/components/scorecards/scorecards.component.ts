@@ -1,6 +1,7 @@
 import { ScorecardService } from '../../services/scorecard.service';
 import { Component, OnInit } from '@angular/core';
 import { Scorecard } from "../../models/scorecard";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-scorecards',
@@ -13,7 +14,8 @@ export class ScorecardsComponent implements OnInit {
   private hidenewScorecard: boolean = true;
   scorecards: Array<Scorecard>;
 
-  constructor(private _scorecardService: ScorecardService) { }
+  constructor(private _scorecardService: ScorecardService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this._scorecardService.getScorecards()

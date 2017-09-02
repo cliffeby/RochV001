@@ -9,6 +9,7 @@ import {Score} from "../../models/score";
 import {Scorecard} from "../../models/scorecard";
 import {IMyDpOptions} from 'mydatepicker';
 import * as moment from 'moment/moment';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-match-center',
@@ -40,7 +41,8 @@ export class MatchCenterComponent implements OnInit {
   constructor(private _matchservice: MatchService,
               private _scoreservice: ScoreService,
               private _scorecardservice: ScorecardService,
-              private _memberservice: MemberService) {
+              private _memberservice: MemberService,
+              private auth: AuthService) {
     let date1: Date = new Date();
     this.today = date1.getFullYear() + '-' + (Number(date1.getMonth() + 1)) + '-' + date1.getDate();
   }

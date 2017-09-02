@@ -16,7 +16,8 @@ const routes: Routes = [
   {path:  'matches', component: MatchCenterComponent},
   {path:  'members', component: MemberCenterComponent},
   {path:  'scores', component: ScoreCenterComponent},
-  {path:  'users', component: UserCenterComponent}
+  {path:  'users', component: UserCenterComponent},
+  { path: 'login', component: UserCenterComponent },
 ];
 
 @NgModule({

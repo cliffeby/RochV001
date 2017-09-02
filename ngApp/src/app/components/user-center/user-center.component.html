@@ -1,7 +1,7 @@
 <div class="row">
   <div *ngIf="!hidenewUser">
     <h2>New User</h2>
-    <form #form="ngForm" (ngSubmit)="onSubmitAddUser(form.value)" class="well">
+    <form #form="ngForm" (ngSubmit)="onAddUser(form.value)" class="well">
       <div class="form-group">
         <label>Username</label>
         <input type="text" class="form-control" required name="username" ngModel>
@@ -17,18 +17,24 @@
       <button type="submit" class="btn btn-success">Save</button>
     </form>
   </div>
-  <user-detail *ngIf="selectedUser && hidenewUser"
-                    (updateUserEvent)="onUpdateUserEvent($event)"
-                    (deleteUserEvent)="onDeleteUserEvent($event)"
-                    [user]="selectedUser">
+  <app-user-login *ngIf="!user"></app-user-login>
+  <user-detail *ngIf="hideUserLogin && hidenewUser"
+               (updateUserEvent)="onUpdateUserEvent($event)"
+               (deleteUserEvent)="onDeleteUserEvent($event)"
+               [user]="selectedUser">
   </user-detail>
 </div>
-<div *ngIf="!selectedUser && hidenewUser">
-  <!--<button style="margin-bottom:2px;" type="button" (click)="newUser()" class="btn btn-success btn-block">+ New User</button>-->
-  <user-list *ngIf="!selectedUser && hidenewUser"
-                  (SelectUser)="onSelectUser($event)"
-                  (CopyUserEvent)="onCopyAddUserEvent($event)"
-                  (AddUserEvent) = "onAddUserEvent($event)"
-                  [users]="users">
+<div *ngIf="!selectedUser && hidenewUser && user">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="error" *ngIf="error">{{error}}</div>
+      <div class="pull-right">
+        <button class="btn btn-primary" type="button" (click)="newUser()">
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <user-list *ngIf="!selectedUser && hidenewUser && user" (SelectUser)="onSelectUser($event)" [users]="users">
   </user-list>
 </div>

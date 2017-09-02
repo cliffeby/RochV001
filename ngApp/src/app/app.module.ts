@@ -30,10 +30,11 @@ import { MatchAddPlayerComponent } from './components/match-add-player/match-add
 import { MemberBlockComponent } from './components/member-block/member-block.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchFilterPipe } from './search.pipe';
-import { SignupComponent } from './components/signup/signup.component';
 import { UserCenterComponent } from './components/user-center/user-center.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
+import {AuthService} from "./services/auth.service";
 
 
 
@@ -60,10 +61,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
     MatchAddPlayerComponent,
     MemberBlockComponent,
     SearchFilterPipe,
-    SignupComponent,
     UserCenterComponent,
     UserDetailComponent,
-    UserListComponent
+    UserListComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +74,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
     MyDatePickerModule
   ],
   providers: [
+    AuthService,
     ScorecardService,
     ScoreService,
     MatchService,

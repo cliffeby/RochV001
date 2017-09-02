@@ -2,11 +2,6 @@
 <div class="row">
   <div class="col-md-12">
     <div class="error" *ngIf="error">{{error}}</div>
-    <div class="pull-right">
-      <button class="btn btn-primary" (click)="addUser()">
-        <i class="glyphicon glyphicon-plus"></i>
-      </button>
-    </div>
   </div>
 </div>
 <div class="row">
@@ -27,9 +22,6 @@
         <td>{{user.email}}</td>
         <a class="btn btn-primary" (click)="onSelect(user)">
           <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary col-sm-offset-2" (click)="onCopyAddUser(user)">
-          <i class="glyphicon glyphicon-copy"></i>
         </a>
       </tr>
       </tbody>

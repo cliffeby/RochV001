@@ -33,6 +33,5 @@ export class UserDetailComponent implements OnInit {
   deleteUser() {
     this.deleteUserEvent.emit(this.user);
   }
-
 }
 

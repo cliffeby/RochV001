@@ -1,6 +1,7 @@
 import { UserService } from '../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from "../../models/user";
+import {AuthService} from "../../services/auth.service";
 @Component({
   selector: 'app-user-center',
   templateUrl: './user-center.component.html',
@@ -10,12 +11,15 @@ import { User } from "../../models/user";
 export class UserCenterComponent implements OnInit {
   selectedUser: User;
   private hidenewUser: boolean = true;
+  private hideUserLogin: boolean = false;
   users: Array<User>;
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this._userService.getUsers()
       .subscribe(resUserData => this.users = resUserData);
+    this.hideUserLogin = false;
   }
 
   onSelectUser(user: any) {
@@ -27,14 +31,13 @@ export class UserCenterComponent implements OnInit {
     this.hidenewUser = false;
   }
 
-  onSubmitAddUser(user: User) {
+  onAddUser(user: User) {
     this._userService.addUser(user)
       .subscribe(resNewUser => {
         this.users.push(resNewUser);
         this.hidenewUser = true;
-        this.selectedUser = resNewUser;
+        this.selectedUser = null;
       });
-
   }
 
   onUpdateUserEvent(user: any) {
@@ -55,5 +58,9 @@ export class UserCenterComponent implements OnInit {
       });
     this.selectedUser = null;
   };
+
+  // onLoginUserEvent(user: User) {
+  //   this._userService.getUser()
+  // }
 
 }
