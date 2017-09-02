@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const memberController = require('./server/controllers/member.controller');
@@ -25,7 +26,7 @@ mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
     console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
   }
 });
-
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(bodyParser.urlencoded({extended: true}));
