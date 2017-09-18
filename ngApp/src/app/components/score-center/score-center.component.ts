@@ -1,7 +1,7 @@
 import { ScoreService } from '../../services/score.service';
 import { Component, OnInit } from '@angular/core';
 import { Score } from "../../models/score";
-import {AuthService} from "../../services/auth.service";
+import { AuthService } from "../../services/auth.service";
 @Component({
   selector: 'app-score-center',
   templateUrl: './score-center.component.html',
@@ -10,6 +10,7 @@ import {AuthService} from "../../services/auth.service";
 })
 export class ScoreCenterComponent implements OnInit {
   selectedScore: Score;
+  hidePlus: boolean;
   private hidenewScore: boolean = true;
   scores: Array<Score>;
   constructor(private _scoreService: ScoreService,
@@ -18,6 +19,8 @@ export class ScoreCenterComponent implements OnInit {
   ngOnInit() {
     this._scoreService.getScores()
       .subscribe(resScoreData => this.scores = resScoreData);
+    this.hidePlus = this.auth.userHasScopes(['create:scores'])
+    console.log('hideplus', this.hidePlus);
   }
 
   onSelectScore(score: any) {
@@ -27,6 +30,7 @@ export class ScoreCenterComponent implements OnInit {
 
   newScore() {
     this.hidenewScore = false;
+
   }
 
   onSubmitAddScore(score: Score) {

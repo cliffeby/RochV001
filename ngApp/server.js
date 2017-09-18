@@ -14,7 +14,9 @@ const path = require('path');
 const port =3000;
 
 const app = express();
-
+const jwt = require('express-jwt');
+const jwtAuthz = require('express-jwt-authz');
+const jwks = require('jwks-rsa');
 const config = require('./server/_config');
 
 // *** mongoose *** ///
@@ -27,75 +29,93 @@ mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
   }
 });
 app.use(cors());
+
+
+
+
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+
+// Configure API to accept RS256 signed tokens
+var jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: "https://roch.auth0.com/.well-known/jwks.json"
+  }),
+  audience: 'http://localhost:4200/home',
+  issuer: "https://roch.auth0.com/",
+  algorithms: ['RS256']
+});
+const checkUserScopes = jwtAuthz(['read:scores']);
+const checkAdminScopes = jwtAuthz(['create:scorecards']);
+const checkScopes = jwtAuthz(['read:scorecards']);
+
+app.use(jwtCheck);
+
 var router = express.Router();
 // Create endpoint handlers for /members
 router.route('/members')
-  .post(authController.isAuthenticated,memberController.postMember)
-  .get(authController.isAuthenticated,memberController.getMembers);
+  .post(jwtCheck, checkScopes, memberController.postMember)
+  .get(jwtCheck, checkScopes, memberController.getMembers);
 
 // Create endpoint handlers for /members/:beer_id
 router.route('/members/:id')
-  .get(authController.isAuthenticated,memberController.getMember)
-  .put(authController.isAuthenticated,memberController.putMember)
-  .delete(authController.isAuthenticated,memberController.deleteMember);
+  .get(jwtCheck, checkScopes, memberController.getMember)
+  .put(jwtCheck, checkScopes, memberController.putMember)
+  .delete(jwtCheck, checkScopes, memberController.deleteMember);
 
-router.route('/users')
-  .post(userController.postUser)
-  .get(userController.getUsers);
-
-router.route('/users/:id')
-  .get(userController.getUser)
-  .put(userController.putUser)
-  .delete(authController.isAuthenticated,userController.deleteUser);
-// Create endpoint handlers for /users/:_id
-// router.route('/users/:id')
-//   .get(userController.getUser)
-//   .put(userController.putUser)
-//   .delete(userController.deleteUser);
 
 router.route('/matches')
-  .post(matchController.postMatch)
-  .get( matchController.getMatches);
+  .post(jwtCheck, checkScopes, matchController.postMatch)
+  .get(jwtCheck, checkScopes, matchController.getMatches);
 
 // Create endpoint handlers for /matches/_id
 router.route('/matches/:id')
-  .get(matchController.getMatch)
-  .put(matchController.putMatch)
-  .delete(matchController.deleteMatch);
+  .get(jwtCheck, checkScopes, matchController.getMatch)
+  .put(jwtCheck, checkScopes, matchController.putMatch)
+  .delete(jwtCheck, checkScopes, matchController.deleteMatch);
+
 
 router.route('/scores')
-  .post(scoreController.postScore)
-  .get(scoreController.getScores);
+  .post(jwtCheck, checkScopes, scoreController.postScore)
+  .get(jwtCheck, checkUserScopes, scoreController.getScores);
 
 // Create endpoint handlers for /scores/:beer_id
 router.route('/scores/:id')
-  .get(scoreController.getScore)
-  .put(scoreController.putScore)
-  .delete(scoreController.deleteScore);
+  .get(jwtCheck, checkScopes, scoreController.getScore)
+  .put(jwtCheck, checkScopes, scoreController.putScore)
+  .delete(jwtCheck, checkScopes, scoreController.deleteScore);
+
 router.route('/scoresByMatch/:id')
  .get(scoreController.getMatchScores);
+
 router.route('/scoresByMatchPlayer/:matchId/:memberId')
   .get(scoreController.getMatchPlayer);
+
 router.route('/scorecards')
-  .post(scorecardController.postScorecard)
-  .get(scorecardController.getScorecards);
+  .post(jwtCheck, checkAdminScopes, scorecardController.postScorecard)
+  .get(jwtCheck, checkScopes, scorecardController.getScorecards);
 
 // Create endpoint handlers for /scorecards/:beer_id
 router.route('/scorecards/:id')
-  .get(scorecardController.getScorecard)
-  .put(scorecardController.putScorecard)
-  .delete(scorecardController.deleteScorecard);
+  .get(jwtCheck, checkScopes, scorecardController.getScorecard)
+  .put(jwtCheck, checkScopes, scorecardController.putScorecard)
+  .delete(jwtCheck, checkScopes, scorecardController.deleteScorecard);
 // Register all our routes with /api
 
 app.use('/api', router);
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'))
+});
+
+app.get('/authorized', function (req, res) {
+  res.send('Secured Resource');
 });
 
 app.listen(port, function(){

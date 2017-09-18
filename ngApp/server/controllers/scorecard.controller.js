@@ -52,7 +52,7 @@ exports.postScorecard =  function(req, res){
 };
 
 exports.putScorecard =  function(req, res){
-  console.log('Update a scorecard');
+  console.log('Update a scorecard', req.user);
   Scorecard.findByIdAndUpdate(req.params.id,
     {
       $set: {

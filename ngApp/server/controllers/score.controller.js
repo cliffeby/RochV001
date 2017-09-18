@@ -4,7 +4,7 @@
 const Score = require('../models/score');
 
 exports.getScores = function(req, res){
-  console.log('Get request for all scores');
+  console.log('Get request for all scores', req.user);
   Score.find({})
     .exec(function(err, scores){
       if (err){
@@ -16,7 +16,7 @@ exports.getScores = function(req, res){
 };
 
 exports.getScore = function(req, res){
-  console.log('Get request for a single score');
+  console.log('Get request for a single score', req);
   Score.findById(req.params.id)
     .exec(function(err, score){
       if (err){
@@ -74,7 +74,7 @@ exports.postScore = function(req, res){
 };
 
 exports.putScore = function(req, res){
-  console.log('Update a score');
+  console.log('Update a score', req.user);
   Score.findByIdAndUpdate(req.params.id,
     {
       $set: {

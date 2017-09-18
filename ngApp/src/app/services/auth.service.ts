@@ -7,15 +7,15 @@ import * as auth0 from 'auth0-js';
 @Injectable()
 export class AuthService {
 
+  requestedScopes: string = 'openid profile read:scorecards read:matches';
+
   auth0 = new auth0.WebAuth({
     clientID: '9E3q7XC0qIfGdCgoLehJRhFoKKNstSIo',
     domain: 'roch.auth0.com',
     responseType: 'token id_token',
-    audience: 'https://roch.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/matches',
-    scope: 'openid'
+    audience: 'http://localhost:4200/home',
+    redirectUri: 'http://localhost:4200/matches'
   });
-
 
   constructor(public router: Router) {}
 
@@ -29,7 +29,7 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home']);
-        console.log('AUTHRESULT', authResult);
+        console.log('AUTHRESULT', authResult, auth0);
       } else if (err) {
         this.router.navigate(['/home']);
         console.log(err);
@@ -40,11 +40,18 @@ export class AuthService {
 
   private setSession(authResult): void {
     // Set the time that the access token will expire at
+    const scopes = authResult.scope || this.requestedScopes;
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    console.log('AUTHRESULT', authResult);
+    localStorage.setItem('scopes', JSON.stringify(scopes));
+  }
+
+  public userHasScopes(scopes: Array<string>): boolean {
+    const grantedScopes = JSON.parse(localStorage.getItem('scopes')).split(' ');
+    console.log('GRANTED SCOPES', grantedScopes);
+    return scopes.every(scope => grantedScopes.includes(scope));
   }
 
   public logout(): void {

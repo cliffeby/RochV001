@@ -1,28 +1,34 @@
 <h2>Score Info</h2>
 
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Cap</th>
-        <th>MatchId</th>
-        <th>MemberId</th>
-        <th>Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let score of scores" [class.active]="score === selectedScore">
-        <td>{{score.name}}</td>
-        <td>{{score.cap}}</td>
-        <td>{{score.matchId}}</td>
-        <td>{{score.memberId}}</td>
-        <a class="btn btn-primary col-sm-offset-2 " (click)="onSelectScore(score)">
-          <i class="glyphicon glyphicon-edit"></i>
-        </a>
-      </tr>
-      </tbody>
-    </table>
+<div *ngIf="!unauth; else unauthcontent">
+  <ng-container #unauthcontent>UNAUTHORIZED</ng-container>
+</div>
+<div *ngIf="unauth">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name1</th>
+          <th>Cap</th>
+          <th>MatchId</th>
+          <th>MemberId</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let score of scores" [class.active]="score === selectedScore">
+          <td>{{score.name}}</td>
+          <td>{{score.cap}}</td>
+          <td>{{score.matchId}}</td>
+          <td>{{score.memberId}}</td>
+          <a class="btn btn-primary col-sm-offset-2 " (click)="onSelectScore(score)">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  </div>
+
+</div>

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -25,19 +25,21 @@ import { ScoreDetailComponent } from './components/score-detail/score-detail.com
 import {MemberService} from "./services/member.service";
 import {MatchService} from "./services/match.service";
 import {ScoreService} from "./services/score.service";
-import {UserService} from "./services/user.service";
 import { MatchAddPlayerComponent } from './components/match-add-player/match-add-player.component';
 import { MemberBlockComponent } from './components/member-block/member-block.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchFilterPipe } from './search.pipe';
-import { UserCenterComponent } from './components/user-center/user-center.component';
-import { UserDetailComponent } from './components/user-detail/user-detail.component';
-import { UserListComponent } from './components/user-list/user-list.component';
-import { UserLoginComponent } from './components/user-login/user-login.component';
 import {AuthService} from "./services/auth.service";
+import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import {ScopeGuardService} from "./services/scope-guard.service";
 
-
-
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenGetter: (() => localStorage.getItem('access_token')),
+    globalHeaders: [{'Content-Type': 'application/json'}],
+  }), http, options);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,11 +62,7 @@ import {AuthService} from "./services/auth.service";
     ScoreDetailComponent,
     MatchAddPlayerComponent,
     MemberBlockComponent,
-    SearchFilterPipe,
-    UserCenterComponent,
-    UserDetailComponent,
-    UserListComponent,
-    UserLoginComponent
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -74,12 +72,18 @@ import {AuthService} from "./services/auth.service";
     MyDatePickerModule
   ],
   providers: [
-    AuthService,
     ScorecardService,
     ScoreService,
     MatchService,
     MemberService,
-    UserService
+    AuthGuardService,
+    ScopeGuardService,
+    AuthService,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ],
   bootstrap: [AppComponent]
 })

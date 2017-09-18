@@ -27,7 +27,7 @@
                  [score]="selectedScore">
   </score-detail>
 </div>
-<div *ngIf="!selectedScore && hidenewScore">
+<div *ngIf="!selectedScore && hidenewScore && hidePlus">
   <div class="row">
     <div class="col-md-12">
       <div class="error" *ngIf="error">{{error}}</div>
@@ -38,6 +38,7 @@
       </div>
     </div>
   </div>
+  </div>
+<div>
   <score-list *ngIf="!selectedScore && hidenewScore" [scores]="scores" (SelectScore)="onSelectScore($event)"></score-list>
-
 </div>
