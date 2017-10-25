@@ -9,7 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "testserver": "node ./node_modules/mocha/bin/mocha server/tests"
+    "testserverfiles": "node ./node_modules/mocha/bin/mocha server/tests",
+    "newman": "newman run server/tests/scores.postman_collection.json",
+    "testserver": "node server"
   },
   "private": true,
   "dependencies": {
@@ -64,6 +66,9 @@
     "karma-requirejs": "^1.1.0",
     "mocha": "^3.5.0",
     "protractor": "~5.1.0",
+    "request": "^2.82.0",
+    "should": "^13.0.1",
+    "supertest": "^3.0.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"

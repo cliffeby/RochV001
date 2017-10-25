@@ -10,10 +10,10 @@ export class MemberService {
 
   private _server = 'http://localhost:3000';
 
-  private _getUrl = "/api/members";
-  private _postUrl = "/api/members";
-  private _putUrl = "/api/members/";
-  private _deleteUrl = "/api/members/";
+  private _getUrl = '/api/members';
+  private _postUrl = '/api/members';
+  private _putUrl = '/api/members/';
+  private _deleteUrl = '/api/members/';
 
   constructor(public auth: AuthService, public _authHttp: AuthHttp) { }
 
@@ -23,15 +23,15 @@ export class MemberService {
   }
 
   addMember(member: Member) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
     return this._authHttp.post(this._server + this._postUrl, JSON.stringify(member), options)
       .map((response: Response) => response.json());
   }
 
   updateMember(member: Member) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
     return this._authHttp.put(this._server + this._putUrl + member._id, JSON.stringify(member), options)
       .map((response: Response) => response.json());
   }

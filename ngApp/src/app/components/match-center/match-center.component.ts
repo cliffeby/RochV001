@@ -3,13 +3,13 @@ import {MemberService} from '../../services/member.service';
 import {ScoreService} from '../../services/score.service';
 import {ScorecardService} from '../../services/scorecard.service';
 import {Component, OnInit} from '@angular/core';
-import {Match} from "../../models/match";
-import {Member} from "../../models/member";
-import {Score} from "../../models/score";
-import {Scorecard} from "../../models/scorecard";
+import {Match} from '../../models/match';
+import {Member} from '../../models/member';
+import {Score} from '../../models/score';
+import {Scorecard} from '../../models/scorecard';
 import {IMyDpOptions} from 'mydatepicker';
 import * as moment from 'moment/moment';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-match-center',
@@ -20,7 +20,7 @@ import {AuthService} from "../../services/auth.service";
 export class MatchCenterComponent implements OnInit {
   selectedMatch: Match;
   match: Match;
-  private hidenewMatch: boolean = true;
+  private hidenewMatch = true;
   private queryString: string;
   matches: Array<Match>;
   members: Array<Member>;
@@ -43,7 +43,7 @@ export class MatchCenterComponent implements OnInit {
               private _scorecardservice: ScorecardService,
               private _memberservice: MemberService,
               private auth: AuthService) {
-    let date1: Date = new Date();
+    const date1: Date = new Date();
     this.today = date1.getFullYear() + '-' + (Number(date1.getMonth() + 1)) + '-' + date1.getDate();
   }
 
@@ -93,17 +93,19 @@ export class MatchCenterComponent implements OnInit {
                   this.members[i].isPlaying = true;
                   match.players++;
                 } else {
-                  if (!this.members[i].isPlaying) this.members[i].isPlaying = false
+                  if (!this.members[i].isPlaying) {
+                    this.members[i].isPlaying = false;
+                  }
                 }
               }
             }
-          })
+          });
       });
   }
 
   newMatch() {
     this.match = new Match();
-    var dateArray = this.today.split('-');
+    let dateArray = this.today.split('-');
     this.model = {date: {year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2])}};
     this.hidenewMatch = false;
   }
@@ -113,10 +115,10 @@ export class MatchCenterComponent implements OnInit {
 
     this._matchservice.addMatch(match)
       .subscribe(resNewMatch => {
-        //TODO Populate SCName on match list Not working
+        // TODO Populate SCName on match list Not working
         this._scorecardservice.getScorecard(this.match.scorecardId)
           .subscribe((resSCData) => this.match.scName = resSCData.name);
-        //TODO push to top of heap
+        // TODO push to top of heap
         this.matches.push(resNewMatch);
         this.hidenewMatch = true;
         this.selectedMatch = null;

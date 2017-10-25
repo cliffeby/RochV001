@@ -1,8 +1,8 @@
 import { MemberService } from '../../services/member.service';
 import { ScoreService } from '../../services/score.service';
 import { Component, OnInit } from '@angular/core';
-import { Member } from "../../models/member";
-import {AuthService} from "../../services/auth.service";
+import { Member } from '../../models/member';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-member-center',
@@ -13,7 +13,7 @@ import {AuthService} from "../../services/auth.service";
 
 export class MemberCenterComponent implements OnInit {
   selectedMember: Member;
-  private hidenewMember: boolean = true;
+  private hidenewMember = true;
   members: Array<Member>;
  // scores: Array<Score>;
   constructor(private _memberService: MemberService,
@@ -52,7 +52,7 @@ export class MemberCenterComponent implements OnInit {
   };
 
   onDeleteMemberEvent(member: any) {
-    let memberArray = this.members;
+    const memberArray = this.members;
     this._memberService.deleteMember(member)
       .subscribe(resDeletedMember => {
         for (let i = 0; i < memberArray.length; i++) {

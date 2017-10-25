@@ -10,6 +10,8 @@ const chai = require('chai');
 const expect = chai.expect;
 const mongoose = require('mongoose');
 const should = require('should');
+const supertest = require('supertest');
+const api = supertest('http://localhost:3000');
 const Member = require('../models/member');
 const User = require('../models/user');
 /**
@@ -46,9 +48,28 @@ before(function (done) {
     done();
   });
 });
+var token = null;
 
+before(function(done) {
+  var request = require("request");
+
+  var options = { method: 'GET',
+    url: 'http://3000/api/scores',
+    headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1VVkROMFkzTWtNNU9UQTRSRGd4TnpRMU56Y3hRelV6TWpkQlJESkNRMFk1UWtGR01rSkZOdyJ9.eyJpc3MiOiJodHRwczovL3JvY2guYXV0aDAuY29tLyIsInN1YiI6IjJ4NDZVM25pUndxS2NPTWFmQksxck1XdHRjNHFXSkk0QGNsaWVudHMiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAvaG9tZSIsImlhdCI6MTUwNzA3MzEwMCwiZXhwIjoxNTA3MTU5NTAwLCJzY29wZSI6Im9wZW5pZCBjcmVhdGU6c2NvcmVjYXJkIHJlbW92ZTpzY29yZWNhcmQgcmVtb3ZlOnNjb3JlIHVwZGF0ZTpzY29yZSBjcmVhdGU6c2NvcmVzIHJlYWQ6c2NvcmVzIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.j_uVuDpFaubiZNprpkmGHo-gjGz0jMinnaotoQQQ4aB8RFTmmXMBpRL8U7v7EqbD0D_BLVQg6STkYBEJeSjSWLF999anWVxbcBH53bsCK2YFtIrV3orjA_GHEUlWbmYyy7KGturqgShrpriaSUAQtPin5wPEqdAJLbIqFy8Cppnoi9RiiOwJ0rbyms24VkjjzlI4rSklmsBfwrHDCYbzlyXVh_i3OvFd8xShxWvgdSxYWB3NswJU1UkfXrQ8T7AEiEluj6XzhQcOns5fmjnaz93lF6PcmY-g9CGrJU0twf-xKUXz_mm1ARj1CqHHHEm7ppbQDaaBtJQ5FQRSDucgmw' } };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+
+
+    console.log('REQ BODY',body);
+  });
+done();
+});
 
 describe("a test2", function () {
+
 
   it('New name saved to test database', function (done) {
     var testName = Member({

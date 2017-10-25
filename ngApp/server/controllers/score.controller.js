@@ -4,7 +4,7 @@
 const Score = require('../models/score');
 
 exports.getScores = function(req, res){
-  console.log('Get request for all scores', req.user);
+  console.log('Get request for all scores');
   Score.find({})
     .exec(function(err, scores){
       if (err){
@@ -16,12 +16,13 @@ exports.getScores = function(req, res){
 };
 
 exports.getScore = function(req, res){
-  console.log('Get request for a single score', req);
+  console.log('Get request for a single score');
   Score.findById(req.params.id)
     .exec(function(err, score){
-      if (err){
+      if (err) {
         console.log("Error retrieving score");
       }else {
+        if(score===null) {console.log("ID not found", score);}
         res.json(score);
       }
     });
@@ -40,7 +41,7 @@ exports.getMatchScores = function(req, res){
 };
 
 exports.getMatchPlayer = function(req, res){
-  console.log('Get request for player-match score', req.params.matchId, req.params.memberId);
+  console.log('Get request for player-match score');
   Score.find({'matchId': req.params.matchId,'memberId': req.params.memberId})
     .exec(function(err, score){
       if (err){
@@ -53,6 +54,7 @@ exports.getMatchPlayer = function(req, res){
 };
 
 exports.postScore = function(req, res){
+  console.log('Post for a score');
   var newScore = new Score();
   newScore.name = req.body.name;
   newScore.cap = req.body.cap;
@@ -74,7 +76,8 @@ exports.postScore = function(req, res){
 };
 
 exports.putScore = function(req, res){
-  console.log('Update a score', req.user);
+  console.log('Update a score', req.params.id);
+  console.log('Update a score', req.body);
   Score.findByIdAndUpdate(req.params.id,
     {
       $set: {
@@ -85,8 +88,7 @@ exports.putScore = function(req, res){
         wonIndo: req.body.wonIndo,
         foursomeIds: req.body.foursomeIds,
         matchId: req.body.matchId,
-        memberId: req.body.memberId,
-        user: req.body.user
+        memberId: req.body.memberId
       }
     },
     {
@@ -94,8 +96,9 @@ exports.putScore = function(req, res){
     },
     function(err, updatedScore){
       if(err){
-        res.send("Error updating score");
+        res.status(status).send(body);
       }else{
+        console.log('updatedScorefromscore.controller',updatedScore);
         res.json(updatedScore);
       }
     }

@@ -1,7 +1,7 @@
 import { ScorecardService } from '../../services/scorecard.service';
 import { Component, OnInit } from '@angular/core';
-import { Scorecard } from "../../models/scorecard";
-import {AuthService} from "../../services/auth.service";
+import { Scorecard } from '../../models/scorecard';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-scorecards',
@@ -11,7 +11,7 @@ import {AuthService} from "../../services/auth.service";
 })
 export class ScorecardsComponent implements OnInit {
   selectedScorecard: Scorecard;
-  private hidenewScorecard: boolean = true;
+  private hidenewScorecard = true;
   private unauth: boolean;
   scorecards: Array<Scorecard>;
 
@@ -42,7 +42,7 @@ export class ScorecardsComponent implements OnInit {
   }
 
   onCopyAddScorecardEvent(scorecard: any) {
-    let copiedScorecard = scorecard;
+    const copiedScorecard = scorecard;
     copiedScorecard.name = scorecard.name + " COPY";
     this._scorecardService.addScorecard(copiedScorecard)
       .subscribe(resNewScorecard => {
@@ -63,7 +63,7 @@ export class ScorecardsComponent implements OnInit {
   };
 
   onDeleteScorecardEvent(scorecard: any) {
-    let scorecardArray = this.scorecards;
+    const scorecardArray = this.scorecards;
     this._scorecardService.deleteScorecard(scorecard)
       .subscribe(resDeletedScorecard => {
         for (let i = 0; i < scorecardArray.length; i++) {

@@ -8,10 +8,10 @@ import { AuthHttp } from 'angular2-jwt';
 @Injectable()
 export class MatchService {
   private _server = 'http://localhost:3000';
-  private _getUrl = "/api/matches";
-  private _postUrl = "/api/matches";
-  private _putUrl = "/api/matches/";
-  private _deleteUrl = "/api/matches/";
+  private _getUrl = '/api/matches';
+  private _postUrl = '/api/matches';
+  private _putUrl = '/api/matches/';
+  private _deleteUrl = '/api/matches/';
 
   constructor(public auth: AuthService, public _authHttp: AuthHttp) { }
 
@@ -21,15 +21,15 @@ export class MatchService {
   }
 
   addMatch(match: Match) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
     return this._authHttp.post(this._server + this._postUrl, JSON.stringify(match), options)
       .map((response: Response) => response.json());
   }
 
   updateMatch(match: Match) {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
     return this._authHttp.put(this._server + this._putUrl + match._id, JSON.stringify(match), options)
       .map((response: Response) => response.json());
   }

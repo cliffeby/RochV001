@@ -45,7 +45,7 @@ export class MemberBlockComponent implements OnInit {
         });
     } else {
       this.match.players--;
-      let scoreArray = this.scores;
+      const scoreArray = this.scores;
       for (let i = 0; i < this.scores.length; i++) {
         if (this.scores[i].memberId === member._id && this.scores[i].matchId === this.match._id) {
           this._scoreservice.deleteScore(this.scores[i])

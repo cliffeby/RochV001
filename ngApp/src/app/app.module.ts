@@ -22,17 +22,17 @@ import { MemberListComponent } from './components/member-list/member-list.compon
 import { ScoreCenterComponent } from './components/score-center/score-center.component';
 import { ScoreListComponent } from './components/score-list/score-list.component';
 import { ScoreDetailComponent } from './components/score-detail/score-detail.component';
-import {MemberService} from "./services/member.service";
-import {MatchService} from "./services/match.service";
-import {ScoreService} from "./services/score.service";
+import {MemberService} from './services/member.service';
+import {MatchService} from './services/match.service';
+import {ScoreService} from './services/score.service';
 import { MatchAddPlayerComponent } from './components/match-add-player/match-add-player.component';
 import { MemberBlockComponent } from './components/member-block/member-block.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SearchFilterPipe } from './search.pipe';
-import {AuthService} from "./services/auth.service";
-import { AuthGuardService } from "./services/auth-guard.service";
+import {AuthService} from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
-import {ScopeGuardService} from "./services/scope-guard.service";
+import {ScopeGuardService} from './services/scope-guard.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
