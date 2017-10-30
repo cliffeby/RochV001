@@ -22,7 +22,10 @@ exports.getScore = function(req, res){
       if (err) {
         console.log("Error retrieving score");
       }else {
-        if(score===null) {console.log("ID not found", score);}
+        if (!score) {
+          res.statusCode = 404;
+          console.log("Not FOUND - get")
+        }
         res.json(score);
       }
     });
@@ -54,7 +57,7 @@ exports.getMatchPlayer = function(req, res){
 };
 
 exports.postScore = function(req, res){
-  console.log('Post for a score');
+  console.log('Post a score', req.body);
   var newScore = new Score();
   newScore.name = req.body.name;
   newScore.cap = req.body.cap;
@@ -67,17 +70,15 @@ exports.postScore = function(req, res){
   newScore.user = req.body.user;
   newScore.save(function(err, insertedScore){
     if (err){
-      console.log('Error saving score');
+      console.log('Error saving a new posted score');
     }else{
       res.json(insertedScore);
-      console.log('InsertedScorePass');
     }
   });
 };
 
 exports.putScore = function(req, res){
   console.log('Update a score', req.params.id);
-  console.log('Update a score', req.body);
   Score.findByIdAndUpdate(req.params.id,
     {
       $set: {
@@ -95,10 +96,15 @@ exports.putScore = function(req, res){
       new: true
     },
     function(err, updatedScore){
+
       if(err){
-        res.status(status).send(body);
+        res.send("Error updating score",err);
+        // res.status(status).send(body);
       }else{
-        console.log('updatedScorefromscore.controller',updatedScore);
+        if (!updatedScore) {
+          res.statusCode = 404;
+          console.log("Not FOUND - update")
+        }
         res.json(updatedScore);
       }
     }
@@ -109,9 +115,14 @@ exports.putScore = function(req, res){
 exports.deleteScore = function(req, res){
   console.log('Deleting a score');
   Score.findByIdAndRemove(req.params.id, function(err, deletedScore){
+
     if(err){
       res.send("Error deleting score");
     }else{
+      if (!deletedScore) {
+        res.statusCode = 404;
+        console.log("Not FOUND - delete")
+      }
       res.json(deletedScore);
     }
   });

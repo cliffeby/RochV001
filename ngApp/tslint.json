@@ -41,6 +41,7 @@
     "no-reference": true,
     "no-require-imports": true,
     "no-string-throw": true,
+
     "no-unused-expression": true,
     "no-var-keyword": true,
     "object-literal-shorthand": true,
@@ -60,6 +61,6 @@
     ],
     "no-unused-variable": true,
     "restrict-plus-operands": true,
-    "no-unnecessary-type-assertion": true
+    "no-unnecessary-type-assertion":false  //changed from Google's true to avoid unsupported errors!
   }
 }

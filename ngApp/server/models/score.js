@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const ScoreSchema = new Schema({
   name: String,
-  cap: Number,
+  cap: String,
   wonTwoBall: Boolean,
   wonOneBall: Boolean,
   wonIndo: Boolean,
@@ -34,6 +34,11 @@ const ScoreSchema = new Schema({
     ref: 'User'
   }
 });
+//TODO Add modified date to Score
+// ScoreSchema.pre('save', function(next){
+//   now = new Date();
+//   modified = now;
+// })
 
 module.exports = mongoose.model('Score', ScoreSchema);
 

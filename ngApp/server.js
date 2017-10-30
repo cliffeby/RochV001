@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 // Configure API to accept RS256 signed tokens
 var jwtCheck = jwt({
@@ -109,12 +109,15 @@ router.route('/scorecards/:id')
 app.use('/api', router);
 
 app.get('*', function(req, res) {
+  res.status(404);
+  res.send("No such path in this API");
   res.sendFile(path.join(__dirname, 'dist/index.html'))
 });
 
-app.get('/authorized', function (req, res) {
-  res.send('Secured Resource');
-});
+//
+// app.get('/authorized', function (req, res) {
+//   res.send('Secured Resource');
+// });
 
 app.listen(port, function(){
     console.log("Server running on localhost:" + port);
