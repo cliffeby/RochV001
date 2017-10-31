@@ -221,7 +221,6 @@ C:\Users\cliff\WebstormProjects\RochV001\ngApp&gt;newman run server/tests/roch1.
 
 on.json -d server/tests/pdata.json  .  Alternatively, you can run the collection&#39;s iterations in the POSTMAN runner.
 
- 
 
 Sources
 
