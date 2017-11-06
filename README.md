@@ -187,7 +187,7 @@ My test scripts make use of _postman. {{variables}}_ to allow for test runner it
 
 To get JWT access\_ and id\_ tokens, Auth0 requires the Headers Keys/Values shown below with Content-Type keys set to _application/x-www-form-urlencoded_.
 
- ![alt text](RochV001/ngApp/server/tests/readmeImages/LoginBody.png)
+ ![alt text](https://1drv.ms/i/s!AgsEoWikEEW_kbNifw0vuZxLvwvf1w)
 
 Prior to the POST, many environmental variables are set and are used by subsequent tests in the collection.
 
