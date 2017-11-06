@@ -189,7 +189,7 @@ To get JWT access\_ and id\_ tokens, Auth0 requires the Headers Keys/Values show
 
  ![alt text](https://1drv.ms/i/s!AgsEoWikEEW_kbNifw0vuZxLvwvf1w)
 
-Prior to the POST, many environmental variables are set and are used by subsequent tests in the collection.
+Prior to the POST, many environmental variables are set and are used by subsequent tests in the collection. 
 
  ![](data:image/*)
 
