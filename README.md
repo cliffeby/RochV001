@@ -1,12 +1,14 @@
-# REST Framework
+# Confessions of a Cut and Paste Developer - Express API Testing
+### _About Me_
+I am a retired civil engineer studying the MEAN stack as an avocation.  I've found the software development "community" unparallelled in support for all levels of users.  With a quick search, a crtl-c/crlt-v fixes your problem.  No other profession offers more to it colleagues.  However getting past the HW or sample app has been a struggle for me.
 
-# One more Sample app
-
-# Confessions of Cut and Paste
+This GitHub page is the first of several planned blogs on my efforts to get beyond HW.  
+ 
+ Cliff Eby - 2017
 
 ### _Introduction_
 
-In an attempt to learn a little about testing, I tried to write some Mocha tests for my server API in a MEAN stack project.  Once I included JWT authorization to the REST routes, I really struggled to get the test framework working.  Once I abandoned the traditional &quot;ng test&quot; approach (more on that later), I started to ask questions &quot;What should I test?&quot;  &quot;Since I control the entire stack, can I adequately test my API on the client side?&quot;  &quot;What level of error reporting should my API generate?&quot;  and most importantly, &quot;Will my API tests ease front end development – What tradeoffs will I encounter?&quot;
+In an attempt to learn a little about testing, I tried to write some Mocha tests for my server API in a MEAN stack project.  Once I included JWT authorization to the REST routes, I really struggled to get the test framework working.  After I abandoned the traditional &quot;ng test&quot; approach (more on that later), I started to ask questions &quot;What should I test?&quot;  &quot;Since I control the entire stack, can I adequately test my API on the client side?&quot;  &quot;What level of error reporting should my API generate?&quot;  and most importantly, &quot;Will my API tests ease front end development – What tradeoffs will I encounter?&quot;
 
 A search for &quot;best practices&quot; for API and/or REST testing produced very little.  Articles suggested consistency, comprehensiveness, middleware and documentation, but none addressed it in the context of an authenticated/authorized self-owned MEAN stack.
 
@@ -185,7 +187,7 @@ My test scripts make use of _postman. {{variables}}_ to allow for test runner it
 
 To get JWT access\_ and id\_ tokens, Auth0 requires the Headers Keys/Values shown below with Content-Type keys set to _application/x-www-form-urlencoded_.
 
- ![](data:image/*)
+ ![](https://1drv.ms/i/s!AgsEoWikEEW_kbNi4MwrvJxsl6lZjg)
 
 Prior to the POST, many environmental variables are set and are used by subsequent tests in the collection.
 
