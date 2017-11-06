@@ -233,7 +233,7 @@ Sources
 
 [https://www.joyent.com/node-js/production/design/errors](https://www.joyent.com/node-js/production/design/errors)
 
-http://blog.restcase.com/rest-api-error-codes-101/
+[http://blog.restcase.com/rest-api-error-codes-101/]
 
 [https://kostasbariotis.com/rest-api-error-handling-with-express-js/](https://kostasbariotis.com/rest-api-error-handling-with-express-js/)
 
