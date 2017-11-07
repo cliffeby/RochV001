@@ -130,12 +130,12 @@ Compliance matrix framework
   <tr>
     <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
   </tr>
-</tbody></table
-
+</tbody>
+</table
 <table >
     <tbody>
-        <thead>
-        <tr>
+        <thead style= "font-size:18px background:black color:white">
+        <th>
          <th>
             <td width="192" valign="top">
                 Behavior
@@ -151,7 +151,7 @@ Compliance matrix framework
                     <strong>Technique</strong>
                 </p>
             </td>
-        </tr>
+        </th>
         </thead>
         <tr>
             <td width="192" valign="top">
