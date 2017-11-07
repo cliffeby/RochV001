@@ -127,6 +127,12 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 | Monday  | pasta   | $6    |
 | Tuesday | chicken | $8    |
 
+| Behavior | Tool | Technique|
+| ---------|------|----------|
+| Login|Auth0Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> for each endpoint and CRUD action. A role
+                                      based JWT is issued by Auth0|
+
+
 <table >
     <tbody>
         <thead style= "font-size:18px background:black color:white">
