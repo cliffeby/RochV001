@@ -132,7 +132,7 @@ Compliance matrix framework
   </tr>
 </tbody></table
 
-<table border="1" cellspacing="0" cellpadding="0" width="648">
+<table >
     <tbody>
         <thead>
         <tr>
