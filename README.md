@@ -22,7 +22,7 @@ The following is a guide for the above context.  It contains principles and a fr
 2. REST API for CRUD operations
 3. I have not yet deployed this server to production.  I suspect that opinions and tests may change once deployed
 
-####Tools
+#### Tools
 
 1. Mongo/Mongoose, Express, Angular, Node/nodemon
 2. Angular CLI
@@ -32,9 +32,9 @@ The following is a guide for the above context.  It contains principles and a fr
 6. POSTMAN for test development and a test runner
 7. Newman for command line testing
 
-###_Principles for endpoint design and testing_
+### _Principles for endpoint design and testing_
 
-####Design - General and Error reporting
+#### Design - General and Error reporting
 
 - Use plural nouns for endpoint.  _WHY: Convention – most developers expect plural endpoints and singular POST, PUT, PATCH, and GET requests are clear with_ _a  /ID appended.  _
 - API responses should use a limited set of http &quot;status-code&quot; responses.  They are:
@@ -54,7 +54,7 @@ _WHY:There are over 70 HTTP status codes. If you use status codes that are not c
 - Do not &quot;document&quot; expected error codes and messages in a separate document – e.g. Postman, Swagger,…  _WHY: While often a simple click to create, that document is just another maintenance requirement and is never at your fingertips.  Instead, make sure your server response and testing tool provide the needed info._
 - Unit test for known responses.  _WHY: Make sure that your server response catches all conditions._
 
-####Design – Middleware
+#### Design – Middleware #
 
 There are many articles and opinions on the proper use of express-server middleware for catching and reporting errors.  With two exceptions, I struggle to see the benefit of detailed status codes and unique messages.  The exceptions are:
 
@@ -75,15 +75,15 @@ There are many articles and opinions on the proper use of express-server middlew
 
 - Similarly, an invalid id (Mongoose defined as not equal to a 16-character hex string) will crash the node server.  Error checking could be on the server or client, but since the id string is not a user input, I chose not to check for a valid hex value.
 
-####Testing - Authorization
+#### Testing - Authorization #
 
 - Test for each JWT scope condition. e.g. does absence of read:score produce &quot;Insufficient Scope&quot;
 - Confirm messages JWT Malformed, No Authorization Token, and Insufficient Scope are produced
 
-####Testing – Mock server 
+#### Testing – Mock server # 
 None was used for early development.  A Test and Dev server were configured.  Make sure that your tests (both during test script creation and once complete) do not pollute your server data.
 
-####Testing - ALL POST, PUT, GET, and DELETE
+#### Testing - ALL POST, PUT, GET, and DELETE #
 
 - Is request authorized i.e. Does the JWT contain the appropriate scope
 - Is the response time within acceptable limits
@@ -113,25 +113,12 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 
 - Is the object ID found
 
-###Coverage
+### Coverage #
 
 - Create a compliance grid for workflow and each endpoint
 
 Compliance matrix framework
 
-<h2>Table for two</h2>
-<table>
-  <tbody><tr>
-    <th>ID</th><th>Name</th><th>Rank</th>
-  </tr>
-  <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
-  </tr>
-  <tr>
-    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
-  </tr>
-</tbody>
-</table
 <table >
     <tbody>
         <thead style= "font-size:18px background:black color:white">
@@ -626,7 +613,7 @@ Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> 
 </table>
 
 
-###POSTMAN
+### POSTMAN #
 
 I previously dabbled in POSTMAN, but rarely got beyond GET and DELETE.  In trying debug my basic Mocha/JWT tests, I turned to POSTMAN to see header request and response data.  The Auth0 Authentication API and Management API documentation and Lars Bilde&#39;s video [https://www.youtube.com/watch?v=DVMCq8v5b7I](https://www.youtube.com/watch?v=DVMCq8v5b7I) gave me the basics.  Along the way, I tried some POSTMAN tests and then the test runner.  Once I found that you can export the tests to a Newman command line test runner, I abandoned Mocha and dove in.
 
@@ -686,7 +673,7 @@ Sources
 
 [https://www.joyent.com/node-js/production/design/errors](https://www.joyent.com/node-js/production/design/errors)
 
-http://blog.restcase.com/rest-api-error-codes-101/
+[http://blog.restcase.com/rest-api-error-codes-101/](http://blog.restcase.com/rest-api-error-codes-101/)
 
 [https://kostasbariotis.com/rest-api-error-handling-with-express-js/](https://kostasbariotis.com/rest-api-error-handling-with-express-js/)
 
@@ -701,8 +688,3 @@ http://blog.restcase.com/rest-api-error-codes-101/
 [https://www.youtube.com/watch?v=DVMCq8v5b7I](https://www.youtube.com/watch?v=DVMCq8v5b7I)
 
 [https://www.youtube.com/watch?v=gqcBptGjHTo&amp](https://www.youtube.com/watch?v=gqcBptGjHTo&amp;t=208s)
-
-1
-
-#
- I could easily see where the server response returned HTML or JSON
