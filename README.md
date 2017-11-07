@@ -638,7 +638,7 @@ Prior to the POST, many environmental variables are set and are used by subseque
 
 Since this is a POST to Auth0, the only test is to assure that it is successful.  Then, JWT access\_ and id\_ tokens are stored in the postman.setGlobalVariable collection.  I chose global variable because these tokens are unreadable and long. It keeps the Environment section readable.
 
-POSTMAN now has a JWT access\_token that allows API access.  Setting Authorization in the Header to Bearer followed by the _access token_, then setting the audience to a _unique string_ defined in Auth0 and changing the Content-type to _application/json_, is all that is needed.  Not shown is that this access\_token includes a scope of create:score that matches the server&#39;s express router requirement.
+POSTMAN now has a JWT access\_token that allows API access.  Setting Authorization in the Header to **Bearer** followed by the _access token_, then setting the audience to a _unique string_ defined in Auth0 and changing the Content-type to _application/json_, is all that is needed.  Not shown is that this access\_token includes a scope of create:score that matches the server&#39;s express router requirement.
 
 `router.route("/scores")`     
 `.post(jwtCheck, jwtAuthz(["create:score"]), scoreController.postScore)`
