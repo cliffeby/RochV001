@@ -118,9 +118,23 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 - Create a compliance grid for workflow and each endpoint
 
 Compliance matrix framework
+
+<h2>Table for two</h2>
+<table>
+  <tbody><tr>
+    <th>ID</th><th>Name</th><th>Rank</th>
+  </tr>
+  <tr>
+    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+  </tr>
+  <tr>
+    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+  </tr>
+</tbody></table
+
 <table border="1" cellspacing="0" cellpadding="0" width="648">
     <tbody>
-        <tr>
+        <th>
             <td width="192" valign="top">
                 <p>
                     <strong>Behavior</strong>
@@ -136,7 +150,7 @@ Compliance matrix framework
                     <strong>Technique</strong>
                 </p>
             </td>
-        </tr>
+        </th>
         <tr>
             <td width="192" valign="top">
                 <p>
@@ -610,53 +624,6 @@ Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> 
         </tr>
     </tbody>
 </table>
-| Endpoint unknown | POSTMANDeveloper | **TEST** that unrecognized endpoint is handled |
-|   |   |   |
-| Known endpoint - POST |   |   |
-|
-1. Is endpoint accessible
-
-1. Is response timely
-
-1. Requested and expected properties
-
-1. Schema
-
-1. Data
- | POSTMANDeveloper | **TEST** unauthorized, authorized, and role/scope status codes and messages  **TEST** response time  **TEST** response body for properties: required, requested and expected  **TEST** schema for correct types  **TEST** one property for specific data |
-| Known endpoint - PUT |   |   |
-|
-1. Is endpoint accessible
-
-1. Is response timely
-
-1. Data
- | POSTMANDeveloper | **TEST** unauthorized, authorized, and role/scope status codes and messages.    **TEST** response time  **TEST** not null and one property for specific data update |
-| Known endpoint - GET all |   |   |
-|
-1. Is endpoint accessible
-
-1. Is response timely
-
-1. Data
- | POSTMANDeveloper | **TEST** unauthorized, authorized, and role/scope status codes and messages  **TEST** response time  **TEST** for array of objects |
-| Known endpoint - GET one |   |   |
-|
-1. Is endpoint accessible
-
-1. Is response timely
-
-1. Data
- | POSTMANDeveloper | **TEST** unauthorized, authorized, and role/scope status codes and messages.   **TEST** response time  **TEST** body is not null/ID not found |
-| Known endpoint - DELETE |   |   |
-|
-1. Is endpoint accessible
-
-1. Is response timely
-
-1. Data
- | POSTMANDeveloper | **TEST** unauthorized, authorized, and role/scope status codes and messages.   **TEST** response time  **TEST** body is not null/ID not found |
-
 
 
 ##POSTMAN
