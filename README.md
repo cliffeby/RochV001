@@ -60,18 +60,21 @@ There are many articles and opinions on the proper use of express-server middlew
 
 - a &quot;404 – Not Found&quot;  app.get(&#39;\*&#39;, func…) fall through is provided by the express-generator for unspecified endpoints and paths.  However, when the path is valid and the id for a GET, PUT, or DELETE is not found, the default express server will return a null body and a 200 status code.  I use the following code to report a 404.
 
-`Score.findById(req.params.id)
-  .exec(function(err, score){
-    if (err) {
-      console.log("Error retrieving score";);
-    }else {
+`Score.findById(req.params.id)`
+
+  `.exec(function(err, score){`
+  
+  `  if (err) {
+      console.log("Error retrieving score";);`
+    
+    }
+    else {
       if ( !score) {
         res.statusCode = 404;
         console.log("Not FOUND - get Score");
       }
       res.json(score);
-    }
-  });`
+    }});`
 
 - Similarly, an invalid id (Mongoose defined as not equal to a 16-character hex string) will crash the node server.  Error checking could be on the server or client, but since the id string is not a user input, I chose not to check for a valid hex value.
 
@@ -117,7 +120,7 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 
 - Create a compliance grid for workflow and each endpoint
 
-Compliance matrix framework
+#### Compliance matrix framework #
 
 <table >
     <tbody>
