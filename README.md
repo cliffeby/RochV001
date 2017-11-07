@@ -123,7 +123,7 @@ Compliance matrix framework
 
 <table border="1" cellspacing="0" cellpadding="0" width="648">
     <tbody>
-        <th>
+        <thead>
         <tr>
             <td width="192" valign="top">
                 <p>
@@ -141,7 +141,7 @@ Compliance matrix framework
                 </p>
             </td>
         </tr>
-        </th>
+        </thead>
         <tr>
             <td width="192" valign="top">
                 <p>
