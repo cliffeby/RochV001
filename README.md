@@ -119,35 +119,24 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 
 Compliance matrix framework
 
-<h2>Table for two</h2>
-<table>
-  <tbody><tr>
-    <th>ID</th><th>Name</th><th>Rank</th>
-  </tr>
-  <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
-  </tr>
-  <tr>
-    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
-  </tr>
-</tbody></table
+
 
 <table border="1" cellspacing="0" cellpadding="0" width="648">
     <tbody>
         <tr>
             <td width="192" valign="top">
                 <p>
-                    <th><strong>Behavior</strong>/th>
+                    <strong>Behavior</strong>
                 </p>
             </td>
             <td width="198" valign="top">
                 <p>
-                    <th><strong>Tool/Responsibility</strong></th>
+                    <strong>Tool/Responsibility</strong>
                 </p>
             </td>
             <td width="258" valign="top">
                 <p>
-                    <th><strong>Technique</strong></th>
+                    <strong>Technique</strong>
                 </p>
             </td>
         </tr>
