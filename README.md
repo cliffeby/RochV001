@@ -1,6 +1,6 @@
 # Confessions of a Cut and Paste Developer - Express API Testing
 ### _About Me_
-I am a retired civil engineer studying the MEAN stack as an avocation.  I've found the software development "community" unparallelled in support for all levels of users. When you hit a roadblock, video tutorials, blogs, Stack Overflow, etc. provide a wealth of content.  For me, a quick search, a crtl-c/crlt-v and my problem is solved.  No other profession offers more to it colleagues.  However getting past the HW or sample app has often been a struggle for me.  As I navigate that world with my Roch app, I will document some of the "not so sample" issues and question that arise.   
+I am a retired civil engineer studying the MEAN stack as an avocation.  I've found the software development "community" unparallelled in support for all levels of users. When you hit a roadblock, video tutorials, blogs, Stack Overflow, etc. provide a wealth of content.  For me, a quick search, a crtl-c/crlt-v and my problem is solved.  No other profession offers more to it colleagues.  However getting past the HW or sample app has often been a struggle for me.  As I navigate that world with my Roch app, I will document some of the "not so sample" issues and questions that arise.   
 
 This GitHub page is the first of several planned blogs on my efforts to get beyond HW.  I expect that the document will be updated as I learn more about the MEAN Stack.
  
@@ -14,9 +14,9 @@ A search for &quot;best practices&quot; for API and/or REST testing produced ver
 
 The following is a guide for the above context.  It contains principles and a framework along with some &quot;How to&quot; suggestions.
 
-###_Context, Caveats and Tools_
+### _Context, Caveats and Tools_
 
-####Context and caveats:
+#### Context and caveats: #
 
 1. Authenticated/authorized self-owned MEAN stack
 2. REST API for CRUD operations
