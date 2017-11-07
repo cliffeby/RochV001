@@ -135,12 +135,10 @@ Compliance matrix framework
 <table >
     <tbody>
         <thead style= "font-size:18px background:black color:white">
-        <th>
-         <th>
+        <tr>
             <td width="192" valign="top">
                 Behavior
             </td>
-         </th>
             <td width="198" valign="top">
                 <p>
                     <strong>Tool/Responsibility</strong>
@@ -151,7 +149,7 @@ Compliance matrix framework
                     <strong>Technique</strong>
                 </p>
             </td>
-        </th>
+        </tr>
         </thead>
         <tr>
             <td width="192" valign="top">
