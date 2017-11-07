@@ -137,7 +137,7 @@ Compliance matrix framework
         <thead style= "font-size:18px background:black color:white">
         <tr>
             <td width="192" valign="top">
-                Behavior
+                <p><strong>Behavior</strong></p>
             </td>
             <td width="198" valign="top">
                 <p>
