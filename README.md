@@ -119,7 +119,18 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 
 Compliance matrix framework
 
-
+<h2>Table for two</h2>
+<table>
+  <tbody><tr>
+    <th>ID</th><th>Name</th><th>Rank</th>
+  </tr>
+  <tr>
+    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+  </tr>
+  <tr>
+    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+  </tr>
+</tbody></table
 
 <table border="1" cellspacing="0" cellpadding="0" width="648">
     <tbody>
@@ -617,7 +628,7 @@ Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> 
 </table>
 
 
-##POSTMAN
+###POSTMAN
 
 I previously dabbled in POSTMAN, but rarely got beyond GET and DELETE.  In trying debug my basic Mocha/JWT tests, I turned to POSTMAN to see header request and response data.  The Auth0 Authentication API and Management API documentation and Lars Bilde&#39;s video [https://www.youtube.com/watch?v=DVMCq8v5b7I](https://www.youtube.com/watch?v=DVMCq8v5b7I) gave me the basics.  Along the way, I tried some POSTMAN tests and then the test runner.  Once I found that you can export the tests to a Newman command line test runner, I abandoned Mocha and dove in.
 
