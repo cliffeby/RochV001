@@ -14,7 +14,7 @@ A search for &quot;best practices&quot; for API and/or REST testing produced ver
 
 The following is a guide for the above context.  It contains principles and a framework along with some &quot;How to&quot; suggestions.
 
-###_ Context, Caveats and Tools_
+### _Context, Caveats and Tools_
 
 #### Context and caveats: #
 
