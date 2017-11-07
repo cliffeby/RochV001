@@ -118,29 +118,498 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 - Create a compliance grid for workflow and each endpoint
 
 Compliance matrix framework
-
-<h2>Table for two</h2>
-<table>
-  <tbody><tr>
-    <th>ID</th><th>Name</th><th>Rank</th>
-  </tr>
-  <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
-  </tr>
-  <tr>
-    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
-  </tr>
-</tbody></table>
-
-| Behavior | Tool/Responsibility | Technique |
-| --- | --- | --- |
-| Login | Auth0 | Client-side login uses Auth0 for authentication |
-| Roles | Auth0 | Using rules in Auth0, users are granted scopes for each endpoint and CRUD action.  A role based JWT is issued by Auth0 |
-| JWT security | Auth0Server developer | Client secret is needed to modify JWT.  Must not be made public |
-| Authorize Routes | DeveloperUsesexpress-jwt, express-jwt-authz, and jwks-rsa | router.route(&#39;/scores&#39;)
-  .get(jwtCheck, jwtAuthz([&#39;read:scores&#39;]), scoreController.getScores);  |
-| Test user authorization | POSTMAN and Auth0 Developer to check UnauthorizedError response - JWT Malformed and No Authorization Token | Login to Auth0 via Postman.  See Auth0 API documentation for required header and body.   **TEST** access\_token for valid and invalid JWTs. |
-| User Identification | POSTMAN and Auth0Developer to check UnauthorizedError response -Insufficient Scope | **TEST** id\_token for expected user, role and scopes |
+<table border="1" cellspacing="0" cellpadding="0" width="648">
+    <tbody>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Behavior</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    <strong>Tool/Responsibility</strong>
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>Technique</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Login</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    Auth0
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    Client-side login uses Auth0 for authentication
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Roles</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    Auth0
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> for each endpoint and CRUD action. A role
+                    based JWT is issued by Auth0
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>JWT security</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    Auth0
+                </p>
+                <p>
+                    Server developer
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    Client secret is needed to modify JWT. Must not be made
+                    public
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Authorize Routes</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    Developer
+                </p>
+                <p>
+                    Uses
+                </p>
+                <p>
+                    express-jwt, express-jwt-authz, and jwks-rsa
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    router.route('/scores')
+                    <br/>
+                    .get(jwtCheck, jwtAuthz(['read:scores']),
+                    scoreController.getScores);
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Test user authorization</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN and Auth0 Developer to check UnauthorizedError
+                    response - JWT Malformed and No Authorization Token
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    Login to Auth0 via Postman. See Auth0 API documentation for
+                    required header and body. <strong>TEST </strong>
+                    access_token for valid and invalid JWTs.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>User Identification</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN and Auth0
+                </p>
+                <p>
+                    Developer to check UnauthorizedError response -Insufficient
+                    Scope
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>TEST</strong>
+                    id_token for expected user, role and scopes
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Endpoint unknown</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN
+                </p>
+                <p>
+                    Developer
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>TEST</strong>
+                    that unrecognized endpoint is handled
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong> </strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+            </td>
+            <td width="258" valign="top">
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Known endpoint - POST</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+            </td>
+            <td width="258" valign="top">
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>a. </strong>
+                    <strong>Is endpoint accessible</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>b. </strong>
+                    <strong>Is response timely</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>c. </strong>
+                    <strong>Requested and expected properties</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>d. </strong>
+                    <strong>Schema</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>e. </strong>
+                    <strong>Data</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN
+                </p>
+                <p>
+                    Developer
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>TEST</strong>
+                    unauthorized, authorized, and role/scope status codes and
+                    messages
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    response time
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    response body for properties: required, requested and
+                    expected
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    schema for correct types
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    one property for specific data
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Known endpoint - PUT </strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+            </td>
+            <td width="258" valign="top">
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>a. </strong>
+                    <strong>Is endpoint accessible</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>b. </strong>
+                    <strong>Is response timely</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>c. </strong>
+                    <strong>Data</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN
+                </p>
+                <p>
+                    Developer
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>TEST</strong>
+                    unauthorized, authorized, and role/scope status codes and
+                    messages. <strong></strong>
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    response time
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    not null and one property for specific data update
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Known endpoint - GET all</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+            </td>
+            <td width="258" valign="top">
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>a. </strong>
+                    <strong>Is endpoint accessible</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>b. </strong>
+                    <strong>Is response timely</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>c. </strong>
+                    <strong>Data</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN
+                </p>
+                <p>
+                    Developer
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>TEST</strong>
+                    unauthorized, authorized, and role/scope status codes and
+                    messages
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    response time
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    for array of objects
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Known endpoint - GET one</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong> </strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>a. </strong>
+                    <strong>Is endpoint accessible</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>b. </strong>
+                    <strong>Is response timely</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>c. </strong>
+                    <strong>Data</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN
+                </p>
+                <p>
+                    Developer
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>TEST</strong>
+                    unauthorized, authorized, and role/scope status codes and
+                    messages. <strong></strong>
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    response time
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    body is not null/ID not found
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>Known endpoint - DELETE</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong> </strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="192" valign="top">
+                <p>
+                    <strong>a. </strong>
+                    <strong>Is endpoint accessible</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>b. </strong>
+                    <strong>Is response timely</strong>
+                </p>
+                <p>
+                    <strong> </strong>
+                </p>
+                <p>
+                    <strong>c. </strong>
+                    <strong>Data</strong>
+                </p>
+            </td>
+            <td width="198" valign="top">
+                <p>
+                    POSTMAN
+                </p>
+                <p>
+                    Developer
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>TEST</strong>
+                    unauthorized, authorized, and role/scope status codes and
+                    messages. <strong></strong>
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    response time
+                </p>
+                <p>
+                    <strong>TEST</strong>
+                    body is not null/ID not found
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
 | Endpoint unknown | POSTMANDeveloper | **TEST** that unrecognized endpoint is handled |
 |   |   |   |
 | Known endpoint - POST |   |   |
