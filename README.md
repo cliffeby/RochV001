@@ -134,23 +134,23 @@ Compliance matrix framework
 
 <table border="1" cellspacing="0" cellpadding="0" width="648">
     <tbody>
-        <th>
+        <tr>
             <td width="192" valign="top">
                 <p>
-                    <strong>Behavior</strong>
+                    <th><strong>Behavior</strong>/th>
                 </p>
             </td>
             <td width="198" valign="top">
                 <p>
-                    <strong>Tool/Responsibility</strong>
+                    <th><strong>Tool/Responsibility</strong></th>
                 </p>
             </td>
             <td width="258" valign="top">
                 <p>
-                    <strong>Technique</strong>
+                    <th><strong>Technique</strong></th>
                 </p>
             </td>
-        </th>
+        </tr>
         <tr>
             <td width="192" valign="top">
                 <p>
