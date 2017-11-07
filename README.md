@@ -136,11 +136,11 @@ Compliance matrix framework
     <tbody>
         <thead>
         <tr>
+         <th>
             <td width="192" valign="top">
-                <p>
-                    <strong>Behavior</strong>
-                </p>
+                Behavior
             </td>
+         </th>
             <td width="198" valign="top">
                 <p>
                     <strong>Tool/Responsibility</strong>
