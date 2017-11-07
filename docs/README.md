@@ -130,7 +130,10 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 | Behavior | Tool | Technique|
 | ---------|------|----------|
 | Login|Auth0Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> for each endpoint and CRUD action. A role
-                                      based JWT is issued by Auth0|
+                                       based JWT is issued by Auth0|
+                                       
+                                        Login|Auth0
+                                         Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> for each endpoint and CRUD action. A role based JWT is issued by Auth0|
 
 
 <table >
