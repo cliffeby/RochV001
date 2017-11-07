@@ -14,15 +14,15 @@ A search for &quot;best practices&quot; for API and/or REST testing produced ver
 
 The following is a guide for the above context.  It contains principles and a framework along with some &quot;How to&quot; suggestions.
 
-###_Context, Caveats and Tools_
+###_ Context, Caveats and Tools_
 
-####_Context and caveats:
+####_ Context and caveats:
 
 1. Authenticated/authorized self-owned MEAN stack
 2. REST API for CRUD operations
 3. I have not yet deployed this server to production.  I suspect that opinions and tests may change once deployed
 
-####Tools
+#### Tools
 
 1. Mongo/Mongoose, Express, Angular, Node/nodemon
 2. Angular CLI
@@ -32,9 +32,9 @@ The following is a guide for the above context.  It contains principles and a fr
 6. POSTMAN for test development and a test runner
 7. Newman for command line testing
 
-###_Principles for endpoint design and testing_
+###_ Principles for endpoint design and testing_
 
-####Design - General and Error reporting
+#### Design - General and Error reporting
 
 - Use plural nouns for endpoint.  _WHY: Convention – most developers expect plural endpoints and singular POST, PUT, PATCH, and GET requests are clear with_ _a  /ID appended.  _
 - API responses should use a limited set of http &quot;status-code&quot; responses.  They are:
