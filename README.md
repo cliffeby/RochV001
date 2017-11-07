@@ -16,7 +16,7 @@ The following is a guide for the above context.  It contains principles and a fr
 
 ###_Context, Caveats and Tools_
 
-####Context and caveats:
+####_Context and caveats:
 
 1. Authenticated/authorized self-owned MEAN stack
 2. REST API for CRUD operations
