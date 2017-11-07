@@ -119,6 +119,19 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 
 Compliance matrix framework
 
+<h2>Table for two</h2>
+<table>
+  <tbody><tr>
+    <th>ID</th><th>Name</th><th>Rank</th>
+  </tr>
+  <tr>
+    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+  </tr>
+  <tr>
+    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+  </tr>
+</tbody></table>
+
 | Behavior | Tool/Responsibility | Technique |
 | --- | --- | --- |
 | Login | Auth0 | Client-side login uses Auth0 for authentication |
