@@ -25,6 +25,10 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+https://medium.freecodecamp.org/the-front-end-test-pyramid-rethink-your-testing-3b343c2bca51
+https://medium.com/javascript-scene/what-every-unit-test-needs-f6cd34d9836d
+https://www.philosophicalhacker.com/post/what-should-we-unit-test/
+https://codecraft.tv/courses/angular/unit-testing/mocks-and-spies/
 
 
 ## Server

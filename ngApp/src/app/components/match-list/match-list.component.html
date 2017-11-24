@@ -1,3 +1,43 @@
-<ul class="nav nav-pills nav-stacked">
-  <li (click)="onSelect(member)" *ngFor="let member of members"><a>{{member.firstName}}</a></li>
-</ul>
+<div *ngIf="!selectedMatch && hidenewMatch">
+
+  <h2>Match List
+  </h2>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="error" *ngIf="error">{{error}}</div>
+      <div class="pull-right">
+        <button class="btn btn-primary" type="button" (click)="newMatch()">
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <input type="text" [(ngModel)]="queryString" id="search" placeholder="Search Match Name">
+      <i class="glyphicon glyphicon-search"></i>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Date played</th>
+          <th>Course</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody  >
+
+        <tr *ngFor="let match of matches | searchfilter: 'name' : queryString " [class.active]="match === selectedMatch"
+            [ngClass]="{true:'bold'}[match.dateFlag]">
+          <td>{{match.name}}</td>
+          <td>{{match.datePlayed | date:'longDate'}}</td>
+          <td>{{match.scName}}</td>
+          <td><a class="btn btn-primary col-sm-offset-2 " (click)="onSelectMatch(match)">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

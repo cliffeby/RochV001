@@ -58,24 +58,24 @@ app.use(jwtCheck);
 var router = express.Router();
 // Create endpoint handlers for /members
 router.route('/members')
-  .post(jwtCheck,  jwtAuthz(['create:members']), memberController.postMember)
+  .post(jwtCheck,  jwtAuthz(['create:member']), memberController.postMember)
   .get(jwtCheck, jwtAuthz(['read:members']), memberController.getMembers);
 
 // Create endpoint handlers for /members/:beer_id
 router.route('/members/:id')
   .get(jwtCheck, checkScopes, memberController.getMember)
-  .put(jwtCheck, jwtAuthz(['create:members']), memberController.putMember)
+  .put(jwtCheck, jwtAuthz(['create:member']), memberController.putMember)
   .delete(jwtCheck, jwtAuthz(['remove:member']), memberController.deleteMember);
 
 
 router.route('/matches')
-  .post(jwtCheck, jwtAuthz(['create:matches']), matchController.postMatch)
+  .post(jwtCheck, jwtAuthz(['create:match']), matchController.postMatch)
   .get(jwtCheck, jwtAuthz(['read:matches']), matchController.getMatches);
 
 // Create endpoint handlers for /matches/_id
 router.route('/matches/:id')
   .get(jwtCheck, checkScopes, matchController.getMatch)
-  .put(jwtCheck, jwtAuthz(['create:matches']), matchController.putMatch)
+  .put(jwtCheck, jwtAuthz(['create:match']), matchController.putMatch)
   .delete(jwtCheck, jwtAuthz(['remove:match']), matchController.deleteMatch);
 
 

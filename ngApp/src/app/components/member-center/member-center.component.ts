@@ -17,7 +17,7 @@ export class MemberCenterComponent implements OnInit {
   members: Array<Member>;
  // scores: Array<Score>;
   constructor(private _memberService: MemberService,
-              private auth: AuthService) { }
+              private auth: AuthService) {}
 
   ngOnInit() {
     this._memberService.getMembers()
@@ -40,15 +40,20 @@ export class MemberCenterComponent implements OnInit {
       .subscribe(resNewMember => {
         this.members.push(resNewMember);
         this.hidenewMember = true;
-        this.selectedMember = resNewMember;
+        this.selectedMember = null;
       });
-
+    // TODO - Is Pipe better to force sort
+    this._memberService.getMembers()
+      .subscribe(resMemberData => this.members = resMemberData);
   }
 
   onUpdateMemberEvent(member: any) {
     this._memberService.updateMember(member)
       .subscribe(resUpdatedMember => member = resUpdatedMember);
     this.selectedMember = null;
+   // TODO - Is Pipe better to force sort
+    this._memberService.getMembers()
+      .subscribe(resMemberData => this.members = resMemberData);
   };
 
   onDeleteMemberEvent(member: any) {

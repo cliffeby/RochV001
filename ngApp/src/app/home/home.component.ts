@@ -9,9 +9,7 @@ export class HomeComponent implements OnInit {
 
   title = 'Welcome to the Rochesters';
 
-  constructor() { }
 
-  ngOnInit() {
-  }
 
+  ngOnInit() {}
 }

@@ -14,7 +14,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let member of members | searchfilter:'lastName': queryString ">
+      <tr *ngFor="let member of members | searchfilter:'lastName': queryString">
         <td>{{member.firstName}}</td>
         <td>{{member.lastName}}</td>
         <td>{{member.currentHCap}}</td>

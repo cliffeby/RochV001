@@ -12,8 +12,8 @@ export class MemberDetailComponent implements OnInit {
   member: any;
 
   private editTitle: boolean = false;
-  private updateMemberEvent = new EventEmitter();
-  private deleteMemberEvent = new EventEmitter();
+  public updateMemberEvent = new EventEmitter();
+  public deleteMemberEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit() {

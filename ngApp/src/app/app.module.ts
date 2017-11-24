@@ -33,6 +33,8 @@ import {AuthService} from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import {ScopeGuardService} from './services/scope-guard.service';
+import {DataService} from './components/aaa-sanity/shared/data.service';
+import { AAASanityComponent } from './components/aaa-sanity/aaa-sanity.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -62,7 +64,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ScoreDetailComponent,
     MatchAddPlayerComponent,
     MemberBlockComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    AAASanityComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MyDatePickerModule
   ],
   providers: [
+    DataService,
     ScorecardService,
     ScoreService,
     MatchService,

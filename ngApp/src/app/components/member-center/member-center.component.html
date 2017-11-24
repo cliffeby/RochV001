@@ -26,7 +26,7 @@
 <!--<div *ngIf="!selectedMember && hidenewMember">-->
   <!--<button style="margin-bottom:2px;" type="button" (click)="newMember()" class="btn btn-success btn-block">+ New Member</button>-->
 
-<div class="row">
+<div *ngIf="!selectedMember && hidenewMember" class="row">
   <div class="col-md-12">
     <div class="error" *ngIf="error">{{error}}</div>
     <div class="pull-right">

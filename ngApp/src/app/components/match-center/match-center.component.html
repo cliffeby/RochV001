@@ -42,8 +42,8 @@
 </div>
 
 <div *ngIf="!selectedMatch && hidenewMatch">
-  <!--<button style="margin-bottom:2px;" type="button" (click)="newMatch()" class="btn btn-success btn-block">+ New Match</button>-->
-  <!--<match-list *ngIf="!selectedMatch && hidenewMatch" [matchs]="matchs" (SelectMatch)="onSelectMatch($event)"></match-list>-->
+
+  <match-list [matches]="matches" (SelectMatch)="onSelectMatch($event)"></match-list>
   <h2>Match List
   </h2>
   <div class="row">

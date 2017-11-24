@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MemberBlockComponent } from './member-block.component';
 
-describe('MemberBlockComponent', () => {
+xdescribe('MemberBlockComponent', () => {
   let component: MemberBlockComponent;
   let fixture: ComponentFixture<MemberBlockComponent>;
 

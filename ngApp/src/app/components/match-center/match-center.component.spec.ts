@@ -1,25 +1,75 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, inject, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatchCenterComponent } from './match-center.component';
+import {AuthService} from "../../services/auth.service";
+import {AuthHttp} from "angular2-jwt";
+import {MatchService} from "../../services/match.service";
+import {MemberService} from "../../services/member.service";
+import {ScoreService} from "../../services/score.service";
+import {ScorecardService} from "../../services/scorecard.service";
+import {RouterTestingModule} from "@angular/router/testing";
+import {MatchDetailComponent} from "../match-detail/match-detail.component";
+import {MatchListComponent} from "../match-list/match-list.component";
+import {SearchFilterPipe} from "../../search.pipe";
+import {FormsModule} from "@angular/forms";
+import {MyDatePicker} from "mydatepicker";
+import {MemberBlockComponent} from "../member-block/member-block.component";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-describe('MatchCenterComponent', () => {
+import {FocusDirective} from 'mydatepicker/dist//directives/my-date-picker.focus.directive';import * as moment from 'moment/moment';
+// Mock our Auth service
+export class MockAuthService {
+  isAuthenticated() {
+  };
+  logout() {
+  };
+}
+export class MockAuthHttp {
+  get(){}
+};
+export class MockDatePicker {};
+
+
+describe('Match Comp and Service: My: TestBed', () => {
   let component: MatchCenterComponent;
   let fixture: ComponentFixture<MatchCenterComponent>;
+  let service: MatchService;
+  let myServiceDependency: AuthHttp;
 
-  beforeEach(async(() => {
+
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [ MatchCenterComponent ]
+      declarations: [FocusDirective, MatchCenterComponent, MatchDetailComponent, MatchListComponent, MemberBlockComponent, SearchFilterPipe],
+      imports: [FormsModule],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        MatchService,
+        ScoreService,
+        ScorecardService,
+        MemberService,
+        {provide: MyDatePicker, useClass: MockDatePicker},
+        {provide: AuthService, useClass: MockAuthService},
+        {provide: AuthHttp, useClass: MockAuthHttp}
+      ]
     })
-    .compileComponents();
+      .compileComponents();
+  });
+    beforeEach(() => {
+      fixture = TestBed.createComponent(MatchCenterComponent);
+      component = fixture.componentInstance; // BannerComponent test instance
+      service = TestBed.get(MatchService);
+      myServiceDependency = TestBed.get(AuthHttp);
+    });
+
+  it('should create a service instance', () => {
+    expect(service).toBeDefined();
+  });
+
+  it('should create an injected instance', inject([MatchService], (injectedService: MatchService) => {
+    expect(injectedService).toBeDefined();
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(MatchCenterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    it('should be created', () => {
+      expect(component).toBeTruthy();
+    });
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});

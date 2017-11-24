@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {FormsModule} from "@angular/forms";
 import { MemberDetailComponent } from './member-detail.component';
 
 describe('MemberDetailComponent', () => {
@@ -8,7 +8,8 @@ describe('MemberDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MemberDetailComponent ]
+      declarations: [ MemberDetailComponent ],
+      imports: [FormsModule]
     })
     .compileComponents();
   }));
@@ -19,7 +20,7 @@ describe('MemberDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it('should be created ', () => {
     expect(component).toBeTruthy();
   });
 });
