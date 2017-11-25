@@ -35,6 +35,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import {ScopeGuardService} from './services/scope-guard.service';
 import {DataService} from './components/aaa-sanity/shared/data.service';
 import { AAASanityComponent } from './components/aaa-sanity/aaa-sanity.component';
+import {AAAService, User} from "./components/aaa-sanity/shared/mockHttp.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -76,6 +77,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   providers: [
     DataService,
+    AAAService,
+
     ScorecardService,
     ScoreService,
     MatchService,

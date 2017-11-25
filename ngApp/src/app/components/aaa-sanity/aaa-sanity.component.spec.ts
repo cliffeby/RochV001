@@ -2,7 +2,7 @@ import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core
 import { AAASanityComponent } from './aaa-sanity.component';
 import {DataService} from "./shared/data.service";
 
-fdescribe('AAASanityComponent', () => {
+describe('AAASanityComponent', () => {
   let component: AAASanityComponent;
   let fixture: ComponentFixture<AAASanityComponent>;
 
@@ -40,7 +40,7 @@ fdescribe('AAASanityComponent', () => {
     expect(compiled.querySelector('p').textContent).toContain('And Again');
   }))});
 
-fdescribe ('Sanity Test Service', ()=> {
+describe ('Sanity Test Service', ()=> {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AAASanityComponent],
@@ -70,7 +70,7 @@ export class Mock1DataService{
   }
 }
 
-fdescribe ('Sanity Tests Mock DataService Async', ()=> {
+describe ('Sanity Tests Mock DataService Async', ()=> {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AAASanityComponent],
@@ -112,7 +112,7 @@ fdescribe ('Sanity Tests Mock DataService Async', ()=> {
   }));
 });
 
-fdescribe ('Sanity Tests using fakeAsync and DataService', ()=> {
+describe ('Sanity Tests using fakeAsync and DataService', ()=> {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AAASanityComponent]
@@ -136,7 +136,7 @@ export class Mock2DataService{
   }
 }
 
-fdescribe ('Sanity Tests Mock DataService', ()=> {
+describe ('Sanity Tests Mock DataService', ()=> {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AAASanityComponent],
