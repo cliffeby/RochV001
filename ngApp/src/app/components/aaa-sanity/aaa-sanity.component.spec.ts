@@ -40,7 +40,7 @@ describe('AAASanityComponent', () => {
     expect(compiled.querySelector('p').textContent).toContain('And Again');
   }))});
 
-describe ('Sanity Test Service', ()=> {
+describe ('Sanity Test - Access a Service', ()=> {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AAASanityComponent],

@@ -6,11 +6,6 @@ import { AuthHttp } from 'angular2-jwt';
 import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from "@angular/router/testing";
 
-interface User {
-  login: string;
-  _id: string;
-}
-
 describe('Mock Service', () => {
   let injector: TestBed;
   let service: AAAService;
@@ -19,20 +14,20 @@ describe('Mock Service', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [AAAService, AuthService, AuthHttp]
-        });
-      injector = getTestBed();
-      service = injector.get(AAAService);
-      httpMock = injector.get(HttpTestingController);
+    });
+    injector = getTestBed();
+    service = injector.get(AAAService);
+    httpMock = injector.get(HttpTestingController);
   })
   afterEach(() => {
     httpMock.verify();
-});
+  });
   // tests here
   describe('#getUsers<User>', () => {
     it('should return method of GET', () => {
       const dummyUsers = [
-        { login: 'John' },
-        { login: 'Doe' }
+        {login: 'John'},
+        {login: 'Doe'}
       ];
       service.getUsers().subscribe(users => {
       });
@@ -44,11 +39,13 @@ describe('Mock Service', () => {
 
     it('should return an Observable User Array of length 2 ', () => {
       const dummyUsers = [
-        { login: 'John' },
-        { login: 'Doe' }
+        {login: 'John'},
+        {login: 'Doe'}
       ];
       service.getUsers().subscribe(users => {
-        expect(users.length).toBe(2);
+        // see comment below
+        this.users = users;
+        expect(this.users.length).toBe(2);
       });
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
@@ -57,8 +54,8 @@ describe('Mock Service', () => {
 
     it('should return an Observable Users of John and Doe', () => {
       const dummyUsers = [
-        { login: 'John' },
-        { login: 'Doe' }
+        {login: 'John'},
+        {login: 'Doe'}
       ];
       service.getUsers().subscribe(users => {
         expect(users).toEqual(dummyUsers);
@@ -71,7 +68,7 @@ describe('Mock Service', () => {
   describe('#postUser<User>', () => {
     it('should return method of Post', () => {
       const dummyUser =
-      { login: 'John Doe', _id: '1' };
+      {login: 'John Doe', _id: '1'};
       service.addUser(dummyUser).subscribe(users => {
       });
       const url = 'http://localhost:3000/api/mocks'
@@ -82,10 +79,21 @@ describe('Mock Service', () => {
 
     it('should return an Observable User Id to equal 1', () => {
       const dummyUsers =
-        { login: 'John Doe', _id: '1' };
-      service.addUser().subscribe(users => {
+      {login: 'John Doe', _id: '1'};
+      service.addUser(dummyUsers).subscribe(users => {
+        // Note for next uncommented line.
+        // A function expression using the function keyword introduces a new dynamically bound
+        // this, whereas an arrow function expression preserves the this of its enclosing context.
+        //   Arrow function expressions are particularly useful for writing callbacks,
+        //   which otherwise often have an undefined or unexpected this. In the example
+        // the use of an arrow function expression causes the callback to have the same
+        // this as the surrounding 'start' method. Writing the callback as a standard function expression
+        // it becomes necessary to manually arrange access to the surrounding this,
+        // for example by copying it into a local variable:
+        // https://aigeec.com/angularjs-2-do-something-when-my-observable-is-complete/
+        this.users = users;
         console.log('USERS in POST', users);
-        expect(users._id).toEqual('1');
+        expect(this.users._id).toEqual('1');
       });
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
@@ -94,8 +102,8 @@ describe('Mock Service', () => {
 
     it('should return an Observable User John Doe', () => {
       const dummyUsers =
-      { login: 'John Doe', _id: '1' };
-      service.addUser().subscribe(users => {
+      {login: 'John Doe', _id: '1'};
+      service.addUser(dummyUsers).subscribe(users => {
         expect(users).toEqual(dummyUsers);
       });
       const url = 'http://localhost:3000/api/mocks'
@@ -106,8 +114,7 @@ describe('Mock Service', () => {
   describe('#putUser<User>', () => {
     it('should return method of Put', () => {
       const dummyUser =
-        { login: 'John Doe', _id:'1'}
-        ;
+      {login: 'John Doe', _id: '1'};
       service.updateUser(dummyUser).subscribe(users => {
       });
       const url = 'http://localhost:3000/api/mocks/1';
@@ -118,53 +125,56 @@ describe('Mock Service', () => {
 
     it('should return an Observable User Object', () => {
       let updateUser: User;
-        updateUser = {login: 'Jimmy Doe', _id: '1'};
+      updateUser = {login: 'Jimmy Doe', _id: '1'};
       service.updateUser(updateUser).subscribe(users => {
-      expect(users.login).toEqual('Jimmy Doe');
+        this.users = users;
+        expect(this.users.login).toEqual('Jimmy Doe');
+      });
+      const url = 'http://localhost:3000/api/mocks/1'
+      const req = httpMock.expectOne(url);
+      req.flush(updateUser);
     });
-    const url = 'http://localhost:3000/api/mocks/1'
-    const req = httpMock.expectOne(url);
-    req.flush(updateUser);
-  });
 
-  it('should return an Observable User John Doe', () => {
-    const dummyUser = { login: 'John Doe', _id: '1' };
-    service.updateUser(dummyUser).subscribe(users => {
-      expect(users).toEqual(dummyUser);
+    it('should return an Observable User John Doe', () => {
+      const dummyUser = {login: 'John Doe', _id: '1'};
+      service.updateUser(dummyUser).subscribe(users => {
+        expect(users).toEqual(dummyUser);
+      });
+      const url = 'http://localhost:3000/api/mocks/1'
+      const req = httpMock.expectOne(url);
+      req.flush(dummyUser);
     });
-    const url = 'http://localhost:3000/api/mocks/1'
-    const req = httpMock.expectOne(url);
-    req.flush(dummyUser);
   });
-});
-describe('#deleteUser<User>', () => {
-  it('should return method of Delete', () => {
-    const url = 'http://localhost:3000/api/mocks/1';
-    const dummyUser = { login: 'John Doe', _id: '1'};
-    service.deleteUser(dummyUser).subscribe(users =>{});
-
-    const req = httpMock.expectOne(url);
-    expect(req.request.method).toBe("DELETE");
-    req.flush(dummyUser);
-  });
-
-  it('should return an Observable User Array of length 1 ', () => {
-    const dummyUser = {login: 'Jimmy Doe', _id: '2'};
-    service.deleteUser().subscribe(users => {
-    expect(users.login).toEqual('Jimmy Doe');
+  describe('#deleteUser<User>', () => {
+    it('should return method of Delete', () => {
+      const url = 'http://localhost:3000/api/mocks/1';
+      const dummyUser = {login: 'John Doe', _id: '1'};
+      service.deleteUser(dummyUser).subscribe(users => {
+      });
+      const req = httpMock.expectOne(url);
+      expect(req.request.method).toBe("DELETE");
+      req.flush(dummyUser);
     });
-  const url = 'http://localhost:3000/api/mocks/1'
-  const req = httpMock.expectOne(url);
-  req.flush(dummyUser);
-});
 
-it('should return an Observable User John Doe', () => {
-  const dummyUsers = { login: 'John Doe', _id: '2' };
-  service.deleteUser().subscribe(users => {
-    expect(users).toEqual(dummyUsers);
+    it('should return an Observable User Array of length 1 ', () => {
+      const dummyUser = {login: 'Jimmy Doe', _id: '2'};
+      service.deleteUser(dummyUser).subscribe(users => {
+        this.users = users;
+        expect(this.users.login).toEqual('Jimmy Doe');
+      });
+      const url = 'http://localhost:3000/api/mocks/1'
+      const req = httpMock.expectOne(url);
+      req.flush(dummyUser);
+    });
+
+    it('should return an Observable User John Doe ', () => {
+      const dummyUsers = {login: 'John Doe', _id: '2'};
+      service.deleteUser(dummyUsers).subscribe(users => {
+        expect(users).toEqual(dummyUsers);
+      });
+      const url = 'http://localhost:3000/api/mocks/1'
+      const req = httpMock.expectOne(url);
+      req.flush(dummyUsers);
+    });
   });
-  const url = 'http://localhost:3000/api/mocks/1'
-  const req = httpMock.expectOne(url);
-  req.flush(dummyUsers);
-});
 });
