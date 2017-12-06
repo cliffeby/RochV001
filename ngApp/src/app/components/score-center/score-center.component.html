@@ -27,7 +27,7 @@
                  [score]="selectedScore">
   </score-detail>
 </div>
-<div *ngIf="!selectedScore && hidenewScore && hidePlus">
+<div *ngIf="!selectedScore && hidenewScore && canCreate">
   <div class="row">
     <div class="col-md-12">
       <div class="error" *ngIf="error">{{error}}</div>

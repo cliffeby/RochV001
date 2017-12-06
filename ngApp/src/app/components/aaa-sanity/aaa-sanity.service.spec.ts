@@ -6,7 +6,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from "@angular/router/testing";
 
-describe('Mock Service', () => {
+describe('Mock AAAService', () => {
   let injector: TestBed;
   let service: AAAService;
   let httpMock: HttpTestingController;

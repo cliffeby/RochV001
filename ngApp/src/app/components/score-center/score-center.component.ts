@@ -10,7 +10,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class ScoreCenterComponent implements OnInit {
   selectedScore: Score;
-  hidePlus: boolean;
+  canCreate: boolean;
   private hidenewScore: boolean = true;
   scores: Array<Score>;
   constructor(private _scoreService: ScoreService,
@@ -19,8 +19,8 @@ export class ScoreCenterComponent implements OnInit {
   ngOnInit() {
     this._scoreService.getScores()
       .subscribe(resScoreData => this.scores = resScoreData);
-    this.hidePlus = this.auth.userHasScopes(['create:scores'])
-    console.log('hideplus', this.hidePlus);
+    this.canCreate = this.auth.userHasScopes(['create:score']);
+    console.log('canCreate', this.canCreate);
   }
 
   onSelectScore(score: any) {

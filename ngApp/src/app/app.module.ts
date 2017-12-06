@@ -36,6 +36,7 @@ import {ScopeGuardService} from './services/scope-guard.service';
 import {DataService} from './components/aaa-sanity/shared/data.service';
 import { AAASanityComponent } from './components/aaa-sanity/aaa-sanity.component';
 import {AAAService, User} from "./components/aaa-sanity/shared/mockHttp.service";
+import { MemberBookComponent } from './component/member-book/member-book.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -66,7 +67,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatchAddPlayerComponent,
     MemberBlockComponent,
     SearchFilterPipe,
-    AAASanityComponent
+    AAASanityComponent,
+    MemberBookComponent
   ],
   imports: [
     BrowserModule,

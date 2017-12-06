@@ -20,13 +20,17 @@
   <member-detail *ngIf="selectedMember && hidenewMember"
                 (updateMemberEvent)="onUpdateMemberEvent($event)"
                 (deleteMemberEvent)="onDeleteMemberEvent($event)"
+                (notify)="onNotifyClicked()"
+                [create]="canCreate"
+                 [update]="canUpdate"
+                 [delete]="canDelete"
                 [member]="selectedMember">
   </member-detail>
 </div>
 <!--<div *ngIf="!selectedMember && hidenewMember">-->
   <!--<button style="margin-bottom:2px;" type="button" (click)="newMember()" class="btn btn-success btn-block">+ New Member</button>-->
 
-<div *ngIf="!selectedMember && hidenewMember" class="row">
+<div *ngIf="!selectedMember && hidenewMember && canCreate" class="row">
   <div class="col-md-12">
     <div class="error" *ngIf="error">{{error}}</div>
     <div class="pull-right">
@@ -36,5 +40,5 @@
     </div>
   </div>
 </div>
-<member-list *ngIf="!selectedMember && hidenewMember" [members]="members" (SelectMember)="onSelectMember($event)"></member-list>
-<!--</div>-->
+<member-list *ngIf="!selectedMember && hidenewMember" [members]="members" [create]="canCreate"
+             (SelectMember)="onSelectMember($event)"></member-list>

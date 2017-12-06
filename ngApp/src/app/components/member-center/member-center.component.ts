@@ -1,6 +1,6 @@
 import { MemberService } from '../../services/member.service';
 import { ScoreService } from '../../services/score.service';
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Member } from '../../models/member';
 import {AuthService} from '../../services/auth.service';
 
@@ -13,17 +13,22 @@ import {AuthService} from '../../services/auth.service';
 
 export class MemberCenterComponent implements OnInit {
   selectedMember: Member;
+  public canCreate: boolean;
+  public canUpdate: boolean;
+  public canDelete: boolean;
   private hidenewMember = true;
   members: Array<Member>;
- // scores: Array<Score>;
+
   constructor(private _memberService: MemberService,
               private auth: AuthService) {}
 
   ngOnInit() {
     this._memberService.getMembers()
       .subscribe(resMemberData => this.members = resMemberData);
-    // this._scoreService.getScores()
-    //   .subscribe(resScoreData => this.scores = resScoreData);
+    this.canCreate = this.auth.userHasScopes(['create:member']);
+    this.canUpdate = this.auth.userHasScopes(['update:member']);
+    this.canDelete = this.auth.userHasScopes(['remove:member']);
+    console.log('canCreate',this.canCreate, this.canUpdate, this.canDelete);
   }
 
   onSelectMember(member: any) {
@@ -68,5 +73,8 @@ export class MemberCenterComponent implements OnInit {
       });
     this.selectedMember = null;
   };
+  onNotifyClicked(): void {
+    this.selectedMember = null;
+  }
 
 }

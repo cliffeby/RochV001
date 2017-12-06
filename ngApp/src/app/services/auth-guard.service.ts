@@ -7,6 +7,7 @@ import { Router, CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Injectable()
+//CanActivate is an interface to determine if a route can be activated
 export class AuthGuardService implements CanActivate {
 
   constructor(public auth: AuthService, public router: Router) {}

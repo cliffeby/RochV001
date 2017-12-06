@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Pipe } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Pipe } from '@angular/core';
 import { Member } from '../../models/member';
 
 
@@ -6,16 +6,20 @@ import { Member } from '../../models/member';
   selector: 'member-list',
   templateUrl: 'member-list.component.html',
   styleUrls: ['member-list.component.css'],
-  inputs: ['members'],
+  inputs: ['members', 'create'],
   outputs: ['SelectMember']
 })
 export class MemberListComponent implements OnInit {
   public SelectMember = new EventEmitter();
   private queryString: string;
+  @Input()
+  public create: boolean;
+
   constructor() { }
 
   ngOnInit() {
     this.queryString = "";
+    console.log('BACK', this.create);
   }
 
   onSelect(mem: Member) {
