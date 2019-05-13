@@ -31,14 +31,14 @@ describe('ScoreCenterComponent', () => {
       declarations: [ ScoreCenterComponent, ScoreDetailComponent, ScoreListComponent ],
       providers: [
         ScoreService,
-     //   { provide: ScoreService, useClass: MockScoreService},
+       { provide: ScoreService, useClass: MockScoreService},
         {provide: AuthService, useClass: MockAuthService},
         {provide: AuthHttp, useClass: MockAuthHttp}
       ]
     })
       .compileComponents();
   });
-  beforeEach(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(ScoreCenterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

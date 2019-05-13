@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: '', redirectTo:'/home', pathMatch:'full'},
   {path: 'home', component: HomeComponent},
   {path:  'scorecards', component: ScorecardsComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['read:scorecards']}},
-  {path:  'matches', component: MatchCenterComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['read:matches']}},
+  {path:  'matches', component: MatchCenterComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['read:matches','read:scorecards', 'read:members']}},
   {path:  'members', component: MemberCenterComponent, canActivate: [AuthGuard] },
   {path:  'scores', component: ScoreCenterComponent, canActivate: [AuthGuard] }
 ];

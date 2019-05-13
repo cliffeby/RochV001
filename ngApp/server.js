@@ -97,11 +97,12 @@ router.route('/scoresByMatchPlayer/:matchId/:memberId')
 
 router.route('/scorecards')
   .post(jwtCheck, jwtAuthz(['create:scorecard']), scorecardController.postScorecard)
-//  .get(jwtCheck, jwtAuthz(['read:scorecards']), scorecardController.getScorecards);
-  .get( scorecardController.getScorecards);
+  .get(jwtCheck, jwtAuthz(['read:scorecards']), scorecardController.getScorecards);
+  // .get( scorecardController.getScorecards);
 // Create endpoint handlers for /scorecards/:beer_id
 router.route('/scorecards/:id')
-  .get(jwtCheck, checkScopes, scorecardController.getScorecard)
+  .get(jwtCheck, jwtAuthz(['read:scorecards']), scorecardController.getScorecard)
+// .get(jwtCheck, checkScopes, scorecardController.getScorecard)
   .put(jwtCheck, jwtAuthz(['create:scorecard']), scorecardController.putScorecard)
   .delete(jwtCheck, jwtAuthz(['remove:scorecard']), scorecardController.deleteScorecard);
 // Register all our routes with /api

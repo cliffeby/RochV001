@@ -29,7 +29,7 @@ export class MockAuthHttp {
 export class MockDatePicker {};
 
 
-describe('Match Comp and Service: My: TestBed', () => {
+describe('Match Center Component and Service: My: TestBed', () => {
   let component: MatchCenterComponent;
   let fixture: ComponentFixture<MatchCenterComponent>;
   let service: MatchService;
@@ -68,8 +68,8 @@ describe('Match Comp and Service: My: TestBed', () => {
     expect(injectedService).toBeDefined();
   }));
 
-    it('should be created', () => {
-      expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(component).toBeTruthy();
     });
   });
 

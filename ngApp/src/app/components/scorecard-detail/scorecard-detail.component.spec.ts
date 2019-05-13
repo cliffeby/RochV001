@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {FormsModule} from "@angular/forms";
 import { ScorecardDetailComponent } from './scorecard-detail.component';
 
-xdescribe('ScorecardDetailComponent', () => {
+describe('ScorecardDetailComponent', () => {
   let component: ScorecardDetailComponent;
   let fixture: ComponentFixture<ScorecardDetailComponent>;
 
@@ -14,7 +14,7 @@ xdescribe('ScorecardDetailComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(ScorecardDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

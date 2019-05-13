@@ -7,14 +7,16 @@ import * as auth0 from 'auth0-js';
 @Injectable()
 export class AuthService {
 
-  requestedScopes: string = 'openid profile read:scorecards read:matches';
+  requestedScopes: string = 'openid profile read:scorecards read:matches create:match create:member read:members';
+
 
   auth0 = new auth0.WebAuth({
     clientID: '9E3q7XC0qIfGdCgoLehJRhFoKKNstSIo',
     domain: 'roch.auth0.com',
     responseType: 'token id_token',
     audience: 'http://localhost:4200/home',
-    redirectUri: 'http://localhost:4200/matches'
+    redirectUri: 'http://localhost:4200/matches',
+    scope: this.requestedScopes
   });
 
   constructor(public router: Router) {}
@@ -45,12 +47,18 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    // localStorage.setItem('scopes', scopes);
     localStorage.setItem('scopes', JSON.stringify(scopes));
+    console.log('SSSCOPES', scopes);
+    // console.log('SSSCOPESJSON', JSON.stringify(scopes));
   }
 
   public userHasScopes(scopes: Array<string>): boolean {
     const grantedScopes = JSON.parse(localStorage.getItem('scopes')).split(' ');
-    console.log('GRANTED SCOPES', grantedScopes);
+    // const grantedScopes = localStorage.getItem('scopes');
+    console.log('HSGRANTED SCOPES', grantedScopes);
+    console.log('HSSCOPES', scopes);
+    console.log('HSSCOPESJSON', JSON.stringify(scopes));
     return scopes.every(scope => grantedScopes.includes(scope));
   }
 

@@ -19,7 +19,7 @@ describe('AAASanityComponent', () => {
     fixture.detectChanges();
   });
 
-  it('2 should equal 2',(() =>{
+  it('2 should equal 2',(() => {
     expect(2).toEqual(2);
   }));
 

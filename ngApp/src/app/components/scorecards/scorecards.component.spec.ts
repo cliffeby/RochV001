@@ -42,7 +42,7 @@ describe('ScorecardsComponent', () => {
     .compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(ScorecardsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

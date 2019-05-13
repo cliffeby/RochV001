@@ -1,21 +1,48 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {FormsModule} from "@angular/forms";
 import { MemberBlockComponent } from './member-block.component';
+import {SearchFilterPipe} from "../../search.pipe";
+import {Score} from '../../models/score';
+import {Match} from '../../models/match';
+import {ScoreService} from '../../services/score.service';
+import {AuthService} from "../../services/auth.service";
+import {MemberService} from "../../services/member.service";
+import {AuthHttp} from "angular2-jwt";
 
-xdescribe('MemberBlockComponent', () => {
+// Mock our Auth service
+//@formatter:off
+export class MockMemberService {
+  getMembers() {}};
+export class MockAuthService {
+  isAuthenticated() {};
+  logout() {};};
+export class MockAuthHttp {
+  get() {};};
+//@formatter:on
+
+
+describe('MemberBlockComponent', () => {
   let component: MemberBlockComponent;
   let fixture: ComponentFixture<MemberBlockComponent>;
-
-  beforeEach(async(() => {
+  let match: Array<Match>;
+  beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [ MemberBlockComponent ]
+      declarations: [ MemberBlockComponent, SearchFilterPipe],
+      imports: [FormsModule],
+      providers: [ ScoreService,
+        {provide: MemberService, useClass: MockMemberService},
+        {provide: AuthService, useClass: MockAuthService},
+        {provide: AuthHttp, useClass: MockAuthHttp}
+      ]
     })
     .compileComponents();
-  }));
+  });
 
-  beforeEach(() => {
+  beforeEach(async() => {
+
     fixture = TestBed.createComponent(MemberBlockComponent);
     component = fixture.componentInstance;
+    // component.match;
     fixture.detectChanges();
   });
 

@@ -19,7 +19,7 @@ export class MemberListComponent implements OnInit {
 
   ngOnInit() {
     this.queryString = "";
-    console.log('BACK', this.create);
+    console.log('BACK from List ngOnInit', this.create);
   }
 
   onSelect(mem: Member) {

@@ -21,12 +21,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: './server/tests/server.model.spec.js', included: true} //C:\Users\cliff\WebstormProjects\RochV001\ngApp\server\tests\server.model.spec.js
+      // {pattern: './server/tests/server.model.spec.js', included: true} //C:\Users\cliff\WebstormProjects\RochV001\ngApp\server\tests\server.model.spec.js
     ],
 
 
     // list of files to exclude
-    exclude: [
+    exclude: [ {pattern: './server/tests/*.*'}
     ],
 
 

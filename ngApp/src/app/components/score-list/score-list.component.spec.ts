@@ -17,7 +17,7 @@ export class MockAuthHttp {
   get(){}
 };
 
-xdescribe('ScoreListComponent ', () => {
+describe('ScoreListComponent ', () => {
   let component: ScoreListComponent;
   let fixture: ComponentFixture<ScoreListComponent>;
 
@@ -34,7 +34,7 @@ xdescribe('ScoreListComponent ', () => {
     .compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(ScoreListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -29,28 +29,28 @@ describe('MemberComponent and Service: My: TestBed', () => {
     TestBed.configureTestingModule({
       declarations: [MemberCenterComponent, MemberDetailComponent, MemberListComponent, SearchFilterPipe],
       imports: [FormsModule],
-      providers: [
-        {provide: MemberService, useClass: MockMemberService},
+      providers: [ MemberService,
+        // {provide: MemberService, useClass: MockMemberService},
         {provide: AuthService, useClass: MockAuthService},
         {provide: AuthHttp, useClass: MockAuthHttp}
       ]
     })
       .compileComponents();
   }));
-  xit('should do something', fakeAsync(() => {
-    fixture = TestBed.createComponent(MemberCenterComponent);
-    component = fixture.componentInstance; // BannerComponent test instance
-    service = fixture.debugElement.injector.get(MemberService);
-    console.log('SERVICEEEDDDDDDD', service);
-    spyOn(MemberService, 'getMembers')
-      .and.returnValue((Promise.resolve('Data')));
-    fixture.detectChanges();
-    tick();
-    expect(component.members).toBe('Data');
-    // expect(myServiceDependency.get).toHaveBeenCalled();
-  }));
+  // it('should do something', fakeAsync(() => {
+  //   fixture = TestBed.createComponent(MemberCenterComponent);
+  //   component = fixture.componentInstance; // BannerComponent test instance
+  //   service = fixture.debugElement.injector.get(MemberService);
+  //   console.log('SERVICEEEDDDDDDD', service);
+  //   spyOn(MemberService, 'getMembers')
+  //     .and.returnValue((Promise.resolve('Data')));
+  //   fixture.detectChanges();
+  //   tick();
+  //   expect(component.members).toBe('Data');
+  //   expect(myServiceDependency.get).toHaveBeenCalled();
+  // }));
 
-  beforeEach(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(MemberCenterComponent);
     component = fixture.componentInstance; // BannerComponent test instance
     service = TestBed.get(MemberService);

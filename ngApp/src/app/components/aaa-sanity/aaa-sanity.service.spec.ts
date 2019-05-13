@@ -97,6 +97,7 @@ describe('Mock AAAService', () => {
       });
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
+      expect(req.request.method).toBe("POST");
       req.flush(dummyUsers);
     });
 
@@ -142,6 +143,7 @@ describe('Mock AAAService', () => {
       });
       const url = 'http://localhost:3000/api/mocks/1'
       const req = httpMock.expectOne(url);
+      expect(req.request.method).toBe("PUT");
       req.flush(dummyUser);
     });
   });
