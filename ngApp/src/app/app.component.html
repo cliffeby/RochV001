@@ -16,7 +16,7 @@
     <li ui-sref-active="active">
       <a  *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Sign In</a>
       <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Sign Out</a>
-      <a> {{auth.userProfile.name}} </a>
+      <a> {{auth.userProfile}} </a>
     </li>
   </ul>
   </div>

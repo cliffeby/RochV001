@@ -1,4 +1,5 @@
 <div *ngIf="scorecard" class="form-horizontal">
+<form>
   <h2>{{scorecard.name}} input</h2>
   <div class="form-group">
     <label class="col-sm-2 control-label"> Name: </label>
@@ -43,7 +44,7 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="button" (click)="updateScorecard()" class="btn btn-primary">Update</button>
+      <button type="button" id = "btnUpdate" (click)="updateScorecard()" class="btn btn-primary">Update</button>
       <button type="button" (click)="deleteScorecard()" class="btn btn-danger">Delete</button>
     </div>
   </div>
@@ -86,4 +87,5 @@
       </td>
     </tr>
   </table>
+ </form>
 </div>

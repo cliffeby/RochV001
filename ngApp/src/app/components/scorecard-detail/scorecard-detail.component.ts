@@ -59,6 +59,7 @@ export class ScorecardDetailComponent implements OnInit {
       scorecard.yards = yards;
       scorecard.hCaps = hCaps;
       scorecard.pars = pars;
+      scorecard.parInputString = '';
     }
   }
 

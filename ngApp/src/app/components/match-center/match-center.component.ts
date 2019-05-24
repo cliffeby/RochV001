@@ -103,6 +103,38 @@ export class MatchCenterComponent implements OnInit {
       });
   }
 
+  onPairMatch(match: any) {
+    this.selectedMatch = match;
+    if (match.scorecardId) {
+      this._scorecardservice.getScorecard(match.scorecardId)
+        .subscribe(resSCData => {
+          this.scorecard = resSCData;
+          match.scName = this.scorecard.name;
+        });
+    }
+    this._scoreservice.getScoreByMatch(match._id)
+      .subscribe(resScoreData => {
+        this.scores = resScoreData;
+        this._memberservice.getMembers()
+          .subscribe(resMemData => {
+            this.members = resMemData;
+            match.players = 0;
+            for (let index = 0; index < this.scores.length; index++) {
+              for (let i = 0; i < this.members.length; i++) {
+                if (this.members[i]._id === this.scores[index].memberId) {
+                  this.members[i].isPlaying = true;
+                  match.players++;
+                } else {
+                  if (!this.members[i].isPlaying) {
+                    this.members[i].isPlaying = false;
+                  }
+                }
+              }
+            }
+          });
+      });
+  }
+
   newMatch() {
     this.match = new Match();
     let dateArray = this.today.split('-');

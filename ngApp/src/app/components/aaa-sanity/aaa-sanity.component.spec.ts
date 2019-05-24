@@ -155,3 +155,24 @@ describe ('Sanity Tests Mock DataService', ()=> {
     console.log('GETDETAILS',typeof dataService.getDetails());
   }));
 });
+
+
+describe ('Sanity Tests Dumb Component - Details', ()=> {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AAASanityComponent],
+    });
+    TestBed.overrideComponent(AAASanityComponent, {
+      set: {providers: [
+        {provide: DataService, useClass: Mock2DataService}
+      ]
+      }})
+      .compileComponents();
+  });
+  it('Test sync MockDataService', (() =>{
+    let fixture = TestBed.createComponent(AAASanityComponent);
+    let dataService = fixture.debugElement.injector.get(DataService);
+      expect(dataService.getDetails()).toBe('Data2');
+    console.log('GETDETAILS',typeof dataService.getDetails());
+  }));
+});

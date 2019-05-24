@@ -1,0 +1,11 @@
+<div *ngIf="match" class="form-horizontal">
+  <h2>{{match.name}} | {{match.scName}} | {{match.datePlayed | date: "longDate"}}</h2>
+
+  <div *ngFor="let member of members">
+
+      <p>{{member.firstName}} {{member.lastName}} - {{member.currentHCap}}</p>
+      <p></p>
+
+        <span *ngIf="member.isPlaying==true">Playing</span>
+  </div>
+</div>
