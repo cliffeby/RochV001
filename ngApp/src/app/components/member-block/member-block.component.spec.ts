@@ -24,7 +24,7 @@ export class MockAuthHttp {
 describe('MemberBlockComponent', () => {
   let component: MemberBlockComponent;
   let fixture: ComponentFixture<MemberBlockComponent>;
-  let match: Array<Match>;
+  // let match: Array<Match>;
   beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ MemberBlockComponent, SearchFilterPipe],
@@ -42,7 +42,6 @@ describe('MemberBlockComponent', () => {
 
     fixture = TestBed.createComponent(MemberBlockComponent);
     component = fixture.componentInstance;
-    // component.match;
     fixture.detectChanges();
   });
 

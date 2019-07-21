@@ -1,4 +1,5 @@
 <div class="row">
+  {{hidenewMatch}}
   <div *ngIf="!hidenewMatch">
     <h2>New Match</h2>
     <form #form="ngForm" (ngSubmit)="onSubmitAddMatch(form.value)">
@@ -43,49 +44,23 @@
 
 <div *ngIf="!selectedMatch && hidenewMatch">
 
-  <match-list [matches]="matches" (SelectMatch)="onSelectMatch($event)"></match-list>
-  <h2>Match List
-  </h2>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="error" *ngIf="error">{{error}}</div>
-      <div class="pull-right">
-        <button class="btn btn-primary" type="button" (click)="newMatch()">
-          <i class="glyphicon glyphicon-plus"></i>
-        </button>
+    <div *ngIf="!selectedMatch && hidenewMatch" class="row">
+        <div class="col-md-12">
+          <div class="error" *ngIf="error">{{error}}</div>
+          <div class="pull-right">
+            <button class="btn btn-primary" (click)="newMatch()">
+              <i class="glyphicon glyphicon-plus"></i>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <input type="text" [(ngModel)]="queryString" id="search" placeholder="Search Match Name">
-      <i class="glyphicon glyphicon-search"></i>
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Date played</th>
-          <th>Course</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-        <tbody  >
 
-        <tr *ngFor="let match of matches | searchfilter: 'name' : queryString " [class.active]="match === selectedMatch"
-            [ngClass]="{true:'bold'}[match.dateFlag]">
-          <td>{{match.name}}</td>
-          <td>{{match.datePlayed | date:'longDate'}}</td>
-          <td>{{match.scName}}</td>
-          <td><a class="btn btn-primary col-sm-offset-2 " (click)="onSelectMatch(match)">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn btn-primary col-sm-offset-2 " (click)="onPairtMatch(match)">
-            <i class="glyphicon glyphicon-plus"></i>
-          </a></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <match-list *ngIf="!selectedMatch && hidenewMatch"
+              (SelectMatch)="onSelectMatch($event)"
+              (PairMatch) = "onPairMatch(match)"
+              [matches]="matches">
+  </match-list>
+
+
 </div>
 

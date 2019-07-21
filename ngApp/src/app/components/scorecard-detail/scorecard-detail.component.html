@@ -1,6 +1,5 @@
 <div *ngIf="scorecard" class="form-horizontal">
-<form>
-  <h2>{{scorecard.name}} input</h2>
+  <h2>{{scorecard.name}}</h2>
   <div class="form-group">
     <label class="col-sm-2 control-label"> Name: </label>
     <div class="col-sm-10">
@@ -44,8 +43,8 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="button" id = "btnUpdate" (click)="updateScorecard()" class="btn btn-primary">Update</button>
-      <button type="button" (click)="deleteScorecard()" class="btn btn-danger">Delete</button>
+      <button type="button" id="btnUpdate" (click)="updateScorecard()" class="btn btn-primary">Update</button>
+      <button type="button" id="btnDelete" (click)="deleteScorecard()" class="btn btn-danger">Delete</button>
     </div>
   </div>
   <table class="stripe row-border order-column" cellspacing="0" width="100%">
@@ -72,20 +71,20 @@
     <th style = "text-align: center;">Back</th>
     <th style = "text-align: center;">Total</th>
     <tr md-row md-auto-select >
+      <td align = "center" *ngFor="let pars of scorecard.pars" [class.active]="scorecard === selectedScorecard">
+        <span>{{pars}}</span>
+      </td>
+    </tr>
+    <tr md-row md-auto-select >
       <td align = "center" *ngFor="let yards of scorecard.yards" [class.active]="scorecard === selectedScorecard">
         <!--<td align = "center" data-ng-repeat="yards in vm.yards track by $index">-->
         <span >{{yards}}</span>
       </td>
-    <tr md-row md-auto-select >
-      <td align = "center" *ngFor="let par of scorecard.pars" [class.active]="scorecard === selectedScorecard">
-        <span>{{par}}</span>
-      </td>
     </tr>
     <tr md-row md-auto-select >
-      <td align = "center" *ngFor="let hCap of scorecard.hCaps" [class.active]="scorecard === selectedScorecard">
-        <span>{{hCap}}</span>
+      <td align = "center" *ngFor="let hCaps of scorecard.hCaps" [class.active]="scorecard === selectedScorecard">
+        <span>{{hCaps}}</span>
       </td>
     </tr>
   </table>
- </form>
 </div>

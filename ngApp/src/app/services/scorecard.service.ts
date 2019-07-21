@@ -21,6 +21,7 @@ export class ScorecardService {
     return this._authHttp.get(this._server + this._getUrl)
       .map((response: Response) => response.json());
   }
+  
   getScorecard(_id: string) {
     return this._authHttp.get(this._server + this._getUrl + '/' + _id)
       .map((response: Response) => response.json());

@@ -35,7 +35,7 @@ exports.postScorecard =  function(req, res){
   newScorecard.rating = req.body.rating;
   newScorecard.slope = req.body.slope;
   newScorecard.parInputString = req.body.parInputString;
-  newScorecard.par = req.body.par;
+  // newScorecard.pars = req.body.pars;
   newScorecard.hCapInputString = req.body.hCapInputString;
   newScorecard.hCap = req.body.hCap;
   newScorecard.yardsInputString = req.body.yardsInputString;
@@ -60,7 +60,7 @@ exports.putScorecard =  function(req, res){
         rating: req.body.rating,
         slope: req.body.slope,
         parInputString: req.body.parInputString,
-        par: req.body.par,
+        // pars: req.body.pars,
         hCapInputString: req.body.hCapInputString,
         hCap: req.body.hCap,
         yardsInputString: req.body.yardsInputString,
@@ -72,6 +72,7 @@ exports.putScorecard =  function(req, res){
       new: true
     },
     function(err, updatedScorecard){
+      console.log('SCORECARD CONTROLer', updatedScorecard);
       if(err){
         res.send("Error updating scorecard");
       }else{

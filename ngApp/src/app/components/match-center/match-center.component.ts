@@ -48,6 +48,13 @@ export class MatchCenterComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this._matchservice.getMatches()
+    //   .subscribe(resMatchData => this.matches = resMatchData);
+    // this.canCreate = this.auth.userHasScopes(['create:match']);
+    // this.canUpdate = this.auth.userHasScopes(['update:match']);
+    // this.canDelete = this.auth.userHasScopes(['remove:match']);
+    // console.log('canCreate', this.canCreate, this.canUpdate, this.canDelete);
+
     this.myday = new Date();
     this.queryString = "";
     this._matchservice.getMatches()
@@ -136,11 +143,16 @@ export class MatchCenterComponent implements OnInit {
   }
 
   newMatch() {
+
+    console.log(" Add match")
+
     this.match = new Match();
+    this.hidenewMatch = false;
+    console.log('addnewmatch', this.match, this.hidenewMatch);
     let dateArray = this.today.split('-');
     this.model = {date: {year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2])}};
-    this.hidenewMatch = false;
   }
+
 
   onSubmitAddMatch(match: Match) {
     match.datePlayed = (this.model.date.year + '-' + this.model.date.month + '-' + this.model.date.day);

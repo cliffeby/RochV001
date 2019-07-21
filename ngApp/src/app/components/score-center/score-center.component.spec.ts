@@ -7,6 +7,7 @@ import { RouterTestingModule} from "@angular/router/testing";
 import {ScoreDetailComponent} from "../score-detail/score-detail.component";
 import {ScoreListComponent} from "../score-list/score-list.component";
 import { FormsModule } from "@angular/forms";
+// import { Scorecard } from 'src/app/models/scorecard';
 
 // Mock our Auth service
 export class MockAuthService {

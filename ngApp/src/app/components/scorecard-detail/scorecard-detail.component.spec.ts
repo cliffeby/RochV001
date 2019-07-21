@@ -1,66 +1,90 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { ScorecardDetailComponent } from './scorecard-detail.component';
-import { Scorecard } from '../../models/scorecard';
-import { DebugElement, Component} from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { Scorecard} from '../../models/scorecard';
 
-@Component({selector: 'host-for-test', template:''}) class HostComponent{}
-
-describe('ScorecardDetailComponent', () => {
+fdescribe('ScorecardDetailComponent', () => {
   let component: ScorecardDetailComponent;
   let fixture: ComponentFixture<ScorecardDetailComponent>;
-  let hostTestComponent: HostComponent;
-  let hostTestFixture: ComponentFixture<HostComponent>;
-  const getSDCElement = () : HTMLElement => hostTestFixture.debugElement.query(By.css('.btn')) ? fixture.debugElement.query(By.css('.btn')).nativeElement : null;
 
-  let nameEl: DebugElement;
-  let ratingEl: DebugElement;
-  let slopeEL: DebugElement;
-  let parEl: DebugElement;
-  let hcapEl: DebugElement;
-  let yardsEl: DebugElement;
-  let updateEl: DebugElement;
-
-  // function createHostComponent( template : string ) : ComponentFixture<HostComponent> {
-  //   TestBed.overrideComponent(HostComponent, { set: { template: template } });
-  //   const fixture = TestBed.createComponent(HostComponent);
-  //   fixture.detectChanges();
-  //   return fixture as ComponentFixture<HostComponent>;
-  // }
-
-  beforeEach(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ ScorecardDetailComponent , HostComponent],
+      declarations: [ScorecardDetailComponent],
       imports: [FormsModule]
     })
-    .compileComponents();
-  });
+      .compileComponents();
+  }));
 
   beforeEach(async() => {
     fixture = TestBed.createComponent(ScorecardDetailComponent);
     component = fixture.componentInstance;
-    nameEl = fixture.debugElement.query(By.css('input[id=btnUpdate]'));
 
+    fixture.detectChanges();
   });
 
   it('should be created ', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Entering course, rating, slope,...', () => {
-    // component.enabled = true;
-    fixture.detectChanges();
-    expect(updateEl.nativeElement.disabled).toBeFalsy();
-    // let scorecard: Scorecard;
-    // nameEl.nativeElement.value = "Blue Monster"; (1)
-    // ratingEl.nativeElement.value = "72.2";
+  it('component method onInitYardstoString should exist', () => {
+    expect(component.onInitYardsString).toBeTruthy;
+  })
 
-    // hostComponent.onUpdateScorecardEvent.subscribe((value) => scorecard = value);
+  it('component method onInitYardstoString return a partial YARDS string', () => {
+    let scorecard = new Scorecard();
+    scorecard.yardsInputString = "";
+    expect(component.onInitYardsString(scorecard)).toEqual(['YARDS', '', '0', '0', '0']);
+  })
 
-    // updateEl.triggerEventHandler('click', null); (2)
+  it('component method onInitYardstoString return a full YARDS string', () => {
+    let scorecard = new Scorecard();
+    scorecard.yardsInputString = "1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2";
+    expect(component.onInitYardsString(scorecard))
+      .toEqual(['YARDS', '1', '1', '1', '1', '1', '1', '1', '1', '1', '9', '2', '2', '2', '2', '2', '2', '2', '2', '2', '18', '27']);
+  })
+// TODO Handle non-numerics
+  it('component method onInitYardstoString return an error string', () => {
+    let scorecard = new Scorecard();
+    scorecard.yardsInputString = "1,a,1";
+    expect(component.onInitYardsString(scorecard)).toEqual(['YARDS', '1', 'a', '1', '0', '0', '0']);
+  })
 
-    // expect(scorecard.name).toBe("Blue Monster");
-    // expect(scorecard.rating).toBe("72.2");
-  });
+  it('component method onInitParstoString return a partial PARS string', () => {
+    let scorecard = new Scorecard();
+    scorecard.parInputString = "";
+    expect(component.onInitParsString(scorecard)).toEqual(['PAR', '', '0', '0', '0']);
+  })
+
+  it('component method onInitParstoString return a full PARS string', () => {
+    let scorecard = new Scorecard();
+    scorecard.parInputString = "1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2";
+    expect(component.onInitParsString(scorecard))
+      .toEqual(['PAR', '1', '1', '1', '1', '1', '1', '1', '1', '1', '9', '2', '2', '2', '2', '2', '2', '2', '2', '2', '18', '27']);
+  })
+
+  xit('component method onInitParstoString return an error string', () => {
+    let scorecard = new Scorecard();
+    scorecard.parInputString = "1,1,a1";
+    expect(component.onInitParsString(scorecard)).toEqual(['PAR', '', '0', '0', '0']);
+  })
+
+  it('component method onInitHcapstoString return a partial HCAPS string', () => {
+    let scorecard = new Scorecard();
+    scorecard.hCapInputString = "";
+    expect(component.onInitHcapsString(scorecard)).toEqual(['HCAP', '', '  ']);
+  })
+
+  it('component method onInitHcapstoString return a full HCAPS string', () => {
+    let scorecard = new Scorecard();
+    scorecard.hCapInputString = "1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2";
+    expect(component.onInitHcapsString(scorecard))
+      .toEqual(['HCAP', '1', '1', '1', '1', '1', '1', '1', '1', '1', '  ', '2', '2', '2', '2', '2', '2', '2', '2', '2']);
+  })
+
+  xit('component method onInitHcapstoString return an error string', () => {
+    let scorecard = new Scorecard();
+    scorecard.hCapInputString = "1,1,a1";
+    expect(component.onInitHcapsString(scorecard)).toEqual(['HCAPS', '', '0', '0', '0']);
+  })
+
 });

@@ -30,15 +30,15 @@ export class MockDatePicker {};
 
 
 describe('Match Detail Comp and Service: My: TestBed', () => {
-  let component: MatchCenterComponent;
-  let fixture: ComponentFixture<MatchCenterComponent>;
+  let component: MatchDetailComponent;
+  let fixture: ComponentFixture<MatchDetailComponent>;
   let service: MatchService;
   let myServiceDependency: AuthHttp;
 
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [FocusDirective, MatchCenterComponent, MatchDetailComponent, MatchListComponent, MemberBlockComponent, SearchFilterPipe],
+      declarations: [FocusDirective, MatchDetailComponent, MatchDetailComponent, MatchListComponent, MemberBlockComponent, SearchFilterPipe],
       imports: [FormsModule],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA],
       providers: [
@@ -54,7 +54,7 @@ describe('Match Detail Comp and Service: My: TestBed', () => {
       .compileComponents();
   });
     beforeEach(async() => {
-      fixture = TestBed.createComponent(MatchCenterComponent);
+      fixture = TestBed.createComponent(MatchDetailComponent);
       component = fixture.componentInstance; // BannerComponent test instance
       service = TestBed.get(MatchService);
       myServiceDependency = TestBed.get(AuthHttp);

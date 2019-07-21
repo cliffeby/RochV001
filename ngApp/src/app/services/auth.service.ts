@@ -7,7 +7,8 @@ import * as auth0 from 'auth0-js';
 @Injectable()
 export class AuthService {
 
-  requestedScopes: string = 'openid profile read:scorecards read:matches create:match create:member read:members';
+  requestedScopes: string = 'openid profile';
+  // requestedScopes: string = 'openid profile read:scorecards read:matches create:match create:member read:members remove:scorecard';
 
 
   auth0 = new auth0.WebAuth({
@@ -49,16 +50,16 @@ export class AuthService {
     localStorage.setItem('expires_at', expiresAt);
     // localStorage.setItem('scopes', scopes);
     localStorage.setItem('scopes', JSON.stringify(scopes));
-    console.log('SSSCOPES', scopes);
+    console.log('Set SCOPES', scopes);
     // console.log('SSSCOPESJSON', JSON.stringify(scopes));
   }
 
   public userHasScopes(scopes: Array<string>): boolean {
     const grantedScopes = JSON.parse(localStorage.getItem('scopes')).split(' ');
     // const grantedScopes = localStorage.getItem('scopes');
-    console.log('HSGRANTED SCOPES', grantedScopes);
-    console.log('HSSCOPES', scopes);
-    console.log('HSSCOPESJSON', JSON.stringify(scopes));
+    console.log('HAS GRANTED SCOPES', grantedScopes);
+    console.log('HAS SCOPES', scopes);
+    console.log('HAS SCOPESJSON', JSON.stringify(scopes));
     return scopes.every(scope => grantedScopes.includes(scope));
   }
 

@@ -16,9 +16,9 @@ const ScorecardSchema = new Schema({
     type: Number
   },
   parInputString: String,
-  pars: [{
-    type: String
-  }],
+  // pars: [{
+  //   type: String
+  // }],
   hCapInputString: String,
   hCaps: [{
     type: String

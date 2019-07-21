@@ -6,7 +6,7 @@ describe('MemberDetailComponent', () => {
   let component: MemberDetailComponent;
   let fixture: ComponentFixture<MemberDetailComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [ MemberDetailComponent ],
       imports: [FormsModule]

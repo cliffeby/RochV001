@@ -6,7 +6,7 @@ describe('AAASanityComponent', () => {
   let component: AAASanityComponent;
   let fixture: ComponentFixture<AAASanityComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [ AAASanityComponent ]
     })
@@ -38,7 +38,30 @@ describe('AAASanityComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('p').textContent).toContain('And Again');
-  }))});
+  }));
+
+  it('component method onInitYearstoString should exist', () => {
+      expect(component.onInitYardsString).toBeTruthy;
+    })
+
+  it('component method onInitYearstoString return a string', () => {
+    expect(component.onInitYardsString("")).toEqual(['YARDS', '', '0', '0', '0']);
+  })
+
+  it('component method onInitYearstoString return a string', () => {
+    expect(component.onInitYardsString("1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2"))
+    .toEqual(['YARDS', '1', '1', '1', '1', '1', '1', '1', '1', '1', '9', '2', '2', '2', '2', '2', '2', '2', '2', '2', '18', '27']);
+  })
+
+  xit('component method onInitYearstoString return a string', () => {
+    expect(component.onInitYardsString("1,a,1")).toEqual(['YARDS', '', '0', '0', '0']);
+  })
+
+  });
+
+
+
+
 
 describe ('Sanity Test - Access a Service', ()=> {
   beforeEach(async(() => {
@@ -57,6 +80,7 @@ describe ('Sanity Test - Access a Service', ()=> {
       expect(component.data).toBe('Data');
     });
   }));
+
   it('Should fail to fetch data using constructor\'s DataService when not async', (() =>{
     let fixture = TestBed.createComponent(AAASanityComponent);
     let component = fixture.componentInstance;
@@ -82,6 +106,7 @@ describe ('Sanity Tests Mock DataService Async', ()=> {
       }})
       .compileComponents();
   });
+
   it('Should fetch data using constructor\'s injected MockDataService', async(() =>{
     let fixture = TestBed.createComponent(AAASanityComponent);
     let component = fixture.componentInstance;
@@ -118,6 +143,7 @@ describe ('Sanity Tests using fakeAsync and DataService', ()=> {
       declarations: [AAASanityComponent]
     });
   });
+
   it('Should fetch data using SpyOn', fakeAsync(() =>{
     let fixture = TestBed.createComponent(AAASanityComponent);
     let component = fixture.componentInstance;
@@ -130,49 +156,50 @@ describe ('Sanity Tests using fakeAsync and DataService', ()=> {
   }));
 });
 
-export class Mock2DataService{
-  getDetails(){
-    return 'Data2';
-  }
-}
+// export class Mock2DataService{
+//   getDetails(){
+//     return 'Data2';
+//   }
+// }
 
-describe ('Sanity Tests Mock DataService', ()=> {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AAASanityComponent],
-    });
-    TestBed.overrideComponent(AAASanityComponent, {
-      set: {providers: [
-        {provide: DataService, useClass: Mock2DataService}
-      ]
-      }})
-      .compileComponents();
-  });
-  it('Test sync MockDataService', (() =>{
-    let fixture = TestBed.createComponent(AAASanityComponent);
-    let dataService = fixture.debugElement.injector.get(DataService);
-      expect(dataService.getDetails()).toBe('Data2');
-    console.log('GETDETAILS',typeof dataService.getDetails());
-  }));
-});
+// describe ('Sanity Tests Mock DataService', ()=> {
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [AAASanityComponent],
+//     });
+//     TestBed.overrideComponent(AAASanityComponent, {
+//       set: {providers: [
+//         {provide: DataService, useClass: Mock2DataService}
+//       ]
+//       }})
+//       .compileComponents();
+//   });
 
+//   xit('Test sync MockDataService', (() =>{
+//     let fixture = TestBed.createComponent(AAASanityComponent);
+//     let dataService = fixture.debugElement.injector.get(DataService);
+//       expect(dataService.getDetails()).toBe('Data2');
+//     console.log('GETDETAILS',typeof dataService.getDetails());
+//   }));
+// });
 
-describe ('Sanity Tests Dumb Component - Details', ()=> {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AAASanityComponent],
-    });
-    TestBed.overrideComponent(AAASanityComponent, {
-      set: {providers: [
-        {provide: DataService, useClass: Mock2DataService}
-      ]
-      }})
-      .compileComponents();
-  });
-  it('Test sync MockDataService', (() =>{
-    let fixture = TestBed.createComponent(AAASanityComponent);
-    let dataService = fixture.debugElement.injector.get(DataService);
-      expect(dataService.getDetails()).toBe('Data2');
-    console.log('GETDETAILS',typeof dataService.getDetails());
-  }));
-});
+// describe ('Sanity Tests Dumb Component - Details', ()=> {
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [AAASanityComponent],
+//     });
+//     TestBed.overrideComponent(AAASanityComponent, {
+//       set: {providers: [
+//         {provide: DataService, useClass: Mock2DataService}
+//       ]
+//       }})
+//       .compileComponents();
+//   });
+
+//   it('Test sync MockDataService', (() =>{
+//     let fixture = TestBed.createComponent(AAASanityComponent);
+//     let dataService = fixture.debugElement.injector.get(DataService);
+//       expect(dataService.getDetails()).toBe('Data2');
+//     console.log('GETDETAILS',typeof dataService.getDetails());
+//   }));
+// });

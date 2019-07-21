@@ -19,12 +19,12 @@ export class MockAuthHttp {
   get(){}
 };
 export class MockScorecardService {
-  getMembers(){}
+  getScorecards(){};
 };
 
 describe('ScorecardsComponent', () => {
-  let service: ScorecardService;
-  let myServiceDependancy: AuthHttp;
+  // let service: ScorecardService;
+  // let myServiceDependancy: AuthHttp;
   let component: ScorecardsComponent;
   let fixture: ComponentFixture<ScorecardsComponent>;
 
@@ -33,8 +33,7 @@ describe('ScorecardsComponent', () => {
       imports: [RouterTestingModule, FormsModule],
       declarations: [ ScorecardsComponent, ScorecardDetailComponent, ScorecardListComponent ],
       providers: [
-        ScorecardService,
-        { provide: ScorecardService, useClass: MockScorecardService},
+        {provide: ScorecardService, useClass: MockScorecardService},
         {provide: AuthService, useClass: MockAuthService},
         {provide: AuthHttp, useClass: MockAuthHttp}
       ]
@@ -46,9 +45,11 @@ describe('ScorecardsComponent', () => {
     fixture = TestBed.createComponent(ScorecardsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    let _scorecardservice = new MockScorecardService();
   });
 
   it('should be created ', () => {
     expect(component).toBeTruthy();
   });
 });
+

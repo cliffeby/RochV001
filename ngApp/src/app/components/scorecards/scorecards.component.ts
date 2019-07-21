@@ -29,6 +29,7 @@ export class ScorecardsComponent implements OnInit {
 
   onAddScorecardEvent() {
     this.hidenewScorecard = false;
+    console.log('Add Scorecard emit')
   }
 
   onSubmitAddScorecard(scorecard: Scorecard) {
@@ -53,7 +54,6 @@ export class ScorecardsComponent implements OnInit {
           .subscribe(resScorecardData => this.scorecards = resScorecardData);
         // this.selectedScorecard = resNewScorecard;
       });
-
   }
 
   onUpdateScorecardEvent(scorecard: any) {

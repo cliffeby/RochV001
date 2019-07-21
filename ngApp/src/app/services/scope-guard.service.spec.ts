@@ -10,7 +10,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {Routes, ActivatedRouteSnapshot, ActivatedRoute} from "@angular/router";
 import {ScorecardsComponent} from "../components/scorecards/scorecards.component";
 
- class MockAuthService{
+class MockAuthService{
   isAuthenticated(){return true};
   userHasScopes(scopes: Array<string>): boolean {
      const grantedScopes = ['read:scorecards', 'create:score'];

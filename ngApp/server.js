@@ -61,7 +61,7 @@ router.route('/members')
   .post(jwtCheck,  jwtAuthz(['create:member']), memberController.postMember)
   .get(jwtCheck, jwtAuthz(['read:members']), memberController.getMembers);
 
-// Create endpoint handlers for /members/:beer_id
+// Create endpoint handlers for /members/_id
 router.route('/members/:id')
   .get(jwtCheck, checkScopes, memberController.getMember)
   .put(jwtCheck, jwtAuthz(['create:member']), memberController.putMember)
@@ -99,14 +99,13 @@ router.route('/scorecards')
   .post(jwtCheck, jwtAuthz(['create:scorecard']), scorecardController.postScorecard)
   .get(jwtCheck, jwtAuthz(['read:scorecards']), scorecardController.getScorecards);
   // .get( scorecardController.getScorecards);
-// Create endpoint handlers for /scorecards/:beer_id
+// Create endpoint handlers for /scorecards/_id
 router.route('/scorecards/:id')
   .get(jwtCheck, jwtAuthz(['read:scorecards']), scorecardController.getScorecard)
-// .get(jwtCheck, checkScopes, scorecardController.getScorecard)
   .put(jwtCheck, jwtAuthz(['create:scorecard']), scorecardController.putScorecard)
   .delete(jwtCheck, jwtAuthz(['remove:scorecard']), scorecardController.deleteScorecard);
-// Register all our routes with /api
 
+// Register all our routes with /api
 app.use('/api', router);
 
 app.get('*', function(req, res) {

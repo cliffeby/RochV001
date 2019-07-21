@@ -37,6 +37,8 @@ import { DataService} from './components/aaa-sanity/shared/data.service';
 import { AAASanityComponent } from './components/aaa-sanity/aaa-sanity.component';
 import { AAAService, User} from "./components/aaa-sanity/shared/mockHttp.service";
 import { MatchPairComponent } from './components/match-pair/match-pair.component';
+import { CounterComponent } from './components/aa1-sanity/aaChild-sanity.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 // import { MemberBookComponent } from './component/member-book/member-book.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -70,6 +72,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SearchFilterPipe,
     AAASanityComponent,
     MatchPairComponent,
+    CounterComponent,
     // MemberBookComponent
   ],
   imports: [
@@ -77,12 +80,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    NoopAnimationsModule
   ],
   providers: [
     DataService,
     AAAService,
-
     ScorecardService,
     ScoreService,
     MatchService,
