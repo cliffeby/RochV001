@@ -7,6 +7,8 @@ import {ScorecardService} from "../../services/scorecard.service";
 import {RouterTestingModule} from "@angular/router/testing";
 import {AuthHttp} from "angular2-jwt";
 import {FormsModule} from "@angular/forms";
+import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
+import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 
 // Mock our Auth service
 export class MockAuthService {
@@ -30,7 +32,7 @@ describe('ScorecardsComponent', () => {
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, FormsModule],
+      imports: [RouterTestingModule, FormsModule, MatFormFieldModule, ReactiveFormsModule],
       declarations: [ ScorecardsComponent, ScorecardDetailComponent, ScorecardListComponent ],
       providers: [
         {provide: ScorecardService, useClass: MockScorecardService},

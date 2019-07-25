@@ -29,8 +29,8 @@
         placeholder="Starting at hole #1, enter hole Par separated by commas">
         <!-- [errorStateMatcher]="errorMatcher" NOT SURE WHY THIS A PROBLEM FOR THE SPEC FILE-->
         <!-- Mat-error not working ??? -->
-        <mat-error *ngIf = "parsForm.hasError('emailDomain')">Modified</mat-error>
-        <mat-error *ngIf = "parsForm.hasError('maxlength')">Too long</mat-error>
+        <!-- <mat-error *ngIf = "parsForm.hasError('emailDomain')">Modified</mat-error>
+        <mat-error *ngIf = "parsForm.hasError('maxlength')">Too long</mat-error> -->
       </textarea>
 
   </mat-form-field>
@@ -43,8 +43,8 @@
         placeholder="Starting at hole #1, enter hole Handicap separated by commas">
         <!-- [errorStateMatcher]="errorMatcher" NOT SURE WHY THIS A PROBLEM FOR THE SPEC FILE-->
         <!-- Mat-error not working ??? -->
-        <mat-error *ngIf = "parsForm.hasError('emailDomain')">Modified</mat-error>
-        <mat-error *ngIf = "parsForm.hasError('maxlength')">Too long</mat-error>
+        <!-- <mat-error *ngIf = "hCapsForm.hasError('emailDomain')">Modified</mat-error>
+        <mat-error *ngIf = "hCapsForm.hasError('maxlength')">Too long</mat-error> -->
       </textarea>
 
   </mat-form-field>
@@ -121,8 +121,11 @@
   </table>
   <div>
       <h4> Warnings:</h4>
-      <p *ngIf="parsForm.hasError('parsLenShort')">Pars expects more than 18 values of 3, 4,or 5 sparated by commas</p>
-      <p *ngIf="parsForm.hasError('parsLenLong')">Pars expects less than 18 values of 3, 4,or 5 sparated by commas</p>
+      <p *ngIf="parsForm.hasError('parsLenShort')">Pars expects more than 18 values of 3, 4,or 5 separated by commas</p>
+      <p *ngIf="parsForm.hasError('parsLenLong')">Pars expects less than 18 values of 3, 4,or 5 separated by commas</p>
       <p *ngIf="parsForm.hasError('parsValue')">Par values should be 3, 4 or 5 separated by commas.</p>
+      <p *ngIf="hCapsForm.hasError('hCapsLenShort')">Handicap expects more than 18 values between 1-18 separated by commas</p>
+      <p *ngIf="hCapsForm.hasError('hCapsLenLong')">Handicap expects less than 18 values between 1-18 separated by commas</p>
+      <p *ngIf="hCapsForm.hasError('hCapsValue')">Handicap values should be 1-18 separated by commas.</p>
 </div>
 </div>

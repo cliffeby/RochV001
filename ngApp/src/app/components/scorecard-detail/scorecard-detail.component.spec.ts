@@ -5,7 +5,7 @@ import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
 import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 
 
-fdescribe('ScorecardDetailComponent', () => {
+describe('ScorecardDetailComponent', () => {
   let component: ScorecardDetailComponent;
   let fixture: ComponentFixture<ScorecardDetailComponent>;
 
@@ -64,10 +64,10 @@ fdescribe('ScorecardDetailComponent', () => {
       .toEqual(['PAR', '1', '1', '1', '1', '1', '1', '1', '1', '1', '9', '2', '2', '2', '2', '2', '2', '2', '2', '2', '18', '27']);
   })
 
-  xit('component method onInitParstoString return an error string', () => {
+  it('component method onInitParstoString return an error string', () => {
     let scorecard = new Scorecard();
-    scorecard.parInputString = "1,1,a1";
-    expect(component.onInitParsString(scorecard)).toEqual(['PAR', '', '0', '0', '0']);
+    scorecard.parInputString = "1,a1,1";
+    expect(component.onInitParsString(scorecard)).toEqual(['PAR', '1', 'a1', '1', '0', '0', '0']);
   })
 
   it('component method onInitHcapstoString return a partial HCAPS string', () => {
@@ -83,10 +83,10 @@ fdescribe('ScorecardDetailComponent', () => {
       .toEqual(['HCAP', '1', '1', '1', '1', '1', '1', '1', '1', '1', '  ', '2', '2', '2', '2', '2', '2', '2', '2', '2']);
   })
 
-  xit('component method onInitHcapstoString return an error string', () => {
+  it('component method onInitHcapstoString return an error string', () => {
     let scorecard = new Scorecard();
-    scorecard.hCapInputString = "1,1,a1";
-    expect(component.onInitHcapsString(scorecard)).toEqual(['HCAPS', '', '0', '0', '0']);
+    scorecard.hCapInputString = "1,a2,1";
+    expect(component.onInitHcapsString(scorecard)).toEqual(['HCAP', '1', 'a2', '1', '  ']);
   })
 
 });

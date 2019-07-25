@@ -59,26 +59,47 @@ export class ScorecardDetailComponent implements OnInit {
     this.scorecardForm = new FormGroup({});
     this.parsForm = new FormControl('', [Validators.required, Validators.maxLength(10), this.parsValidator])
     this.parsForm.setValue(this.scorecard.parInputString);
-    this.hCapsForm = new FormControl('', [Validators.required, Validators.maxLength(10), this.parsValidator])
+    this.hCapsForm = new FormControl('', [Validators.required, Validators.maxLength(10), this.hCapsValidator])
     this.hCapsForm.setValue(this.scorecard.hCapInputString);
   }
   parsValidator(control: FormControl) {
     const condition1 = control.value;
     let parEntry: Number = condition1.substring(condition1.length - 1, condition1.length)
     if (parEntry < 3 || parEntry > 5) {
-      console.log('Condition', condition1, 'Error', condition1.substring(condition1.length - 1, condition1.length));
+      console.log('ConditionP', condition1, 'Error', condition1.substring(condition1.length - 1, condition1.length));
       return { parsValue: { condition: control.get.name } };
     }
     else if (condition1.length < 35) {
-      console.log('ConditionL', condition1.length);
+      console.log('ConditionPL', condition1.length);
       return { parsLenShort: { condition: condition1.length } }
     }
     else if (condition1.length > 36) {
-      console.log('ConditionL', condition1.length);
+      console.log('ConditionPH', condition1.length);
       return { parsLenLong: { condition: condition1.length } }
     }
     else {
-      console.log('Condition', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
+      console.log('ConditionPN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
+      return null;
+    }
+  }
+  hCapsValidator(control: FormControl) {
+    const condition1 = control.value;
+    let hCapEntry: Number = condition1.substring(condition1.length - 2, condition1.length)
+    if (hCapEntry < 1 || hCapEntry > 18) {
+      console.log('ConditionH', condition1, 'Error', condition1.substring(condition1.length - 2, condition1.length));
+      return { hCapsValue: { condition: control.get.name } };
+      // TODO Check for duplicate hCaps entry
+    }
+    else if (condition1.length < 44) {
+      console.log('ConditionHL', condition1.length);
+      return { hCapsLenShort: { condition: condition1.length } }
+    }
+    else if (condition1.length > 45) {
+      console.log('ConditionHH', condition1.length);
+      return { hCapsLenLong: { condition: condition1.length } }
+    }
+    else {
+      console.log('ConditionHN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
       return null;
     }
   }
@@ -134,6 +155,7 @@ export class ScorecardDetailComponent implements OnInit {
     this.scorecard.yards = this.onInitYardsString(this.scorecard);
     this.scorecard.pars = this.onInitParsString(this.scorecard);
     this.scorecard.parInputString = this.parsForm.value;
+    this.scorecard.hCapInputString = this.hCapsForm.value;
     console.log('SCORECARD DETAIL this.scorecard', this.scorecard)
     this.updateScorecardEvent.emit(this.scorecard);
   }
