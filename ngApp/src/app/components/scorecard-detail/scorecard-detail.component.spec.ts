@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from "@angular/forms";
 import { ScorecardDetailComponent } from './scorecard-detail.component';
-import { Scorecard} from '../../models/scorecard';
+import { Scorecard } from '../../models/scorecard';
+import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
+import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
+
 
 fdescribe('ScorecardDetailComponent', () => {
   let component: ScorecardDetailComponent;
@@ -10,12 +12,12 @@ fdescribe('ScorecardDetailComponent', () => {
   beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [ScorecardDetailComponent],
-      imports: [FormsModule]
+      imports: [FormsModule, MatFormFieldModule, ReactiveFormsModule]
     })
       .compileComponents();
   }));
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(ScorecardDetailComponent);
     component = fixture.componentInstance;
 
@@ -42,7 +44,7 @@ fdescribe('ScorecardDetailComponent', () => {
     expect(component.onInitYardsString(scorecard))
       .toEqual(['YARDS', '1', '1', '1', '1', '1', '1', '1', '1', '1', '9', '2', '2', '2', '2', '2', '2', '2', '2', '2', '18', '27']);
   })
-// TODO Handle non-numerics
+  // TODO Handle non-numerics
   it('component method onInitYardstoString return an error string', () => {
     let scorecard = new Scorecard();
     scorecard.yardsInputString = "1,a,1";

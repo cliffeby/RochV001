@@ -1,6 +1,26 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {Scorecard} from "../../models/scorecard";
+import { Component, OnInit, Output, EventEmitter, NgModule } from '@angular/core';
+import { Scorecard } from "../../models/scorecard";
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
+import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 import { ScorecardService } from "../../services/scorecard.service"
+import { NgModel } from '@angular/forms';
+
+
+export class CrossFieldErrorMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return control.dirty && form.invalid;
+  }
+}
+
+@NgModule({
+  imports: [
+    MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, ErrorStateMatcher
+  ],
+  exports: [
+    MatInputModule, MatFormFieldModule
+  ]
+})
 
 @Component({
   selector: 'scorecard-detail',
@@ -21,6 +41,11 @@ export class ScorecardDetailComponent implements OnInit {
   }
 
   scorecard: Scorecard;
+  public scorecardForm: FormGroup;
+  public parsForm: FormControl;
+  public hCapsForm: FormControl;
+  public yardsForm: FormControl;
+  errorMatcher = new CrossFieldErrorMatcher();
 
   private editTitle: boolean = false;
   private updateScorecardEvent = new EventEmitter();
@@ -31,6 +56,31 @@ export class ScorecardDetailComponent implements OnInit {
     this.scorecard.yards = this.onInitYardsString(this.scorecard);
     this.scorecard.pars = this.onInitParsString(this.scorecard);
     console.log('Scorecard', this.scorecard)
+    this.scorecardForm = new FormGroup({});
+    this.parsForm = new FormControl('', [Validators.required, Validators.maxLength(10), this.parsValidator])
+    this.parsForm.setValue(this.scorecard.parInputString);
+    this.hCapsForm = new FormControl('', [Validators.required, Validators.maxLength(10), this.parsValidator])
+    this.hCapsForm.setValue(this.scorecard.hCapInputString);
+  }
+  parsValidator(control: FormControl) {
+    const condition1 = control.value;
+    let parEntry: Number = condition1.substring(condition1.length - 1, condition1.length)
+    if (parEntry < 3 || parEntry > 5) {
+      console.log('Condition', condition1, 'Error', condition1.substring(condition1.length - 1, condition1.length));
+      return { parsValue: { condition: control.get.name } };
+    }
+    else if (condition1.length < 35) {
+      console.log('ConditionL', condition1.length);
+      return { parsLenShort: { condition: condition1.length } }
+    }
+    else if (condition1.length > 36) {
+      console.log('ConditionL', condition1.length);
+      return { parsLenLong: { condition: condition1.length } }
+    }
+    else {
+      console.log('Condition', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
+      return null;
+    }
   }
 
   onInitYardsString(scorecard: Scorecard) {
@@ -58,7 +108,7 @@ export class ScorecardDetailComponent implements OnInit {
       back9Par += Number(pars[j]);
     }
     let total18Par = front9Par + back9Par;
-    console.log("onInitParsStrings",scorecard.parInputString, pars);
+    console.log("onInitParsStrings", scorecard.parInputString, pars);
     pars.splice(10, 0, String(front9Par));
     pars.splice(20, 0, String(back9Par));
     pars.splice(21, 0, String(total18Par));
@@ -66,7 +116,7 @@ export class ScorecardDetailComponent implements OnInit {
     return pars;
   }
   onInitHcapsString(scorecard: Scorecard) {
-    let hCaps: string[] = ('HCAP,' + this.scorecard.hCapInputString).split(',');
+    let hCaps: string[] = ('HCAP,' + scorecard.hCapInputString).split(',');
     hCaps.splice(10, 0, '  ');
     return hCaps;
   }
@@ -83,6 +133,7 @@ export class ScorecardDetailComponent implements OnInit {
     this.scorecard.hCaps = this.onInitHcapsString(this.scorecard);
     this.scorecard.yards = this.onInitYardsString(this.scorecard);
     this.scorecard.pars = this.onInitParsString(this.scorecard);
+    this.scorecard.parInputString = this.parsForm.value;
     console.log('SCORECARD DETAIL this.scorecard', this.scorecard)
     this.updateScorecardEvent.emit(this.scorecard);
   }
