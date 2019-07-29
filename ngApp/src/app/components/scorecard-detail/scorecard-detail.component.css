@@ -1,0 +1,16 @@
+p {
+  font-family: Lato;
+}
+.detail-form {
+  min-width: 150px;
+  max-width: 1500px;
+  width: 100%;
+}
+
+.detail-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}

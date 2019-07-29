@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ScorecardDetailComponent } from './scorecard-detail.component';
 import { Scorecard } from '../../models/scorecard';
 import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
+import { ControlMessagesComponent } from '../../helpers/control-messages/control-messages.component'
 import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 
 
@@ -11,7 +12,7 @@ describe('ScorecardDetailComponent', () => {
 
   beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ScorecardDetailComponent],
+      declarations: [ScorecardDetailComponent, ControlMessagesComponent],
       imports: [FormsModule, MatFormFieldModule, ReactiveFormsModule]
     })
       .compileComponents();

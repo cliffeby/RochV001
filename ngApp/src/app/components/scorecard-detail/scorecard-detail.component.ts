@@ -1,21 +1,23 @@
 import { Component, OnInit, Output, EventEmitter, NgModule } from '@angular/core';
 import { Scorecard } from "../../models/scorecard";
 import { MatInputModule } from '@angular/material/input'
-import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
-import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
+import { MatFormFieldModule, ErrorStateMatcher} from '@angular/material'
+import { MatTableModule } from '@angular/material/table'
+import { MatTableDataSource } from '@angular/material'
+import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 import { ScorecardService } from "../../services/scorecard.service"
 import { NgModel } from '@angular/forms';
+import { ValidationService } from '../../services/validation.service';
 
-
-export class CrossFieldErrorMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return control.dirty && form.invalid;
-  }
-}
+// export class CrossFieldErrorMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+//     return control.dirty && form.invalid;
+//   }
+// }
 
 @NgModule({
   imports: [
-    MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, ErrorStateMatcher
+    MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, ErrorStateMatcher, MatTableModule, MatTableDataSource
   ],
   exports: [
     MatInputModule, MatFormFieldModule
@@ -30,79 +32,50 @@ export class CrossFieldErrorMatcher implements ErrorStateMatcher {
   outputs: ['updateScorecardEvent', 'deleteScorecardEvent']
 })
 export class ScorecardDetailComponent implements OnInit {
-  // @Output() updateScorecardEvent = new EventEmitter<Scorecard>();
-  // scorecard: any;
 
-  // private editTitle: boolean = false;
 
-  // private deleteScorecardEvent = new EventEmitter();
-
-  constructor() {
+  constructor(private fb: FormBuilder) {
+    this.scorecardForm1 = fb.group({
+      name: ['', [Validators.required, ValidationService.nameValidator]],
+      rating: '',
+      slope: '',
+      parsInput: [''],
+      hCapsInput: [''],
+      yardsInput: ['']
+    })
   }
 
   scorecard: Scorecard;
-  public scorecardForm: FormGroup;
-  public parsForm: FormControl;
-  public hCapsForm: FormControl;
-  public yardsForm: FormControl;
-  errorMatcher = new CrossFieldErrorMatcher();
+  scorecardPreview: string[][];
+  displayedColumns: string[];
+  temppars: string = '';
+
+  public scorecardForm1: FormGroup;
+  // errorMatcher = new CrossFieldErrorMatcher();
 
   private editTitle: boolean = false;
   private updateScorecardEvent = new EventEmitter();
   private deleteScorecardEvent = new EventEmitter();
 
   ngOnInit() {
+    this.displayedColumns= ['name', '1', '2','3','4','5','6','7','8','9', 'front'];
     this.scorecard.hCaps = this.onInitHcapsString(this.scorecard);
     this.scorecard.yards = this.onInitYardsString(this.scorecard);
     this.scorecard.pars = this.onInitParsString(this.scorecard);
-    console.log('Scorecard', this.scorecard)
-    this.scorecardForm = new FormGroup({});
-    this.parsForm = new FormControl('', [Validators.required, Validators.maxLength(10), this.parsValidator])
-    this.parsForm.setValue(this.scorecard.parInputString);
-    this.hCapsForm = new FormControl('', [Validators.required, Validators.maxLength(10), this.hCapsValidator])
-    this.hCapsForm.setValue(this.scorecard.hCapInputString);
+    this.scorecardPreview = this.onInitScorecardPreview(this.scorecard);
+    console.log('Scorecard', this.scorecard, this.scorecardPreview)
+    this.temppars = JSON.stringify(this.scorecard.pars);
+    console.log('temppars', this.temppars)
+    this.scorecardForm1 = this.fb.group({
+      name: [this.scorecard.name, [Validators.required, Validators.minLength(5)]],
+      rating: [this.scorecard.rating],
+      slope: [this.scorecard.slope],
+      parsInput: [this.scorecard.parInputString, [Validators.required, ValidationService.parsValidator]],
+      hCapsInput: [this.scorecard.hCapInputString, [Validators.required, ValidationService.hCapsValidator]],
+      yardsInput: [this.scorecard.yardsInputString, [Validators.required, ValidationService.yardsValidator]]
+    })
   }
-  parsValidator(control: FormControl) {
-    const condition1 = control.value;
-    let parEntry: Number = condition1.substring(condition1.length - 1, condition1.length)
-    if (parEntry < 3 || parEntry > 5) {
-      console.log('ConditionP', condition1, 'Error', condition1.substring(condition1.length - 1, condition1.length));
-      return { parsValue: { condition: control.get.name } };
-    }
-    else if (condition1.length < 35) {
-      console.log('ConditionPL', condition1.length);
-      return { parsLenShort: { condition: condition1.length } }
-    }
-    else if (condition1.length > 36) {
-      console.log('ConditionPH', condition1.length);
-      return { parsLenLong: { condition: condition1.length } }
-    }
-    else {
-      console.log('ConditionPN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
-      return null;
-    }
-  }
-  hCapsValidator(control: FormControl) {
-    const condition1 = control.value;
-    let hCapEntry: Number = condition1.substring(condition1.length - 2, condition1.length)
-    if (hCapEntry < 1 || hCapEntry > 18) {
-      console.log('ConditionH', condition1, 'Error', condition1.substring(condition1.length - 2, condition1.length));
-      return { hCapsValue: { condition: control.get.name } };
-      // TODO Check for duplicate hCaps entry
-    }
-    else if (condition1.length < 44) {
-      console.log('ConditionHL', condition1.length);
-      return { hCapsLenShort: { condition: condition1.length } }
-    }
-    else if (condition1.length > 45) {
-      console.log('ConditionHH', condition1.length);
-      return { hCapsLenLong: { condition: condition1.length } }
-    }
-    else {
-      console.log('ConditionHN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
-      return null;
-    }
-  }
+
 
   onInitYardsString(scorecard: Scorecard) {
     let front9Yards: number = 0, back9Yards: number = 0;
@@ -141,6 +114,24 @@ export class ScorecardDetailComponent implements OnInit {
     hCaps.splice(10, 0, '  ');
     return hCaps;
   }
+  onInitScorecardPreview(scorecard: Scorecard){
+     function transpose(matrix) {
+       return matrix[0].map((col, i) => matrix.map(row => row[i]));
+     }
+     let preview: string[][];
+     preview = [[]];
+
+       for (var j = 0; j < this.displayedColumns.length; j++) {
+         preview.push(["{'PAR':'" + this.scorecard.pars[j] + "','HCAP':'" + this.scorecard.hCaps[j] + "','YARDS':'" +this.scorecard.yards[j]+"'},"])
+       }
+    preview.shift();
+    preview.shift();
+    preview = transpose(preview);
+
+
+     console.log('PREVIWE', preview);
+     return preview;
+   }
 
   onTitleClick() {
     this.editTitle = true;
@@ -151,11 +142,12 @@ export class ScorecardDetailComponent implements OnInit {
   }
 
   updateScorecard() {
-    this.scorecard.hCaps = this.onInitHcapsString(this.scorecard);
-    this.scorecard.yards = this.onInitYardsString(this.scorecard);
-    this.scorecard.pars = this.onInitParsString(this.scorecard);
-    this.scorecard.parInputString = this.parsForm.value;
-    this.scorecard.hCapInputString = this.hCapsForm.value;
+    this.scorecard.name = this.scorecardForm1.controls['name'].value
+    this.scorecard.rating = this.scorecardForm1.controls['rating'].value
+    this.scorecard.slope = this.scorecardForm1.controls['slope'].value
+    this.scorecard.parInputString = this.scorecardForm1.controls['parsInput'].value
+    this.scorecard.hCapInputString = this.scorecardForm1.controls['hCapsInput'].value
+    this.scorecard.yardsInputString = this.scorecardForm1.controls['yardsInput'].value
     console.log('SCORECARD DETAIL this.scorecard', this.scorecard)
     this.updateScorecardEvent.emit(this.scorecard);
   }

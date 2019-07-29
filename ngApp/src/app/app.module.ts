@@ -45,6 +45,10 @@ import { MaterialModule } from './material.module';
 import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
+import { ValidationService } from './services/validation.service';
+import { ControlMessagesComponent } from './helpers/control-messages/control-messages.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material';
 // import { MemberBookComponent } from './component/member-book/member-book.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -79,10 +83,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AAASanityComponent,
     MatchPairComponent,
     CounterComponent,
+    ControlMessagesComponent
     // MemberBookComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
@@ -92,6 +98,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MaterialModule,
     MatInputModule,
     MatFormFieldModule
+
   ],
   exports: [
     MaterialModule,
@@ -108,6 +115,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthGuardService,
     ScopeGuardService,
     AuthService,
+    ValidationService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
