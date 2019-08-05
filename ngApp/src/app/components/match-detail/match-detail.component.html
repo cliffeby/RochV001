@@ -30,3 +30,28 @@
     </div>
   </div>
 </div>
+<form class="detail-form" [formGroup]="matchDetailForm">
+
+    <mat-form-field class = "detail-full-width">
+      <input matInput type="text" placeholder=" Name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field class = "detail-full-width">
+       <input matInput [matDatepicker] = "datep" placeholder="Date">
+      <mat-datepicker-toggle matSuffix
+                [for] = "datep" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #datep></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Course</mat-label>
+        <mat-select [(value)]="match.course">
+          <mat-option><option *ngFor = "let n of scorecards" [value] = n._id>
+            {{ n.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    {{match.course}}  COURSE
+    <br>
+    <button mat-raised-button color="primary" id="btnUpdate" (click)="updateMatch()" class="btn btn-primary">Update</button>
+    <button mat-raised-button color="warn" id="btnDelete" (click)="deleteMatch()" class="btn btn-danger">Delete</button>
+</form>

@@ -3,10 +3,12 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import { AuthHttp } from 'angular2-jwt';
-import { AuthService } from '../../../services/auth.service';
-import 'rxjs/add/observable/throw';
+// import 'rxjs/add/operator/map';
+// import { AuthHttp } from 'angular2-jwt';
+// import { AuthService } from '../../../services/auth.service';
+// import 'rxjs/add/observable/throw';
+// import { strictEqual } from 'assert';
+// import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 
 
 export interface User {
@@ -17,10 +19,10 @@ export interface User {
 @Injectable()
 export class AAAService {
 
-  private _server = 'http://localhost:3000';
+   _server = 'http://localhost:3000';
 
-  private Url = '/api/mocks';
-  private UrlId = this.Url + '/1';
+   Url = '/api/mocks';
+   UrlId = this.Url + '/1';
 
   // Change the auth service to standard Http
   constructor( private _authHttp: HttpClient) { }
@@ -32,6 +34,9 @@ export class AAAService {
   // getAuthUsers() {
   //   return this._realAuthHttp.get(this._server + this.Url);
   // }
+  getSingleUser(id: number) {
+    return this._authHttp.get<User>(this._server + this.Url + this.UrlId);
+  }
 
   addUser(user: User) {
     return this._authHttp.post(this._server + this.Url, user);

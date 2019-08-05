@@ -3,8 +3,14 @@ import {AAAService, User} from "./shared/mockhttp.service";
 import 'rxjs/add/operator/map';
 import { AuthService } from '../../services/auth.service';
 import { AuthHttp } from 'angular2-jwt';
+import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from "@angular/router/testing";
+
+export interface User {
+  login: string;
+  _id: string;
+}
 
 describe('Mock AAAService', () => {
   let injector: TestBed;
@@ -12,50 +18,56 @@ describe('Mock AAAService', () => {
   let httpMock: HttpTestingController;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [AAAService, AuthService, AuthHttp]
+      imports: [HttpClientTestingModule],
+      providers: [AAAService]
     });
     injector = getTestBed();
-    service = injector.get(AAAService);
-    httpMock = injector.get(HttpTestingController);
+    service = TestBed.get(AAAService);
+    httpMock = TestBed.get(HttpTestingController);
   })
   afterEach(() => {
-    httpMock.verify();
   });
   // tests here
   describe('#getUsers<User>', () => {
-    it('should return method of GET', () => {
-      const dummyUsers = [
-        {login: 'John'},
-        {login: 'Doe'}
+    xit('should return method of GET', fakeAsync(() => {
+      let dummyUsers: User[];
+      // let users: User[];
+      dummyUsers =[
+        {login: 'John', _id: '1'},
+        {login: 'Doe', _id: '2'}
       ];
-      service.getUsers().subscribe(users => {
-      });
+      service.getUsers();
+
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
-      expect(req.request.method).toBe("GET");
+      console.log("URL", req.request.url);
+      expect(req.request.method).toEqual("GET");
+
       req.flush(dummyUsers);
-    });
+      tick();
+      expect(service.getUsers.length).toBe(1);
+      httpMock.verify();
+
+    }));
 
     it('should return an Observable User Array of length 2 ', () => {
-      const dummyUsers = [
-        {login: 'John'},
-        {login: 'Doe'}
+      let dummyUsers: User[] = [
+        { login: 'John', _id: '1' },
+        { login: 'Doe', _id: '2' }
       ];
-      service.getUsers().subscribe(users => {
+      service.getUsers().subscribe((data)=> {
         // see comment below
-        this.users = users;
-        expect(this.users.length).toBe(2);
-      });
+        // this.users = users;
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
+      expect(data.length).toBe(1);
       req.flush(dummyUsers);
     });
-
+    });
     it('should return an Observable Users of John and Doe', () => {
       const dummyUsers = [
-        {login: 'John'},
-        {login: 'Doe'}
+        { login: 'John' },
+        { login: 'Doe' }
       ];
       service.getUsers().subscribe(users => {
         expect(users).toEqual(dummyUsers);
@@ -64,7 +76,22 @@ describe('Mock AAAService', () => {
       const req = httpMock.expectOne(url);
       req.flush(dummyUsers);
     });
+
+  it('should return an Observable User of Luke', () => {
+
+    service.getSingleUser(1).subscribe(users => {
+      expect(users.login).toBe("Luke");
+
+    const url = ('http://localhost:3000/api/mocks')
+    const req = httpMock.expectOne(url);
+    console.log('REQ URL', req.request.url);
+    expect(req.request.method).toBe('GET');
+    req.flush({login: "Luke"});
+    httpMock.verify();
   });
+  });
+});
+
   describe('#postUser<User>', () => {
     it('should return method of Post', () => {
       const dummyUser =
@@ -73,8 +100,10 @@ describe('Mock AAAService', () => {
       });
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
+
       expect(req.request.method).toBe("POST");
       req.flush(dummyUser);
+      httpMock.verify();
     });
 
     it('should return an Observable User Id to equal 1', () => {
@@ -91,14 +120,14 @@ describe('Mock AAAService', () => {
         // it becomes necessary to manually arrange access to the surrounding this,
         // for example by copying it into a local variable:
         // https://aigeec.com/angularjs-2-do-something-when-my-observable-is-complete/
-        this.users = users;
-        console.log('USERS in POST', users);
-        expect(this.users._id).toEqual('1');
-      });
+        // this.users = users;
+
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
       expect(req.request.method).toBe("POST");
       req.flush(dummyUsers);
+        httpMock.verify();
+    });
     });
 
     it('should return an Observable User John Doe', () => {
@@ -110,6 +139,7 @@ describe('Mock AAAService', () => {
       const url = 'http://localhost:3000/api/mocks'
       const req = httpMock.expectOne(url);
       req.flush(dummyUsers);
+      httpMock.verify();
     });
   });
   describe('#putUser<User>', () => {
@@ -122,6 +152,7 @@ describe('Mock AAAService', () => {
       const req = httpMock.expectOne(url);
       expect(req.request.method).toBe("PUT");
       req.flush(dummyUser);
+      httpMock.verify();
     });
 
     it('should return an Observable User Object', () => {
@@ -129,11 +160,13 @@ describe('Mock AAAService', () => {
       updateUser = {login: 'Jimmy Doe', _id: '1'};
       service.updateUser(updateUser).subscribe(users => {
         this.users = users;
-        expect(this.users.login).toEqual('Jimmy Doe');
-      });
+        expect(this.users.login).toEqual('Jimmy Doe1');
+        console.log("LOGIN TEST JIMMY DOE", this.users);
       const url = 'http://localhost:3000/api/mocks/1'
       const req = httpMock.expectOne(url);
       req.flush(updateUser);
+        httpMock.verify();
+    });
     });
 
     it('should return an Observable User John Doe', () => {
@@ -145,6 +178,7 @@ describe('Mock AAAService', () => {
       const req = httpMock.expectOne(url);
       expect(req.request.method).toBe("PUT");
       req.flush(dummyUser);
+      httpMock.verify();
     });
   });
   describe('#deleteUser<User>', () => {
@@ -156,17 +190,20 @@ describe('Mock AAAService', () => {
       const req = httpMock.expectOne(url);
       expect(req.request.method).toBe("DELETE");
       req.flush(dummyUser);
+      httpMock.verify();
     });
 
     it('should return an Observable User Array of length 1 ', () => {
-      const dummyUser = {login: 'Jimmy Doe', _id: '2'};
-      service.deleteUser(dummyUser).subscribe(users => {
-        this.users = users;
-        expect(this.users.login).toEqual('Jimmy Doe');
-      });
+      const dummyUser = {login: 'Jimmy Doe11', _id: '2'};
+      service.deleteUser(dummyUser).subscribe(data => {
+        this.data = data;
+        expect(this.data.login).toEqual('Jimmy Doe');
+
       const url = 'http://localhost:3000/api/mocks/1'
       const req = httpMock.expectOne(url);
       req.flush(dummyUser);
+      httpMock.verify();
+    });
     });
 
     it('should return an Observable User John Doe ', () => {
@@ -177,6 +214,7 @@ describe('Mock AAAService', () => {
       const url = 'http://localhost:3000/api/mocks/1'
       const req = httpMock.expectOne(url);
       req.flush(dummyUsers);
+      httpMock.verify();
     });
   });
 });

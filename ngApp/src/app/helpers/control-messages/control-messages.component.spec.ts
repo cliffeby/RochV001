@@ -9,13 +9,14 @@ export class MockValidationService {
   };
 }
 
+let control = new FormControl();
+
 describe('ControlMessagesComponent', () => {
   let component: ControlMessagesComponent;
   let fixture: ComponentFixture<ControlMessagesComponent>;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [ValidationService],
       declarations: [ControlMessagesComponent],
       providers: [
         { provide: ValidationService, useclass: MockValidationService }
@@ -27,6 +28,7 @@ describe('ControlMessagesComponent', () => {
   beforeEach(async () => {
     fixture = TestBed.createComponent(ControlMessagesComponent);
     component = fixture.componentInstance;
+    component.control = control;
     fixture.detectChanges();
     let _validationservice = new MockValidationService();
   });

@@ -66,7 +66,6 @@ describe('Match Detail Comp and Service: My: TestBed', () => {
   it('should create an injected instance', inject([MatchService], (injectedService: MatchService) => {
     expect(injectedService).toBeDefined();
   }));
-  console.log('MatchDetailComponent', component)
   it('should be created', () => {
     expect(component).toBeTruthy();
   });

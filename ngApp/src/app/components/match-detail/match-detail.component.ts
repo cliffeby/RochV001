@@ -1,7 +1,23 @@
-import {Component, OnInit, EventEmitter} from '@angular/core';
+import {Component, OnInit, EventEmitter, NgModule} from '@angular/core';
 import { Scorecard } from "../../models/scorecard";
 import { ScorecardService } from "../../services/scorecard.service"
 import {IMyDpOptions} from 'mydatepicker';
+import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { NgModel } from '@angular/forms';
+import { ValidationService } from '../../services/validation.service';
+import { MatInputModule, MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@NgModule({
+  imports: [
+    MatInputModule, MatFormFieldModule, ReactiveFormsModule,
+    BrowserAnimationsModule, FormsModule, MatSelectModule
+  ],
+  exports: [
+    MatInputModule, MatFormFieldModule, MatSelectModule
+  ]
+})
 
 @Component({
   selector: 'match-detail',
@@ -12,6 +28,8 @@ import {IMyDpOptions} from 'mydatepicker';
 })
 export class MatchDetailComponent implements OnInit {
   match: any;
+  selected: any;
+  fb: FormBuilder;
   scorecards: Array<Scorecard>;
   private myDatePickerOptions: IMyDpOptions = {
     // other options... see https://github.com/kekeh/mydatepicker
@@ -25,6 +43,7 @@ export class MatchDetailComponent implements OnInit {
   private editTitle: boolean = false;
   private updateMatchEvent = new EventEmitter();
   private deleteMatchEvent = new EventEmitter();
+  public matchDetailForm: FormGroup;
 
   constructor( private _scorecardservice: ScorecardService) {
   }
@@ -37,6 +56,12 @@ export class MatchDetailComponent implements OnInit {
       var dateArray = this.match.datePlayed.split('-');
       this.model = { date: { year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2]) } };
     }
+    this.selected = this.match.course;
+    this.matchDetailForm = this.fb.group({
+      name: [this.match.name, [Validators.required, Validators.minLength(5)]],
+      date: [this.match.date],
+      course: [this.match.course]
+    })
   }
 
   updateMatch() {
@@ -45,6 +70,9 @@ export class MatchDetailComponent implements OnInit {
     this._scorecardservice.getScorecard(this.match.scorecardId)
       .subscribe((resSCData) => this.match.scName = resSCData.name);
     this.updateMatchEvent.emit(this.match);
+    this.match.name = this.matchDetailForm.controls['name'].value
+    this.match.name = this.matchDetailForm.controls['date'].value
+    this.match.name = this.matchDetailForm.controls['course'].value
     }
 
   deleteMatch() {

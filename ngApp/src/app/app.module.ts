@@ -44,7 +44,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule, FormGroupDirective, NgForm } from '@angular/forms'
-import { MatFormFieldModule, ErrorStateMatcher } from '@angular/material'
+import { MatFormFieldModule, MatDatepickerModule, MatSelectModule } from '@angular/material'
 import { ValidationService } from './services/validation.service';
 import { ControlMessagesComponent } from './helpers/control-messages/control-messages.component';
 import { MatTableModule } from '@angular/material/table';
@@ -83,7 +83,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AAASanityComponent,
     MatchPairComponent,
     CounterComponent,
-    ControlMessagesComponent
+    ControlMessagesComponent,
+    // BrowserAnimationsModule
     // MemberBookComponent
   ],
   imports: [
@@ -97,7 +98,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     NoopAnimationsModule,
     MaterialModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatSelectModule
+
+
 
   ],
   exports: [

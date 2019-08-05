@@ -12,6 +12,7 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule, FormGroupDirec
 import { ControlMessagesComponent } from '../../helpers/control-messages/control-messages.component';
 import { format } from 'url';
 
+
 // Mock our Auth service
 export class MockAuthService {
   isAuthenticated() {
@@ -23,7 +24,7 @@ export class MockAuthHttp {
   get(){}
 };
 export class MockScorecardService {
-  getScorecards(){};
+  getScorecards(){return true};
 };
 
 describe('ScorecardsComponent', () => {
@@ -48,8 +49,9 @@ describe('ScorecardsComponent', () => {
   beforeEach(async() => {
     fixture = TestBed.createComponent(ScorecardsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     let _scorecardservice = new MockScorecardService();
+    fixture.detectChanges();
+
   });
 
   it('should be created ', () => {
