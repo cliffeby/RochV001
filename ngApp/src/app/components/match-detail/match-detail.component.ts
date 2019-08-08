@@ -1,5 +1,6 @@
 import {Component, OnInit, EventEmitter, NgModule} from '@angular/core';
 import { Scorecard } from "../../models/scorecard";
+import { Match } from "../../models/match";
 import { ScorecardService } from "../../services/scorecard.service"
 import {IMyDpOptions} from 'mydatepicker';
 import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
@@ -27,9 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   outputs: ['updateMatchEvent', 'deleteMatchEvent']
 })
 export class MatchDetailComponent implements OnInit {
-  match: any;
+  match: Match;
   selected: any;
-  fb: FormBuilder;
+  selectedCourse: any;
   scorecards: Array<Scorecard>;
   private myDatePickerOptions: IMyDpOptions = {
     // other options... see https://github.com/kekeh/mydatepicker
@@ -44,8 +45,14 @@ export class MatchDetailComponent implements OnInit {
   private updateMatchEvent = new EventEmitter();
   private deleteMatchEvent = new EventEmitter();
   public matchDetailForm: FormGroup;
+  // course = new FormControl('', [Validators.required]);
 
-  constructor( private _scorecardservice: ScorecardService) {
+  constructor( private _scorecardservice: ScorecardService, private fb: FormBuilder) {
+    this.matchDetailForm = fb.group({
+      name:"",
+      date: "",
+      course: ""
+    })
   }
 
   ngOnInit() {
@@ -56,23 +63,36 @@ export class MatchDetailComponent implements OnInit {
       var dateArray = this.match.datePlayed.split('-');
       this.model = { date: { year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2]) } };
     }
-    this.selected = this.match.course;
     this.matchDetailForm = this.fb.group({
       name: [this.match.name, [Validators.required, Validators.minLength(5)]],
-      date: [this.match.date],
-      course: [this.match.course]
+      course: [this.match.scorecardId],
+      date: [this.match.datePlayed]
     })
+    // this.selected = this.match.scorecardId;
+    this.selectedCourse = this.match.scorecardId;
   }
 
   updateMatch() {
+    let scorecard : any;
     //TODO DATE PLAYED is not stored as a DATE object on client
     this.match.datePlayed = (this.model.date.year+'-'+this.model.date.month+'-'+this.model.date.day);
     this._scorecardservice.getScorecard(this.match.scorecardId)
       .subscribe((resSCData) => this.match.scName = resSCData.name);
+
+    this.match.name = this.matchDetailForm.controls['name'].value;
+    this.match.datePlayed = this.matchDetailForm.controls['date'].value;
+    // this.match.scorecardId = this.matchDetailForm.controls['course'].value;
+    this.match.scorecardId = this.matchDetailForm.controls['course'].value;
+    console.log('SELESCTED', this .selectedCourse, this.match.scorecardId,
+                this.matchDetailForm.controls['course'].value, this.match);
+    if (this.match.scorecardId) {
+      this._scorecardservice.getScorecard(this.match.scorecardId)
+        .subscribe(resSCData => {
+          scorecard = resSCData;
+          this.match.scName = scorecard.name;
+        });
+      }
     this.updateMatchEvent.emit(this.match);
-    this.match.name = this.matchDetailForm.controls['name'].value
-    this.match.name = this.matchDetailForm.controls['date'].value
-    this.match.name = this.matchDetailForm.controls['course'].value
     }
 
   deleteMatch() {

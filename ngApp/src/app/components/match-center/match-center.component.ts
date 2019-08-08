@@ -145,6 +145,11 @@ export class MatchCenterComponent implements OnInit {
   newMatch() {
 
     console.log(" Add match")
+//  Set default course on match???
+    // of(this.getOrders()).subscribe(orders => {
+    //   this.orders = orders;
+    //   this.form.controls.orders.patchValue(this.orders[0].id);
+    // });
 
     this.match = new Match();
     this.hidenewMatch = false;
