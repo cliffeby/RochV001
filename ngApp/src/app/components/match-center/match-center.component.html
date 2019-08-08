@@ -1,5 +1,4 @@
 <div class="row">
-  {{hidenewMatch}}
   <div *ngIf="!hidenewMatch">
     <h2>New Match</h2>
     <form #form="ngForm" (ngSubmit)="onSubmitAddMatch(form.value)">

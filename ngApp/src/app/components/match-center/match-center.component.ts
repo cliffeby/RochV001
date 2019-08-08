@@ -165,16 +165,19 @@ export class MatchCenterComponent implements OnInit {
     this._matchservice.addMatch(match)
       .subscribe(resNewMatch => {
         // TODO Populate SCName on match list Not working
-        this._scorecardservice.getScorecard(this.match.scorecardId)
-          .subscribe((resSCData) => this.match.scName = resSCData.name);
-        // TODO push to top of heap
-        this.matches.push(resNewMatch);
+        this._scorecardservice.getScorecard(match.scorecardId)
+          .subscribe((resSCData) => match.scName = resSCData.name);
+        match.dateFlag = moment(this.myday).subtract(1, 'days').isBefore(match.datePlayed);
+        console.log('This match oUAddEvent', match);
+        this.matches.unshift(match);
         this.hidenewMatch = true;
         this.selectedMatch = null;
       });
   }
 
   onUpdateMatchEvent(match: any) {
+    match.dateFlag = moment(this.myday).subtract(1, 'days').isBefore(match.datePlayed);
+    console.log('This match onUpdateEvent', match);
     this._matchservice.updateMatch(match)
       .subscribe(resUpdatedMatch => match = resUpdatedMatch);
     this.selectedMatch = null;
