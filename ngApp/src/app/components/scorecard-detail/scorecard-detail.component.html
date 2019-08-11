@@ -32,8 +32,14 @@
              formControlName="yardsInput">
             </textarea>
         </mat-form-field>
-        <button mat-raised-button color="primary" id="btnUpdate" (click)="updateScorecard()" class="btn btn-primary">Update</button>
-        <button mat-raised-button color="warn" id="btnDelete" (click)="deleteScorecard()" class="btn btn-danger">Delete</button>
+        <div class = 'button-space'>
+        <button *ngIf="scorecard._id" mat-raised-button color="primary" id="btnUpdate" (click)="updateScorecard()" class="btn btn-primary">Update</button>
+        <button *ngIf="scorecard._id"mat-raised-button color="warn" id="btnDelete" (click)="deleteScorecard()" class="btn btn-danger">Delete</button>
+        <button *ngIf="!scorecard._id" mat-raised-button color="primary" id="btnAdd" (click)="addScorecard()">Add</button>
+        <button mat-raised-button color="basic" id="btnCancel" routerLink = "../">Cancel</button>
+        </div>
+        <p></p>
+        <p></p>
   </form>
 
   <table class="stripe row-border order-column" cellspacing="0" width="35%">
@@ -48,15 +54,15 @@
     <th style = "text-align: center;">8</th>
     <th style = "text-align: center;">9</th>
     <th style = "text-align: center;">Front</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
-    <th style = "text-align: center;">2</th>
+    <th style = "text-align: center;">10</th>
+    <th style = "text-align: center;">11</th>
+    <th style = "text-align: center;">12</th>
+    <th style = "text-align: center;">13</th>
+    <th style = "text-align: center;">14</th>
+    <th style = "text-align: center;">15</th>
+    <th style = "text-align: center;">16</th>
+    <th style = "text-align: center;">17</th>
+    <th style = "text-align: center;">18</th>
     <th style = "text-align: center;">Back</th>
     <th style = "text-align: center;">Total</th>
     <tr md-row md-auto-select >
@@ -77,7 +83,6 @@
   </table>
   <div>
       <h4> Warnings:</h4>
-
       <control-messages [control] = "scorecardForm1.controls['name']"></control-messages>
       <control-messages [control] = "scorecardForm1.controls['parsInput']"></control-messages>
       <control-messages [control] = "scorecardForm1.controls['hCapsInput']"></control-messages>

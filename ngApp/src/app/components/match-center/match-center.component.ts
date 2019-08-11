@@ -169,7 +169,7 @@ export class MatchCenterComponent implements OnInit {
           .subscribe((resSCData) => match.scName = resSCData.name);
         match.dateFlag = moment(this.myday).subtract(1, 'days').isBefore(match.datePlayed);
         console.log('This match oUAddEvent', match);
-        this.matches.unshift(match);
+        this.matches.unshift(match); //unshift pushes match to matches[0] - temporarily is first on list
         this.hidenewMatch = true;
         this.selectedMatch = null;
       });

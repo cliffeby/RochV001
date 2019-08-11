@@ -9,12 +9,6 @@ import { ScorecardService } from "../../services/scorecard.service"
 import { NgModel } from '@angular/forms';
 import { ValidationService } from '../../services/validation.service';
 
-// export class CrossFieldErrorMatcher implements ErrorStateMatcher {
-//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-//     return control.dirty && form.invalid;
-//   }
-// }
-
 @NgModule({
   imports: [
     MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, ErrorStateMatcher, MatTableModule, MatTableDataSource
@@ -29,10 +23,10 @@ import { ValidationService } from '../../services/validation.service';
   templateUrl: './scorecard-detail.component.html',
   styleUrls: ['./scorecard-detail.component.css'],
   inputs: ['scorecard'],
-  outputs: ['updateScorecardEvent', 'deleteScorecardEvent']
+  outputs: ['updateScorecardEvent', 'deleteScorecardEvent', 'submitAddScorecardEvent']
 })
-export class ScorecardDetailComponent implements OnInit {
 
+export class ScorecardDetailComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.scorecardForm1 = fb.group({
@@ -46,26 +40,23 @@ export class ScorecardDetailComponent implements OnInit {
   }
 
   scorecard: Scorecard;
-  scorecardPreview: string[][];
-  displayedColumns: string[];
-  temppars: string = '';
 
   public scorecardForm1: FormGroup;
-  // errorMatcher = new CrossFieldErrorMatcher();
-
-  private editTitle: boolean = false;
   private updateScorecardEvent = new EventEmitter();
   private deleteScorecardEvent = new EventEmitter();
+  private submitAddScorecardEvent = new EventEmitter();
 
   ngOnInit() {
-    this.displayedColumns= ['name', '1', '2','3','4','5','6','7','8','9', 'front'];
+    if (this.scorecard == null) {
+      this.scorecard = new Scorecard();
+      this.scorecard.parInputString = '';
+      this.scorecard.hCapInputString = '';
+      this.scorecard.yardsInputString = '';
+    }
     this.scorecard.hCaps = this.onInitHcapsString(this.scorecard);
     this.scorecard.yards = this.onInitYardsString(this.scorecard);
     this.scorecard.pars = this.onInitParsString(this.scorecard);
-    this.scorecardPreview = this.onInitScorecardPreview(this.scorecard);
-    console.log('Scorecard', this.scorecard, this.scorecardPreview)
-    this.temppars = JSON.stringify(this.scorecard.pars);
-    console.log('temppars', this.temppars)
+
     this.scorecardForm1 = this.fb.group({
       name: [this.scorecard.name, [Validators.required, Validators.minLength(5)]],
       rating: [this.scorecard.rating],
@@ -75,7 +66,6 @@ export class ScorecardDetailComponent implements OnInit {
       yardsInput: [this.scorecard.yardsInputString, [Validators.required, ValidationService.yardsValidator]]
     })
   }
-
 
   onInitYardsString(scorecard: Scorecard) {
     let front9Yards: number = 0, back9Yards: number = 0;
@@ -102,43 +92,15 @@ export class ScorecardDetailComponent implements OnInit {
       back9Par += Number(pars[j]);
     }
     let total18Par = front9Par + back9Par;
-    console.log("onInitParsStrings", scorecard.parInputString, pars);
     pars.splice(10, 0, String(front9Par));
     pars.splice(20, 0, String(back9Par));
     pars.splice(21, 0, String(total18Par));
-    console.log(pars);
     return pars;
   }
   onInitHcapsString(scorecard: Scorecard) {
     let hCaps: string[] = ('HCAP,' + scorecard.hCapInputString).split(',');
     hCaps.splice(10, 0, '  ');
     return hCaps;
-  }
-  onInitScorecardPreview(scorecard: Scorecard){
-     function transpose(matrix) {
-       return matrix[0].map((col, i) => matrix.map(row => row[i]));
-     }
-     let preview: string[][];
-     preview = [[]];
-
-       for (var j = 0; j < this.displayedColumns.length; j++) {
-         preview.push(["{'PAR':'" + this.scorecard.pars[j] + "','HCAP':'" + this.scorecard.hCaps[j] + "','YARDS':'" +this.scorecard.yards[j]+"'},"])
-       }
-    preview.shift();
-    preview.shift();
-    preview = transpose(preview);
-
-
-     console.log('PREVIWE', preview);
-     return preview;
-   }
-
-  onTitleClick() {
-    this.editTitle = true;
-  }
-
-  ngOnChanges() {
-    this.editTitle = false;
   }
 
   updateScorecard() {
@@ -148,13 +110,19 @@ export class ScorecardDetailComponent implements OnInit {
     this.scorecard.parInputString = this.scorecardForm1.controls['parsInput'].value
     this.scorecard.hCapInputString = this.scorecardForm1.controls['hCapsInput'].value
     this.scorecard.yardsInputString = this.scorecardForm1.controls['yardsInput'].value
-    console.log('SCORECARD DETAIL this.scorecard', this.scorecard)
     this.updateScorecardEvent.emit(this.scorecard);
   }
 
-  deleteScorecard() {
-    console.log('SCORECARD DETAIL Delete', this.scorecard)
-    this.deleteScorecardEvent.emit(this.scorecard);
+  addScorecard(){
+    this.scorecard.name = this.scorecardForm1.controls['name'].value
+    this.scorecard.rating = this.scorecardForm1.controls['rating'].value
+    this.scorecard.slope = this.scorecardForm1.controls['slope'].value
+    this.scorecard.parInputString = this.scorecardForm1.controls['parsInput'].value
+    this.scorecard.hCapInputString = this.scorecardForm1.controls['hCapsInput'].value
+    this.submitAddScorecardEvent.emit(this.scorecard);
   }
 
+  deleteScorecard() {
+    this.deleteScorecardEvent.emit(this.scorecard);
+  }
 }

@@ -1,36 +1,6 @@
 <div *ngIf="match" class="form-horizontal">
   <h2>{{match.name}} | {{match.scName}} | {{match.datePlayed | date: "longDate"}}</h2>
-  <!-- <div class="form-group">
-    <label class="col-sm-2 control-label"> Name: </label>
-    <div class="col-sm-10">
-      <input class="form-control" [(ngModel)]="match.name" placeholder="Assign a name"/>
-    </div>
-  </div> -->
-  <!-- <div class="form-group">
-    <label class="col-sm-2 control-label">Course: </label>
-    <div class="col-sm-2 btn">
-      <select [(ngModel)]="match.scorecardId" name="scorecardId">
-        <option *ngFor = "let n of scorecards" [value] = n._id>
-          {{ n.name }}{{n._id}}
-        </option>
-      </select>
-    </div>
-  </div> -->
 
-  <!-- <div class="form-group">
-    <label class="col-sm-2 control-label"> Date: </label>
-    <div class="col-sm-10">
-    <my-date-picker name="mydate" [options]="myDatePickerOptions"
-                    [(ngModel)]="model"></my-date-picker>
-  </div>
-</div> -->
-  <!-- <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="button" (click)="updateMatch()" class="btn btn-primary">Update</button>
-      <button type="button" (click)="deleteMatch()" class="btn btn-danger">Delete</button>
-    </div>
-  </div>
-</div> -->
 <form class="detail-form" [formGroup]="matchDetailForm" (ngSubmit)="updateMatch()">
 
     <mat-form-field class = "detail-full-width">
@@ -39,12 +9,13 @@
 
     <mat-form-field class = "detail-full-width">
        <input matInput [matDatepicker] = "dateC"
-                       [formControl] = "dateCtrl"
+                       [formControl] = "matchDetailForm.controls['date']"
                        placeholder="Date">
       <mat-datepicker-toggle matSuffix [for] = "dateC"></mat-datepicker-toggle>
       <mat-datepicker #dateC></mat-datepicker>
-      <mat-error align="end" *ngIf= "dateCtrl.hasError('required')">
+      <mat-error align="end" *ngIf= "matchDetailForm.controls['date'].hasError('invalidDate')">
         Use the data picker for a valid date.
+        <!-- Error from Validation Service is not displayed?? -->
       </mat-error>
     </mat-form-field>
 

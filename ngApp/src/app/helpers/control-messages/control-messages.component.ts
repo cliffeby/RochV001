@@ -12,7 +12,7 @@ export class ControlMessagesComponent {
 
   get errorMessage() {
     for (let propertyName in this.control.errors) {
-      console.log('PropertyName', propertyName, this.control.errors[propertyName], ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]))
+      // console.log('PropertyName', propertyName, this.control.errors[propertyName], ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]))
       if (this.control.errors.hasOwnProperty(propertyName)) {
         // if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
         return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);

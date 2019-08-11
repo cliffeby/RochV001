@@ -15,7 +15,8 @@ export class ValidationService {
       'hCapsValue': 'Handicap values should be 1 - 18 separated by commas',
       'yardsLenShort': 'Yards expects more than 18 values between 90-600 separated by commas',
       'yardsLenLong': 'Yards expects less than 18 values between 90-600 separated by commas',
-      'yardsValue': 'Yards values should be 90 - 600 separated by commas'
+      'yardsValue': 'Yards values should be 90 - 600 separated by commas',
+      'invalidDate': 'Use datepicker to get a valid format'
     };
 
     return config[validatorName];
@@ -25,19 +26,19 @@ export class ValidationService {
     const condition1 = control.value;
     let parEntry: Number = condition1.substring(condition1.length - 1, condition1.length)
     if (parEntry < 3 || parEntry > 5) {
-      console.log('ConditionP', condition1, 'Error', condition1.substring(condition1.length - 1, condition1.length));
+      // console.log('ConditionP', condition1, 'Error', condition1.substring(condition1.length - 1, condition1.length));
       return { parsValue: true };
     }
     else if (condition1.length < 35) {
-      console.log('ConditionPL', condition1.length);
+      // console.log('ConditionPL', condition1.length);
       return { parsLenShort: true }
     }
     else if (condition1.length > 36) {
-      console.log('ConditionPH', condition1.length);
+      // console.log('ConditionPH', condition1.length);
       return { parsLenLong: true }
     }
     else {
-      console.log('ConditionPN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
+      // console.log('ConditionPN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
       return null;
     }
   }
@@ -46,20 +47,20 @@ export class ValidationService {
     const condition1 = control.value;
     let hCapEntry: Number = condition1.substring(condition1.length - 2, condition1.length)
     if (hCapEntry < 1 || hCapEntry > 18) {
-      console.log('ConditionH', condition1, 'Error', condition1.substring(condition1.length - 2, condition1.length));
+      // console.log('ConditionH', condition1, 'Error', condition1.substring(condition1.length - 2, condition1.length));
       return { hCapsValue: true };
       // TODO Check for duplicate hCaps
     }
     else if (condition1.length < 44) {
-      console.log('ConditionHL', condition1.length);
+      // console.log('ConditionHL', condition1.length);
       return { hCapsLenShort: true }
     }
     else if (condition1.length > 45) {
-      console.log('ConditionHH', condition1.length);
+      // console.log('ConditionHH', condition1.length);
       return { hCapsLenLong: true }
     }
     else {
-      console.log('ConditionHN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
+      // console.log('ConditionHN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
       return null;
     }
   }
@@ -69,19 +70,19 @@ export class ValidationService {
     let yardsEntry: Number = condition1.substring(condition1.length - 3, condition1.length)
     //TODO Wont catch 4 digit entries
     if (yardsEntry < 90 || yardsEntry > 600) {
-      console.log('ConditionY', condition1, 'Error', condition1.substring(condition1.length - 3, condition1.length));
+      // console.log('ConditionY', condition1, 'Error', condition1.substring(condition1.length - 3, condition1.length));
       return { yardsValue: true};
     }
     else if (condition1.length < 70) {
-      console.log('ConditionYL', condition1.length);
+      // console.log('ConditionYL', condition1.length);
       return { yardsLenShort: true }
     }
     else if (condition1.length > 72) {
-      console.log('ConditionYH', condition1.length);
+      // console.log('ConditionYH', condition1.length);
       return { yardsLenLong: true }
     }
     else {
-      console.log('ConditionYN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
+      // console.log('ConditionYN', condition1, "Null", condition1.substring(condition1.length - 2, condition1.length - 1));
       return null;
     }
   }
@@ -108,6 +109,16 @@ export class ValidationService {
       return null;
     } else {
       return { 'invalidName': true };
+    }
+  }
+
+  static dateValidator(control) {
+    console.log('ConditionpreCheck', control.value);
+    if (control.value == null) {
+      return null;
+        } else {
+      console.log('ConditionInvaildDate', control.value);
+      return { 'invalidDate': true };
     }
   }
 

@@ -12,7 +12,6 @@ import {AuthService} from '../../services/auth.service';
 export class ScorecardsComponent implements OnInit {
   selectedScorecard: Scorecard;
   private hidenewScorecard = true;
-  private unauth: boolean;
   scorecards: Array<Scorecard>;
 
   constructor(private _scorecardService: ScorecardService,
@@ -29,16 +28,14 @@ export class ScorecardsComponent implements OnInit {
 
   onAddScorecardEvent() {
     this.hidenewScorecard = false;
-    console.log('Add Scorecard emit')
   }
 
-  onSubmitAddScorecard(scorecard: Scorecard) {
+  onSubmitAddScorecardEvent(scorecard: any) {
     this._scorecardService.addScorecard(scorecard)
       .subscribe(resNewScorecard => {
         this.scorecards.push(resNewScorecard);
         this.hidenewScorecard = true;
         this.selectedScorecard = null;
-        // this.selectedScorecard = resNewScorecard;
       });
   }
 
@@ -52,7 +49,6 @@ export class ScorecardsComponent implements OnInit {
         this.selectedScorecard = null;
         this._scorecardService.getScorecards()
           .subscribe(resScorecardData => this.scorecards = resScorecardData);
-        // this.selectedScorecard = resNewScorecard;
       });
   }
 

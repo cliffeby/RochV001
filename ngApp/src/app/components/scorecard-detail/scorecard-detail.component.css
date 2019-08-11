@@ -14,3 +14,7 @@ p {
 td {
   padding-right: 8px;
 }
+.button-space button,
+.button-space a {
+  margin-right: 8px;
+}
