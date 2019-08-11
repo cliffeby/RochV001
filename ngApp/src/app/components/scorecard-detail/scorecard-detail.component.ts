@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, NgModule } from '@angular/core';
 import { Scorecard } from "../../models/scorecard";
+import { MaterialModule } from "../../material.module"
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule, ErrorStateMatcher} from '@angular/material'
 import { MatTableModule } from '@angular/material/table'
@@ -11,7 +12,7 @@ import { ValidationService } from '../../services/validation.service';
 
 @NgModule({
   imports: [
-    MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule, ErrorStateMatcher, MatTableModule, MatTableDataSource
+    MaterialModule
   ],
   exports: [
     MatInputModule, MatFormFieldModule

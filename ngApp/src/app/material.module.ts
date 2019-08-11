@@ -1,16 +1,15 @@
-import { MatButtonModule, MatToolbarModule, MatIconModule, MatInputModule, MatFormFieldModule, MatTableDataSource, ErrorStateMatcher,
-  MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import { MatButtonModule, MatToolbarModule, MatIconModule, MatInputModule, MatFormFieldModule,
+  MatDatepickerModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
 import { MatTableModule } from '@angular/material/table'
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+const MaterialComponents = [MatButtonModule, MatToolbarModule, MatIconModule, MatInputModule, MatFormFieldModule,
+  MatDatepickerModule, MatNativeDateModule, MatTableModule, MatSelectModule
+]
 
 @NgModule({
-  declarations: [],
-  imports: [
-    MatButtonModule, MatToolbarModule, MatIconModule, MatInputModule, MatFormFieldModule, MatTableModule, MatDatepickerModule,MatNativeDateModule
-  ],
-  exports: [
-    MatButtonModule, MatToolbarModule, MatIconModule, MatInputModule, MatFormFieldModule, MatTableModule, MatDatepickerModule, MatNativeDateModule
-  ]
+
+  imports: [MaterialComponents],
+  exports: [MaterialComponents]
 })
 export class MaterialModule { }

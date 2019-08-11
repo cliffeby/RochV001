@@ -42,16 +42,10 @@ import { MatchPairComponent } from './components/match-pair/match-pair.component
 import { CounterComponent } from './components/aa1-sanity/aaChild-sanity.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule, FormGroupDirective, NgForm } from '@angular/forms'
-import { MatFormFieldModule, MatSelectModule } from '@angular/material'
 import { ValidationService } from './services/validation.service';
 import { ControlMessagesComponent } from './helpers/control-messages/control-messages.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatTableDataSource } from '@angular/material';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
-// import { MemberBookComponent } from './component/member-book/member-book.component';
+
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -98,20 +92,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppRoutingModule,
     MyDatePickerModule,
     NoopAnimationsModule,
-    MaterialModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule
+    MaterialModule
 
   ],
-  exports: [
-    MaterialModule,
-    MatInputModule,
-    MatFormFieldModule
-  ],
+
   providers: [
     DataService,
     AAAService,

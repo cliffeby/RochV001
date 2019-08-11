@@ -3,22 +3,14 @@ import { Scorecard } from "../../models/scorecard";
 import { Match } from "../../models/match";
 import { ScorecardService } from "../../services/scorecard.service"
 import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { NgModel } from '@angular/forms';
 import { ValidationService } from '../../services/validation.service';
-import { MatInputModule, MatFormFieldModule, MatSelectModule } from '@angular/material';
-import { MatDatepickerModule } from '@angular/material/datepicker'
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from '../../material.module';
 
 @NgModule({
-  imports: [
-    MatInputModule, MatFormFieldModule, ReactiveFormsModule,
-    BrowserAnimationsModule, FormsModule, MatSelectModule, MatDatepickerModule, MatMomentDateModule,
-    ValidationService
-  ],
-  exports: [
-    MatInputModule, MatFormFieldModule, MatSelectModule
-  ]
+  imports: [ MaterialModule,ReactiveFormsModule,BrowserAnimationsModule, FormsModule, ValidationService]
 })
 
 @Component({
