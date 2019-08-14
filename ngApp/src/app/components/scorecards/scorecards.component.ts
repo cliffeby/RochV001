@@ -69,5 +69,7 @@ export class ScorecardsComponent implements OnInit {
         }
       });
     this.selectedScorecard = null;
+    this._scorecardService.getScorecards()
+      .subscribe(resScorecardData => this.scorecards = resScorecardData);
   };
 }

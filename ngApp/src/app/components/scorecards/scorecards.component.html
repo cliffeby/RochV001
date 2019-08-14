@@ -13,11 +13,13 @@
                     [scorecard]="selectedScorecard">
   </scorecard-detail>
 </div>
-<div *ngIf="!selectedScorecard && hidenewScorecard">
+
   <scorecard-list *ngIf="!selectedScorecard && hidenewScorecard"
                   (SelectScorecard)="onSelectScorecard($event)"
+                  (DeleteScorecardEvent)="onDeleteScorecardEvent($event)"
                   (CopyScorecardEvent)="onCopyAddScorecardEvent($event)"
                   (AddScorecardEvent) = "onAddScorecardEvent($event)"
+
                   [scorecards]="scorecards">
   </scorecard-list>
-</div>
+

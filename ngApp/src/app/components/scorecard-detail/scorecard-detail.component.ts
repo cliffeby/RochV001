@@ -1,10 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, NgModule } from '@angular/core';
 import { Scorecard } from "../../models/scorecard";
 import { MaterialModule } from "../../material.module"
-import { MatInputModule } from '@angular/material/input'
-import { MatFormFieldModule, ErrorStateMatcher} from '@angular/material'
-import { MatTableModule } from '@angular/material/table'
-import { MatTableDataSource } from '@angular/material'
 import { FormControl, FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 import { ScorecardService } from "../../services/scorecard.service"
 import { NgModel } from '@angular/forms';
@@ -12,10 +8,7 @@ import { ValidationService } from '../../services/validation.service';
 
 @NgModule({
   imports: [
-    MaterialModule
-  ],
-  exports: [
-    MatInputModule, MatFormFieldModule
+    MaterialModule, ReactiveFormsModule
   ]
 })
 
@@ -34,14 +27,13 @@ export class ScorecardDetailComponent implements OnInit {
       name: ['', [Validators.required, ValidationService.nameValidator]],
       rating: '',
       slope: '',
-      parsInput: [''],
-      hCapsInput: [''],
-      yardsInput: ['']
+      parsInputString: [''],
+      hCapsInputString: [''],
+      yardsInputString: ['']
     })
   }
 
   scorecard: Scorecard;
-
   public scorecardForm1: FormGroup;
   private updateScorecardEvent = new EventEmitter();
   private deleteScorecardEvent = new EventEmitter();
@@ -62,9 +54,9 @@ export class ScorecardDetailComponent implements OnInit {
       name: [this.scorecard.name, [Validators.required, Validators.minLength(5)]],
       rating: [this.scorecard.rating],
       slope: [this.scorecard.slope],
-      parsInput: [this.scorecard.parInputString, [Validators.required, ValidationService.parsValidator]],
-      hCapsInput: [this.scorecard.hCapInputString, [Validators.required, ValidationService.hCapsValidator]],
-      yardsInput: [this.scorecard.yardsInputString, [Validators.required, ValidationService.yardsValidator]]
+      parsInputString: [this.scorecard.parInputString, [Validators.required, ValidationService.parsValidator]],
+      hCapsInputString: [this.scorecard.hCapInputString, [Validators.required, ValidationService.hCapsValidator]],
+      yardsInputString: [this.scorecard.yardsInputString, [Validators.required, ValidationService.yardsValidator]]
     })
   }
 
@@ -108,9 +100,9 @@ export class ScorecardDetailComponent implements OnInit {
     this.scorecard.name = this.scorecardForm1.controls['name'].value
     this.scorecard.rating = this.scorecardForm1.controls['rating'].value
     this.scorecard.slope = this.scorecardForm1.controls['slope'].value
-    this.scorecard.parInputString = this.scorecardForm1.controls['parsInput'].value
-    this.scorecard.hCapInputString = this.scorecardForm1.controls['hCapsInput'].value
-    this.scorecard.yardsInputString = this.scorecardForm1.controls['yardsInput'].value
+    this.scorecard.parInputString = this.scorecardForm1.controls['parsInputString'].value
+    this.scorecard.hCapInputString = this.scorecardForm1.controls['hCapsInputString'].value
+    this.scorecard.yardsInputString = this.scorecardForm1.controls['yardsInputString'].value
     this.updateScorecardEvent.emit(this.scorecard);
   }
 
@@ -118,8 +110,9 @@ export class ScorecardDetailComponent implements OnInit {
     this.scorecard.name = this.scorecardForm1.controls['name'].value
     this.scorecard.rating = this.scorecardForm1.controls['rating'].value
     this.scorecard.slope = this.scorecardForm1.controls['slope'].value
-    this.scorecard.parInputString = this.scorecardForm1.controls['parsInput'].value
-    this.scorecard.hCapInputString = this.scorecardForm1.controls['hCapsInput'].value
+    this.scorecard.parInputString = this.scorecardForm1.controls['parsInputString'].value
+    this.scorecard.hCapInputString = this.scorecardForm1.controls['hCapsInputString'].value
+    this.scorecard.yardsInputString = this.scorecardForm1.controls['yardsInputString'].value
     this.submitAddScorecardEvent.emit(this.scorecard);
   }
 

@@ -17,19 +17,19 @@
 
         <mat-form-field class = "detail-full-width">
             <textarea matInput placeholder="PARS - Starting at hole #1, enter hole Par separated by commas"
-             formControlName="parsInput">
+             formControlName="parsInputString">
             </textarea>
         </mat-form-field>
 
         <mat-form-field class = "detail-full-width">
             <textarea matInput placeholder="HANDICAPS - Starting at hole #1, enter hole Handicap separated by commas"
-             formControlName="hCapsInput">
+             formControlName="hCapsInputString">
             </textarea>
         </mat-form-field>
 
         <mat-form-field class = "detail-full-width">
             <textarea matInput placeholder="YARDS - Starting at hole #1, enter hole yardage separated by commas"
-             formControlName="yardsInput">
+             formControlName="yardsInputString">
             </textarea>
         </mat-form-field>
         <div class = 'button-space'>
@@ -84,8 +84,8 @@
   <div>
       <h4> Warnings:</h4>
       <control-messages [control] = "scorecardForm1.controls['name']"></control-messages>
-      <control-messages [control] = "scorecardForm1.controls['parsInput']"></control-messages>
-      <control-messages [control] = "scorecardForm1.controls['hCapsInput']"></control-messages>
-      <control-messages [control] = "scorecardForm1.controls['yardsInput']"></control-messages>
+      <control-messages [control] = "scorecardForm1.controls['parsInputString']"></control-messages>
+      <control-messages [control] = "scorecardForm1.controls['hCapsInputString']"></control-messages>
+      <control-messages [control] = "scorecardForm1.controls['yardsInputString']"></control-messages>
 </div>
 </div>

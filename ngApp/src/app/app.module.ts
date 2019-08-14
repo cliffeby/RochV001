@@ -47,6 +47,7 @@ import { ValidationService } from './services/validation.service';
 import { ControlMessagesComponent } from './helpers/control-messages/control-messages.component';
 
 
+
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     tokenGetter: (() => localStorage.getItem('access_token')),
@@ -79,9 +80,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AAASanityComponent,
     MatchPairComponent,
     CounterComponent,
-    ControlMessagesComponent,
-    // BrowserAnimationsModule
-    // MemberBookComponent
+    ControlMessagesComponent
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ export class ScorecardService {
     return this._authHttp.get(this._server + this._getUrl)
       .map((response: Response) => response.json());
   }
-  
+
   getScorecard(_id: string) {
     return this._authHttp.get(this._server + this._getUrl + '/' + _id)
       .map((response: Response) => response.json());
@@ -37,6 +37,7 @@ export class ScorecardService {
   updateScorecard(scorecard: Scorecard) {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
+    console.log('SCService', scorecard, JSON.stringify(scorecard));
     return this._authHttp.put(this._server + this._putUrl + scorecard._id, JSON.stringify(scorecard), options)
       .map((response: Response) => response.json());
   }
