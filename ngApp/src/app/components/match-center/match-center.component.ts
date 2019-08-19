@@ -69,6 +69,7 @@ export class MatchCenterComponent implements OnInit {
           this.scorecards = resSCData;
           for (let index = 0; index < this.scorecards.length; index++) {
             for (let i = 0; i < this.matches.length; i++) {
+              // console.log("Matches",index, i, this.matches[i])
               if (this.matches[i].scorecardId === this.scorecards[index]._id) {
                 this.matches[i].scName = this.scorecards[index].name;
               }
@@ -76,6 +77,21 @@ export class MatchCenterComponent implements OnInit {
           }
         }
       );
+  }
+
+  addMatch() {
+    this.match = new Match();
+    this.hidenewMatch = false;
+    // this._scoreservice.getScores()
+    //   .subscribe(resScoreData => {
+    //     this.scores = resScoreData;
+    //   });
+    // this._memberservice.getMembers()
+    //   .subscribe(resMemData => {
+    //     this.members = resMemData;
+    //   });
+    // this.match.players = 0;
+    this.selectedMatch = this.match;
   }
 
   onSelectMatch(match: any) {
@@ -142,31 +158,17 @@ export class MatchCenterComponent implements OnInit {
       });
   }
 
-  newMatch() {
-
-    console.log(" Add match")
-//  Set default course on match???
-    // of(this.getOrders()).subscribe(orders => {
-    //   this.orders = orders;
-    //   this.form.controls.orders.patchValue(this.orders[0].id);
-    // });
-
-    this.match = new Match();
-    this.hidenewMatch = false;
-    console.log('addnewmatch', this.match, this.hidenewMatch);
-    let dateArray = this.today.split('-');
-    this.model = {date: {year: parseInt(dateArray[0]), month: parseInt(dateArray[1]), day: parseInt(dateArray[2])}};
-  }
 
 
-  onSubmitAddMatch(match: Match) {
-    match.datePlayed = (this.model.date.year + '-' + this.model.date.month + '-' + this.model.date.day);
+
+  onSubmitAddMatchEvent(match: Match) {
+    // match.datePlayed = (this.model.date.year + '-' + this.model.date.month + '-' + this.model.date.day);
 
     this._matchservice.addMatch(match)
       .subscribe(resNewMatch => {
         // TODO Populate SCName on match list Not working
-        this._scorecardservice.getScorecard(match.scorecardId)
-          .subscribe((resSCData) => match.scName = resSCData.name);
+        // this._scorecardservice.getScorecard(match.scorecardId)
+        //   .subscribe((resSCData) => match.scName = resSCData.name);
         match.dateFlag = moment(this.myday).subtract(1, 'days').isBefore(match.datePlayed);
         console.log('This match oUAddEvent', match);
         this.matches.unshift(match); //unshift pushes match to matches[0] - temporarily is first on list
@@ -182,9 +184,13 @@ export class MatchCenterComponent implements OnInit {
       .subscribe(resUpdatedMatch => match = resUpdatedMatch);
     this.selectedMatch = null;
   };
+  onScoreMatchEvent(match: any) {
+    console.log("Score match from match center", match);
+  }
 
   onDeleteMatchEvent(match: any) {
     let matchArray = this.matches;
+    console.log("DELETE MATCH", match)
     this._matchservice.deleteMatch(match)
       .subscribe(resDeletedMatch => {
         for (let i = 0; i < matchArray.length; i++) {
@@ -194,6 +200,11 @@ export class MatchCenterComponent implements OnInit {
         }
       });
     this.selectedMatch = null;
+    this.ngOnInit();
+    // this._matchservice.getMatches()
+    //   .subscribe(resMatchData => {
+    //     this.matches = resMatchData;
+    //   });
   };
 
 }

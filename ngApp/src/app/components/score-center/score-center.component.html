@@ -24,6 +24,7 @@
   <score-detail *ngIf="selectedScore && hidenewScore"
                  (updateScoreEvent)="onUpdateScoreEvent($event)"
                  (deleteScoreEvent)="onDeleteScoreEvent($event)"
+                 (ScoreMatchEvent) = 'onScoreMatchEvent($event)'
                  [score]="selectedScore">
   </score-detail>
 </div>

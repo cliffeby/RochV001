@@ -113,8 +113,8 @@ export class ValidationService {
   }
 
   static dateValidator(control) {
-    console.log('ConditionpreCheck', control.value);
-    if (control.value == null) {
+    // console.log('ConditionpreCheck', control.value);
+    if (control.value == !null) {
       return null;
         } else {
       console.log('ConditionInvaildDate', control.value);

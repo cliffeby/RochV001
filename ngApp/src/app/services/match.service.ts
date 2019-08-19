@@ -21,6 +21,7 @@ export class MatchService {
   }
 
   addMatch(match: Match) {
+    // console.log("Match added")
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     return this._authHttp.post(this._server + this._postUrl, JSON.stringify(match), options)
@@ -28,6 +29,7 @@ export class MatchService {
   }
 
   updateMatch(match: Match) {
+    // console.log("Match updateded")
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     return this._authHttp.put(this._server + this._putUrl + match._id, JSON.stringify(match), options)

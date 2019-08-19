@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:  'scorecards', component: ScorecardsComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['read:scorecards']}},
   {path:  'matches', component: MatchCenterComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['read:matches','read:scorecards', 'read:members']}},
   { path: 'members', component: MemberCenterComponent, canActivate: [ScopeGuard], data: { expectedScopes: [ 'read:members'] } },
-  { path: 'scores', component: ScoreCenterComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['read:scores', 'remove:scores'] } }
+  { path: 'scores', component: ScoreCenterComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['read:scores', 'remove:score'] } }
 ];
 
 // {path:  'members', component: MemberCenterComponent, canActivate: [ScopeGuard], data: { expectedScopes: [' read:members']} },

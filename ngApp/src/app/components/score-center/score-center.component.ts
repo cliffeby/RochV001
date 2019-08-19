@@ -49,6 +49,10 @@ export class ScoreCenterComponent implements OnInit {
     this.selectedScore = null;
   };
 
+  onScoreMatchEvent(match: any) {
+    console.log("Score match", match);
+  }
+
   onDeleteScoreEvent(score: any) {
     let scoreArray = this.scores;
     this._scoreService.deleteScore(score)

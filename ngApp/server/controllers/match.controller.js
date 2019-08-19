@@ -64,6 +64,7 @@ exports.putMatch = function(req, res){
     },
     function(err, updatedMatch){
       if(err){
+        console.log("Error update match", err,updatedMatch);
         res.send("Error updating match");
       }else{
         res.json(updatedMatch);

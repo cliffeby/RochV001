@@ -1,6 +1,6 @@
-<div *ngIf="match" class="form-horizontal">
+<div *ngIf="match._id" class="form-horizontal">
   <h2>{{match.name}} | {{match.scName}} | {{match.datePlayed | date: "longDate"}}</h2>
-
+</div>
 <form class="detail-form" [formGroup]="matchDetailForm" (ngSubmit)="updateMatch()">
 
     <mat-form-field class = "detail-full-width">
@@ -11,7 +11,7 @@
        <input matInput [matDatepicker] = "dateC"
                        [formControl] = "matchDetailForm.controls['date']"
                        placeholder="Date">
-      <mat-datepicker-toggle matSuffix [for] = "dateC"></mat-datepicker-toggle>
+      <mat-datepicker-toggle matSuffix [for] = "dateC" ></mat-datepicker-toggle>
       <mat-datepicker #dateC></mat-datepicker>
       <mat-error align="end" *ngIf= "matchDetailForm.controls['date'].hasError('invalidDate')">
         Use the data picker for a valid date.
@@ -29,7 +29,11 @@
       </mat-select>
   </mat-form-field>
 
-    <br><br><br><br><br><br>
-    <button mat-raised-button color="primary" id="btnUpdate" (click)="updateMatch()" class="btn btn-primary">Update</button>
-    <button mat-raised-button color="warn" id="btnDelete" (click)="deleteMatch()" class="btn btn-danger">Delete</button>
+  <br><br><br><br><br><br>
+    <div class="button-space">
+      <button *ngIf="match._id" mat-raised-button color="primary" id="btnUpdate" (click)="updateMatch()" class="btn btn-primary">Update</button>
+      <button *ngIf="match._id" mat-raised-button color="warn" id="btnArchive" (click)="archiveMatch()" class="btn btn-danger">Archive</button>
+      <button *ngIf="!match._id" mat-raised-button color="primary" id="btnAdd" (click)="submitAddMatch()">Add</button>
+      <button mat-raised-button color="basic" id="btnCancel" routerLink = "../">Cancel</button>
+    </div>
 </form>

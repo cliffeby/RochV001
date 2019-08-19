@@ -78,7 +78,6 @@ router.route('/matches/:id')
   .put(jwtCheck, jwtAuthz(['create:match']), matchController.putMatch)
   .delete(jwtCheck, jwtAuthz(['remove:match']), matchController.deleteMatch);
 
-
 router.route('/scores')
   .post(jwtCheck, jwtAuthz(['create:score']), scoreController.postScore)
   .get(jwtCheck, jwtAuthz(['read:scores']), scoreController.getScores);

@@ -1,6 +1,20 @@
 <div class="row">
-  <div *ngIf="!hidenewMatch">
-    <h2>New Match</h2>
+    <div *ngIf="!hidenewMatch">
+      <h2>New Match</h2>
+      <match-detail
+
+        (deleteMatchEvent)="onDeleteMatchEvent($event)"
+        (submitAddMatchEvent) = "onSubmitAddMatchEvent($event)"
+       >
+      </match-detail>
+      <!-- <member-block
+        [members]="members"
+        [scores]="scores"
+        [match]="selectedMatch">
+      </member-block> -->
+    </div>
+  <!-- <div *ngIf="!hidenewMatch">
+    <h2>New Match2</h2>
     <form #form="ngForm" (ngSubmit)="onSubmitAddMatch(form.value)">
       <div class="form-group">
         <label class="col-sm-2 control-label"> Name: </label>
@@ -31,24 +45,39 @@
           </div>
         </div>
     </form>
-  </div>
+  </div> -->
   <match-detail *ngIf="selectedMatch && hidenewMatch"
-                (updateMatchEvent)="onUpdateMatchEvent($event)"
-                (deleteMatchEvent)="onDeleteMatchEvent($event)"
-                [match]="selectedMatch">
+                (updateMatchEvent) = "onUpdateMatchEvent($event)"
+                (submitAddMatchEvent) = 'onSubmitAddMatchEvent($event)'
+
+                (deleteMatchEvent) = "onDeleteMatchEvent($event)"
+                [match] = "selectedMatch">
   </match-detail>
-  <member-block *ngIf="selectedMatch && hidenewMatch" [members]="members" [scores]="scores" [match]="selectedMatch">>
+  <member-block *ngIf="selectedMatch && hidenewMatch"
+                [members]="members"
+                [scores]="scores"
+                [match]="selectedMatch">
   </member-block>
 </div>
 
 <div *ngIf="!selectedMatch && hidenewMatch">
-
-    <div *ngIf="!selectedMatch && hidenewMatch" class="row">
+    <!-- <div class="row">
         <div class="col-md-12">
-          <div class="error" *ngIf="error">{{error}}</div>
           <div class="pull-right">
-            <button class="btn btn-primary" (click)="newMatch()">
-              <i class="glyphicon glyphicon-plus"></i>
+            <button mat-icon-button color="primary" (click)="addMatch()">
+                <mat-icon class="mat-18">create</mat-icon>
+                Add
+            </button>
+          </div>
+        </div>
+      </div> -->
+      <h2>Match List</h2>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <button mat-icon-button color="primary" (click)="addMatch()">
+                <mat-icon class="mat-18">create</mat-icon>
+                Add
             </button>
           </div>
         </div>
@@ -56,10 +85,12 @@
 
   <match-list *ngIf="!selectedMatch && hidenewMatch"
               (SelectMatch)="onSelectMatch($event)"
+              (ScoreMatchEvent) = 'onScoreMatchEvent($event)'
               (PairMatch) = "onPairMatch(match)"
+              (DeleteMatchEvent) = "onDeleteMatchEvent($event)"
               [matches]="matches">
   </match-list>
-
-
 </div>
+
+
 
