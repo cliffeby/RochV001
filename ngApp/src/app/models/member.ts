@@ -2,7 +2,7 @@ export class Member {
   _id: string;
   firstName: string;
   lastName: string;
-  currentHCap: number;
+  currentHCap: string;
   isPlaying: boolean;
   created: string;
   user: string;

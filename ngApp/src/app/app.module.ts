@@ -45,6 +45,7 @@ import { MaterialModule } from './material.module';
 import { ReactiveFormsModule, FormGroupDirective, NgForm } from '@angular/forms'
 import { ValidationService } from './services/validation.service';
 import { ControlMessagesComponent } from './helpers/control-messages/control-messages.component';
+import { MatchScoreComponent } from './components/match-score/match-score.component';
 
 
 
@@ -68,6 +69,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatchCenterComponent,
     MatchDetailComponent,
     MatchListComponent,
+    MatchScoreComponent,
     MemberCenterComponent,
     MemberDetailComponent,
     MemberListComponent,

@@ -47,7 +47,7 @@
     <ng-container matColumnDef="scores">
         <th mat-header-cell *matHeaderCellDef> Scores </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="warn" (click)="scoreMatch(element)">
+          <button mat-icon-button color="warn" (click)="onScoreMatch(element)">
               <mat-icon class="mat-18">score</mat-icon>
           </button>
         </td>

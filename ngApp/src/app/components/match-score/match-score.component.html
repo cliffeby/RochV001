@@ -1,1 +1,33 @@
-<p>match-score works!</p>
+<div class="form-horizontal">
+
+  <h2>{{match.name}} | {{match.scName}} | {{match.datePlayed | date: "longDate"}}</h2>
+</div>
+
+<div>{{match.playerNames}}   {{match.playersHCap}}</div>
+<div>{{DS.playerNames}}  {{DS.playersHCaps}}</div>
+<table mat-table  [dataSource]="dataSource">
+    <ng-container matColumnDef="playerNames">
+        <th mat-header-cell *matHeaderCellDef
+        > Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.playerNames}} </td>
+    </ng-container>
+    <ng-container matColumnDef="playershCap">
+        <th mat-header-cell *matHeaderCellDef
+        > HCAP </th>
+        <td mat-cell *matCellDef="let element"> {{element.playersHCap}} </td>
+    </ng-container>
+
+  <br><br><br><br><br><br>
+    <div class="button-space">
+      <button  mat-raised-button color="primary" id="btnUpdate" (click)="updateScore()">Update</button>
+      <button mat-raised-button color="basic" id="btnCancel" routerLink = "../">Cancel</button>
+    </div>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let element"[ngClass] = "{'bold': element.dateFlag}" ></tr>
+    </table>
+
+
+    <button mat-icon-button color="warn" (click)="onAddPlayer()">
+      <mat-icon class="mat-18">delete</mat-icon>
+  </button>

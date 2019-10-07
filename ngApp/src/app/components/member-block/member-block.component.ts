@@ -25,6 +25,7 @@ export class MemberBlockComponent implements OnInit {
 
   ngOnInit() {
     this.queryString = "";
+    console.log("From member-block0", this.match.players, this.score.name);
   }
 
   onSelect(mem: Member) {
@@ -41,8 +42,9 @@ export class MemberBlockComponent implements OnInit {
       this.score.name = this.match.name + ' ' + member.lastName;
       this._scoreservice.addScore(this.score)
         .subscribe(resNewScore => {
-          this.scores.push(resNewScore);
+          this.scores= [...this.scores,resNewScore];
         });
+        console.log('From member-block1', this.match.players, this.score.name)
     } else {
       this.match.players--;
       const scoreArray = this.scores;

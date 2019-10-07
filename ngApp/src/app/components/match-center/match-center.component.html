@@ -1,5 +1,5 @@
 <div class="row">
-    <div *ngIf="!hidenewMatch">
+    <div *ngIf="!hidenewMatch && !scoreMatch">
       <h2>New Match</h2>
       <match-detail
 
@@ -46,14 +46,14 @@
         </div>
     </form>
   </div> -->
-  <match-detail *ngIf="selectedMatch && hidenewMatch"
+  <match-detail *ngIf="selectedMatch && hidenewMatch && !scoreMatch"
                 (updateMatchEvent) = "onUpdateMatchEvent($event)"
                 (submitAddMatchEvent) = 'onSubmitAddMatchEvent($event)'
 
                 (deleteMatchEvent) = "onDeleteMatchEvent($event)"
                 [match] = "selectedMatch">
   </match-detail>
-  <member-block *ngIf="selectedMatch && hidenewMatch"
+  <member-block *ngIf="selectedMatch && hidenewMatch && !scoreMatch"
                 [members]="members"
                 [scores]="scores"
                 [match]="selectedMatch">
@@ -72,7 +72,7 @@
         </div>
       </div> -->
       <h2>Match List</h2>
-    <div class="row">
+    <div *ngIf = "!scoreMatch" class="row">
         <div class="col-md-12">
           <div class="pull-right">
             <button mat-icon-button color="primary" (click)="addMatch()">
@@ -83,13 +83,24 @@
         </div>
       </div>
 
-  <match-list *ngIf="!selectedMatch && hidenewMatch"
-              (SelectMatch)="onSelectMatch($event)"
-              (ScoreMatchEvent) = 'onScoreMatchEvent($event)'
+  <match-list *ngIf="!selectedMatch && hidenewMatch && !scoreMatch"
+
               (PairMatch) = "onPairMatch(match)"
               (DeleteMatchEvent) = "onDeleteMatchEvent($event)"
               [matches]="matches">
   </match-list>
+</div>
+<div>
+  <match-score *ngIf = 'scoreMatch'
+              [DS] = "ds"
+              [match] = 'scoredMatch'
+              >
+  </match-score>
+  <!-- <member-block *ngIf=" scoreMatch"
+  [members]="members"
+  [scores]="scores"
+  [match]="scoredMatch">
+</member-block> -->
 </div>
 
 
