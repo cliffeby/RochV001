@@ -91,16 +91,18 @@
   </match-list>
 </div>
 <div>
-  <match-score *ngIf = 'scoreMatch'
+  <match-score
               [DS] = "ds"
               [match] = 'scoredMatch'
               >
   </match-score>
-  <!-- <member-block *ngIf=" scoreMatch"
+
+  <!-- *ngIf = 'scoreMatch' -->
+  <member-block *ngIf=" scoreMatch"
   [members]="members"
   [scores]="scores"
   [match]="scoredMatch">
-</member-block> -->
+</member-block>
 </div>
 
 

@@ -25,7 +25,7 @@ export class MatchListComponent implements OnInit {
   // public SelectMatch = new EventEmitter();
   public AddMatchEvent = new EventEmitter();
   public DeleteMatchEvent = new EventEmitter();
-  // public ScoreMatchEvent = new EventEmitter();
+  public ScoreMatchEvent = new EventEmitter();
   private queryString: string;
   public displayedColumns = ['name', 'datePlayed', 'scName', 'details', 'pair', 'scores', 'delete'];
   myString: string = "test";
@@ -56,7 +56,7 @@ export class MatchListComponent implements OnInit {
   }
 
   onScoreMatch(mtc: Match){
-    // this.ScoreMatchEvent.emit(mtc);
+    this.ScoreMatchEvent.emit(mtc);
     this._matchService.matchScored.emit(mtc);
   }
 
