@@ -4,7 +4,7 @@ I am a retired civil engineer studying the MEAN stack as an avocation.  I've fou
 
 This GitHub page is the first of several planned blogs on my efforts to get beyond HW.  I expect that the document will be updated as I learn more about the MEAN Stack.
  
- Cliff Eby - 2017
+ Cliff Eby - 2017 - updated Aug 2020
 
 ### _Introduction_
 
@@ -171,7 +171,7 @@ None was used for early development.  A Test and Dev server were configured.  Ma
             </td>
             <td width="258" valign="top">
                 <p>
-Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> for each endpoint and CRUD action. A role
+Using <u>rules</u> in Auth0, users are granted                    <u>permissions</u> for each endpoint and CRUD action. A role
                     based JWT is issued by Auth0
                 </p>
             </td>
@@ -218,7 +218,7 @@ Using <u>rules</u> in Auth0, users are granted                    <u>scopes</u> 
                 <p>
                     router.route('/scores')
                     <br/>
-                    .get(jwtCheck, jwtAuthz(['read:scores']),
+                    .get(jwtCheck, jwtAuthz(['read:scores'], options),
                     scoreController.getScores);
                 </p>
             </td>
@@ -666,7 +666,7 @@ The entire Roch collection test can run in POSTMAN or in Newman.  Using a file n
 
 Exporting all or part of the collection creates a json file that can be used as a Newman input to run at the command line.
 
-C:\Users\cliff\WebstormProjects\RochV001\ngApp&gt;newman run server/tests/roch1.postman\_collection.json -d server/tests/pdata.json  .  Alternatively, you can run the collection&#39;s iterations in the POSTMAN runner.
+C:\Users\cliff\WebstormProjects\RochV001\ngApp&gt;newman run server/tests/roch2.postman\_collection.json -d server/tests/pdata.json  .  Alternatively, you can run the collection&#39;s iterations in the POSTMAN runner.
 
  ![](data:image/*)
 
