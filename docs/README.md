@@ -8,7 +8,7 @@ This GitHub page is the first of several planned blogs on my efforts to get beyo
 
 ### _Introduction_
 
-In an attempt to learn a little about testing, I tried to write some Mocha tests for my server API in a MEAN stack project.  Once I included JWT authorization to the REST routes, I really struggled to get the test framework working.  After I abandoned the traditional &quot;ng test&quot; approach (more on that later), I started to ask questions &quot;What should I test?&quot;  &quot;Since I control the entire stack, can I adequately test my API on the client side?&quot;  &quot;What level of error reporting should my API generate?&quot;  and most importantly, &quot;Will my API tests ease front end development – What tradeoffs will I encounter?&quot;
+In an attempt to learn a little about testing, I tried to write some Mocha tests for my API server in a MEAN stack project.  Once I included JWT authorization to the REST routes, I really struggled to get the test framework working.  After I abandoned the traditional &quot;ng test&quot; approach (more on that later), I started to ask questions &quot;What should I test?&quot;  &quot;Since I control the entire stack, can I adequately test my API on the client side?&quot;  &quot;What level of error reporting should my API generate?&quot;  and most importantly, &quot;Will my API tests ease front end development – What tradeoffs will I encounter?&quot;
 
 A search for &quot;best practices&quot; for API and/or REST testing produced very little.  Articles suggested consistency, comprehensiveness, middleware and documentation, but none addressed it in the context of an authenticated/authorized self-owned MEAN stack.
 
@@ -26,9 +26,9 @@ The following is a guide for the above context.  It contains principles and a fr
 
 1. Mongo/Mongoose, Express, Angular, Node/nodemon
 2. Angular CLI
-3. Node - express sever uses JavaScript – still looking for a Typescript node server implementation that I can understand.
+3. Node - express sever uses JavaScript – few Typescript node server implementations when I started.
 4. Auth0 – for authorization and JWT generation
-5. Three JWT libraries - express-jwt, express-jwt-authz, and jwks-rsa
+5. Four JWT libraries - express-jwt, express-jwt-authz, jwt_decode, and jwks-rsa
 6. POSTMAN for test development and a test runner
 7. Newman for command line testing
 
@@ -80,7 +80,7 @@ There are many articles and opinions on the proper use of express-server middlew
 
 #### Testing - Authorization #
 
-- Test for each JWT scope condition. e.g. does absence of read:score produce &quot;Insufficient Scope&quot;
+- Test for each JWT scope/permission condition. e.g. does absence of read:score produce &quot;Insufficient Scope&quot;
 - Confirm messages JWT Malformed, No Authorization Token, and Insufficient Scope are produced
 
 #### Testing – Mock server # 
@@ -88,7 +88,7 @@ None was used for early development.  A Test and Dev server were configured.  Ma
 
 #### Testing - ALL POST, PUT, GET, and DELETE #
 
-- Is request authorized i.e. Does the JWT contain the appropriate scope
+- Is request authorized i.e. Does the JWT contain the appropriate scope/permission
 - Is the response time within acceptable limits
 - Is the status code correct- 200, 400,…
 - Is the response message correct
@@ -638,10 +638,10 @@ Prior to the POST, many environmental variables are set and are used by subseque
 
 Since this is a POST to Auth0, the only test is to assure that it is successful.  Then, JWT access\_ and id\_ tokens are stored in the postman.setGlobalVariable collection.  I chose global variable because these tokens are unreadable and long. It keeps the Environment section readable.
 
-POSTMAN now has a JWT access\_token that allows API access.  Setting Authorization in the Header to **Bearer** followed by the _access token_, then setting the audience to a _unique string_ defined in Auth0 and changing the Content-type to _application/json_, is all that is needed.  Not shown is that this access\_token includes a scope of create:score that matches the server&#39;s express router requirement.
+The above POST creates a JWT access\_token that allows API access.  Setting Authorization in the Header to **Bearer** followed by the _access token_, then setting the audience to a _unique string_ defined in Auth0 and changing the Content-type to _application/json_, is all that is needed.  Not shown is that this access\_token includes a scope of create:score that matches the server&#39;s express router requirement.
 
 `router.route("/scores")`     
-`.post(jwtCheck, jwtAuthz(["create:score"]), scoreController.postScore)`
+`.post(jwtCheck, jwtAuthz(["create:score"], options), scoreController.postScore)`
 
  ![](data:image/*)
 
